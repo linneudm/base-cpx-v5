@@ -1,6 +1,26 @@
 local radioChannel = 0.0
 local radioNames = {}
 local disableRadioAnim = false
+local radioProp = nil
+
+local function createLocalRadioProp(ped)
+	local radioModel = `prop_cs_hand_radio`
+	if not HasModelLoaded(radioModel) then
+		RequestModel(radioModel)
+		while not HasModelLoaded(radioModel) do
+			Wait(10)
+		end
+	end
+
+	local obj = CreateObject(radioModel, 0.0, 0.0, 0.0, false, false, false)
+	if not DoesEntityExist(obj) then
+		return nil
+	end
+
+	AttachEntityToEntity(obj, ped, GetPedBoneIndex(ped, 28422), 0.0750, 0.0230, -0.0230, -90.0000, 0.0, -59.9999, true, false, false, false, 2, true)
+	SetModelAsNoLongerNeeded(radioModel)
+	return obj
+end
 
 --- event syncRadioData
 --- syncs the current players on the radio to the client
@@ -169,12 +189,24 @@ RegisterCommand('+radiotalk', function()
 			playMicClicks(true)
 			if GetConvarInt('voice_enableRadioAnim', 1) == 1 and not (GetConvarInt('voice_disableVehicleRadioAnim', 0) == 1 and IsPedInAnyVehicle(PlayerPedId(), false)) then
 				if not disableRadioAnim then
-					RequestAnimDict('random@arrests')
-					while not HasAnimDictLoaded('random@arrests') do
-						Citizen.Wait(10)
+					local radioAnimDict = 'anim@male@holding_radio'
+					local radioAnimName = 'holding_radio_clip'
+
+					if DoesAnimDictExist(radioAnimDict) then
+						RequestAnimDict(radioAnimDict)
+						while not HasAnimDictLoaded(radioAnimDict) do
+							Citizen.Wait(10)
+						end
+
+						TaskPlayAnim(PlayerPedId(), radioAnimDict, radioAnimName, 8.0, 2.0, -1, 50, 2.0, false, false, false)
+					else
+						logger.warn(('[radio] Animation dictionary "%s" does not exist.'):format(radioAnimDict))
 					end
-					print('random@arrests', 'generic_radio_enter')
-					TaskPlayAnim(PlayerPedId(), "random@arrests", "generic_radio_enter", 8.0, 2.0, -1, 50, 2.0, 0, 0, 0)
+					if radioProp and DoesEntityExist(radioProp) then
+						DeleteObject(radioProp)
+						radioProp = nil
+					end
+					radioProp = createLocalRadioProp(PlayerPedId())
 				end
 			end
 			Citizen.CreateThread(function()
@@ -198,7 +230,11 @@ RegisterCommand('-radiotalk', function()
 		TriggerEvent("pma-voice:radioActive", false)
 		playMicClicks(false)
 		if GetConvarInt('voice_enableRadioAnim', 1) == 1 then
-			StopAnimTask(PlayerPedId(), "random@arrests", "generic_radio_enter", -4.0)
+			StopAnimTask(PlayerPedId(), "anim@male@holding_radio", "holding_radio_clip", -4.0)
+			if radioProp and DoesEntityExist(radioProp) then
+				DeleteObject(radioProp)
+				radioProp = nil
+			end
 		end
 		TriggerServerEvent('pma-voice:setTalkingOnRadio', false)
 	end
