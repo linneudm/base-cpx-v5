@@ -1,12 +1,12 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VRP
 -----------------------------------------------------------------------------------------------------------------------------------------
-local Tunnel = module("vrp","lib/Tunnel")
+local Tunnel = module("vrp", "lib/Tunnel")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CONNECTION
 -----------------------------------------------------------------------------------------------------------------------------------------
 cRP = {}
-Tunnel.bindInterface("paramedic",cRP)
+Tunnel.bindInterface("paramedic", cRP)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -15,23 +15,28 @@ local Bleeding = 0
 local BloodTick = 0
 local Injuried = GetGameTimer()
 local BloodTimers = GetGameTimer()
+local PARAMEDIC_BLEEDING_ENABLED = true
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- GAMEEVENTTRIGGERED
 -----------------------------------------------------------------------------------------------------------------------------------------
-AddEventHandler("gameEventTriggered",function(name,args)
+AddEventHandler("gameEventTriggered", function(name, args)
+	if not PARAMEDIC_BLEEDING_ENABLED then
+		return
+	end
+
 	if LocalPlayer["state"]["Route"] < 900000 then
 		if name == "CEventNetworkEntityDamage" then
 			if PlayerPedId() == args[1] and LocalPlayer["state"]["Active"] then
 				if args[7] == 126349499 or args[7] == 1064738331 or args[7] == 85055149 then
-					SetPedToRagdoll(PlayerPedId(),2500,2500,0,0,0,0)
+					SetPedToRagdoll(PlayerPedId(), 2500, 2500, 0, 0, 0, 0)
 				else
 					if GetGameTimer() >= Injuried then
 						if not IsPedInAnyVehicle(args[1]) and GetEntityHealth(args[1]) > 100 then
 							Injuried = GetGameTimer() + 1000
 
-							local Hit,Mark = GetPedLastDamageBone(args[1])
+							local Hit, Mark = GetPedLastDamageBone(args[1])
 							if Hit and not Damaged[Mark] and Mark ~= 0 then
-								TriggerServerEvent("evidence:dropEvidence","yellow")
+								TriggerServerEvent("evidence:dropEvidence", "yellow")
 								Bleeding = Bleeding + 1
 								Damaged[Mark] = true
 							end
@@ -46,15 +51,33 @@ end)
 -- THREADBLOODTICK
 -----------------------------------------------------------------------------------------------------------------------------------------
 CreateThread(function()
+	if not PARAMEDIC_BLEEDING_ENABLED then
+		return
+	end
+
 	while true do
 		local Ped = PlayerPedId()
 		if GetGameTimer() >= BloodTimers and LocalPlayer["state"]["Route"] < 900000 and GetEntityHealth(Ped) > 100 then
 			BloodTimers = GetGameTimer() + 10000
 			BloodTick = BloodTick + 1
 
-			if BloodTick >= 3 and Bleeding >= 3 then
+			if BloodTick >= 3 and Bleeding > 4 then
 				BloodTick = 0
-				
+				local damage = 0
+				if Bleeding == 5 then
+					damage = 2
+				elseif Bleeding == 6 then
+					damage = 3
+				elseif Bleeding >= 7 then
+					damage = 4
+				end
+
+				if damage > 0 then
+					local health = GetEntityHealth(Ped)
+					SetEntityHealth(Ped, math.max(101, health - damage))
+					TriggerEvent("Notify", "blood", "Sangramento encontrado.", 2000)
+					TriggerServerEvent("dna:dropDna", 255, 0, 0)
+				end
 			end
 		end
 
@@ -65,7 +88,7 @@ end)
 -- PARAMEDIC:RESET
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("paramedic:Reset")
-AddEventHandler("paramedic:Reset",function()
+AddEventHandler("paramedic:Reset", function()
 	Damaged = {}
 	Bleeding = 0
 	BloodTick = 0
@@ -79,14 +102,15 @@ end)
 function cRP.Bleeding()
 	return Bleeding
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- BANDAGE
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.Bandage()
 	local Humanes = ""
-	for k,v in pairs(Damaged) do
-		TriggerEvent("Notify","amarelo","Passou ataduras no(a) <b>"..Bone(k).."</b>.",3000)
-		TriggerEvent("sounds:source","bandage",0.5)
+	for k, v in pairs(Damaged) do
+		TriggerEvent("Notify", "amarelo", "Passou ataduras no(a) <b>" .. Bone(k) .. "</b>.", 3000)
+		TriggerEvent("sounds:source", "bandage", 0.5)
 		Bleeding = Bleeding - 1
 		Humanes = Bone(k)
 		Damaged[k] = nil
@@ -100,34 +124,35 @@ function cRP.Bandage()
 
 	return Humanes
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PARAMEDIC:INJURIES
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("paramedic:Injuries")
-AddEventHandler("paramedic:Injuries",function()
+AddEventHandler("paramedic:Injuries", function()
 	local Number = 0
 	local Injuries = ""
 	local Damages = false
 
-	for k,v in pairs(Damaged) do
+	for k, v in pairs(Damaged) do
 		if not Damages then
-			Injuries = Injuries.."<b>Danos Superficiais:</b><br>"
+			Injuries = Injuries .. "<b>Danos Superficiais:</b><br>"
 			Damages = true
 		end
 
 		Number = Number + 1
-		Injuries = Injuries.."<b>"..Number.."</b>: "..Bone(k).."<br>"
+		Injuries = Injuries .. "<b>" .. Number .. "</b>: " .. Bone(k) .. "<br>"
 	end
 
 	if Injuries == "" then
-		TriggerEvent("Notify","amarelo","Nenhum ferimento encontrado.",5000)
+		TriggerEvent("Notify", "amarelo", "Nenhum ferimento encontrado.", 5000)
 	else
-		TriggerEvent("Notify","amarelo",Injuries,10000)
+		TriggerEvent("Notify", "amarelo", Injuries, 10000)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- DIAGNOSTIC
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cRP.Diagnostic()
-	return Damaged,Bleeding
+	return Damaged, Bleeding
 end
