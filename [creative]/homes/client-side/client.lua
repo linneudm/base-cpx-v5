@@ -122,6 +122,7 @@ end)
 RegisterCommand("entrar", function(source, args)
 	local ped = PlayerPedId()
 	local coords = GetEntityCoords(ped)
+
 	for k, v in pairs(homesList) do
 		local distance = #(coords - vector3(v[5], v[6], v[7]))
 		if distance <= 1.5 and vSERVER.checkPermissions(k) then
@@ -165,6 +166,55 @@ RegisterCommand("entrar", function(source, args)
 			SetEntityInvincible(ped, false)
 			DoScreenFadeIn(1000)
 		end
+	end
+end)
+
+RegisterCommand("spawnprop", function(source, args)
+	--local model = "prop_washer_02"
+	local model = args[1]
+	local hash = GetHashKey(model)
+
+	RequestModel(hash)
+	while not HasModelLoaded(hash) do
+		Wait(10)
+	end
+
+	local ped = PlayerPedId()
+	local coords = GetOffsetFromEntityInWorldCoords(ped, 0.0, 1.5, 0.0)
+
+	local obj = CreateObjectNoOffset(hash, coords.x, coords.y, coords.z, false, false, false)
+	SetEntityAsMissionEntity(obj, true, true)
+	FreezeEntityPosition(obj, true)
+	PlaceObjectOnGroundProperly(obj)
+end)
+
+RegisterCommand("removeprop", function()
+	local ped = PlayerPedId()
+	local pCoords = GetEntityCoords(ped)
+	local raio = 5.0
+
+	local objetos = GetGamePool("CObject")
+	local objetoMaisProximo = nil
+	local menorDistancia = raio
+
+	for _, obj in ipairs(objetos) do
+		if DoesEntityExist(obj) then
+			local oCoords = GetEntityCoords(obj)
+			local distancia = #(pCoords - oCoords)
+
+			if distancia < menorDistancia then
+				menorDistancia = distancia
+				objetoMaisProximo = obj
+			end
+		end
+	end
+
+	if objetoMaisProximo then
+		SetEntityAsMissionEntity(objetoMaisProximo, true, true)
+		DeleteEntity(objetoMaisProximo)
+		print(("Prop removida. Distância: %.2f"):format(menorDistancia))
+	else
+		print("Nenhuma prop encontrada por perto.")
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------

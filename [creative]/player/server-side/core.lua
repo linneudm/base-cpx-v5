@@ -1166,11 +1166,13 @@ local discordLinks = {
 	["Comanf"] = "",        ------
 
 	--ADMIN
-	["God"] = "",  --
-	["Blips"] = "", --
+	["God"] =
+	"https://discord.com/api/webhooks/1482881480253509764/tjvvXfsyOU-Fzic7t1i0CBLIIVMOxe5WQ-dVxuujzqn8Lb07ba1saJuvZs5U1aXGNx_R",          --
+	["Blips"] = "",                                                                                                                       --
 	["Police"] = "",
 	["Robberys"] = "",
-	["Delete"] = "",
+	["Delete"] =
+	"https://discord.com/api/webhooks/1482881480253509764/tjvvXfsyOU-Fzic7t1i0CBLIIVMOxe5WQ-dVxuujzqn8Lb07ba1saJuvZs5U1aXGNx_R",
 
 	--FACS
 	["Cupula"] = "",

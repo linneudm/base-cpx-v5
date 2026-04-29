@@ -1,65 +1,66 @@
 $(document).ready(() => {
   window.addEventListener("message", function (event) {
-		switch (event["data"]["action"]) {
-			case "openSystem":
-				$("#charPage").css("display", "flex");
-				generateSelect();
-				break;
+    switch (event["data"]["action"]) {
+      case "openSystem":
+        $("#charPage").css("display", "flex");
+        generateSelect();
+        break;
 
-			case "closeSystem":
-				$("#charPage").css("display", "none");
-				break;
+      case "closeSystem":
+        $("#charPage").css("display", "none");
+        break;
 
-			case "openSpawn":
-				$("#charSpawn").css("display", "flex");
-				break;
+      case "openSpawn":
+        $("#charSpawn").css("display", "flex");
+        break;
 
-			case "closeNew":
-				$("#charPage").css("display", "none");
-				$("#charRegister").css("display", "none");
-				break;
+      case "closeNew":
+        $("#charPage").css("display", "none");
+        $("#charRegister").css("display", "none");
+        break;
 
-			case "closeSpawn":
-				$("#charSpawn").css("display", "none");
-				break;
-		};
-	});
+      case "closeSpawn":
+        $("#charSpawn").css("display", "none");
+        break;
+    }
+  });
 
-  $('.change').on('click', function () {
-    if ($(this).attr('data-group') === 'gender') {
-      $('.male, .female').removeClass('active');
-      $(this).addClass('active');
+  $(".change").on("click", function () {
+    if ($(this).attr("data-group") === "gender") {
+      $(".male, .female").removeClass("active");
+      $(this).addClass("active");
     } else {
-      $('.north, .south').removeClass('active');
-      $(this).addClass('active');
+      $(".north, .south").removeClass("active");
+      $(this).addClass("active");
     }
   });
 
   function generateSelect() {
     $.post("http://spawn/generateDisplay", JSON.stringify({}), (data) => {
-
-      let screenCode = '';
-      var characterList = data["result"].sort((a, b) => (a["user_id"] > b["user_id"]) ? 1 : -1);
+      let screenCode = "";
+      var characterList = data["result"].sort((a, b) =>
+        a["user_id"] > b["user_id"] ? 1 : -1,
+      );
 
       characterList.forEach((char) => {
         screenCode += `
           <div class="person-area">
             <div class="person-info">
               <div class="primary-data">
-                <p>${char['name']}</p>
+                <p>${char["name"]}</p>
               </div>
               <div class="secondary-data">
                 <div class="info-block">
                   <p>Passaporte</p>
-                  <p>#${char['user_id']}</p>
+                  <p>#${char["user_id"]}</p>
                 </div>
                 <div class="info-block">
                   <p>Nacionalidade</p>
-                  <p>${char['locale']}</p>
+                  <p>${char["locate"]} ${char["blood"]}</p>
                 </div>
               </div>
               <div class="button-area">
-                <div class="selection-button" data-id="${char['user_id']}">
+                <div class="selection-button" data-id="${char["user_id"]}">
                   <p>SELECIONAR</p>
                   <div class="go-img">
                     <svg viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -111,47 +112,71 @@ $(document).ready(() => {
         `;
       }
 
-      $('.selection-grid-box').html(screenCode);
+      $(".selection-grid-box").html(screenCode);
     });
   }
 });
 
-$(document).on("click",".selection-button",function(e){
-	$.post("http://spawn/characterChosen",JSON.stringify({ id: parseInt(e["currentTarget"]["dataset"]["id"]) }));
-	$("#charPage").css("display","none");
+$(document).on("click", ".selection-button", function (e) {
+  $.post(
+    "http://spawn/characterChosen",
+    JSON.stringify({ id: parseInt(e["currentTarget"]["dataset"]["id"]) }),
+  );
+  $("#charPage").css("display", "none");
 });
 
-$(document).on("click",".create-button",function(e){
-	$("#charPage").fadeOut("100").css("display","none");
-	$("#charRegister").fadeIn("100").css("display","flex");
+$(document).on("click", ".create-button", function (e) {
+  $("#charPage").fadeOut("100").css("display", "none");
+  $("#charRegister").fadeIn("100").css("display", "flex");
 });
 
-$(document).on("click",".return-button",function(e){
-	$("#charPage").fadeIn("100").css("display","flex");
-	$("#charRegister").fadeOut("100").css("display","none");
+$(document).on("click", ".return-button", function (e) {
+  $("#charPage").fadeIn("100").css("display", "flex");
+  $("#charRegister").fadeOut("100").css("display", "none");
 });
 
 $(document).on("click", ".spawn-button", function (e) {
   let hashCode = parseInt(e["currentTarget"]["dataset"]["hash"]);
-  
+
   if (hashCode === 4) {
     hashCode = "spawn";
   }
 
-	$.post("http://spawn/spawnChosen", JSON.stringify({
-		hash: hashCode
-	}));
+  $.post(
+    "http://spawn/spawnChosen",
+    JSON.stringify({
+      hash: hashCode,
+    }),
+  );
 });
 
-$(document).on("click",".submit-button",function(e){
-	var nome = $("#name").val();
-	var sobrenome = $("#lastname").val();
-	var sexo = $(".change.male.active, .change.female.active").attr("data-value");
-	var local = $(".change.north.active, .change.south.active").attr("data-value");
+$(document).on("click", ".submit-button", function (e) {
+  var nome = $("#name").val();
+  var sobrenome = $("#lastname").val();
+  var sexo = $(".change.male.active, .change.female.active").attr("data-value");
+  var local = $(".change.north.active, .change.south.active").attr(
+    "data-value",
+  );
 
-	if (nome != "" && sobrenome != "" && (sexo == "M" || sexo == "F") && (local == "S" || local == "N")){
-		if (sexo == "M"){ sexo = "mp_m_freemode_01" } else { sexo = "mp_f_freemode_01" }
-		if (local == "S"){ local = "Sul" } else { local = "Norte" }
-		$.post("http://spawn/newCharacter",JSON.stringify({ name: nome, name2: sobrenome, sex: sexo, loc: local }));
-	}
+  if (
+    nome != "" &&
+    sobrenome != "" &&
+    (sexo == "M" || sexo == "F") &&
+    (local == "S" || local == "N")
+  ) {
+    if (sexo == "M") {
+      sexo = "mp_m_freemode_01";
+    } else {
+      sexo = "mp_f_freemode_01";
+    }
+    if (local == "S") {
+      local = "Sul";
+    } else {
+      local = "Norte";
+    }
+    $.post(
+      "http://spawn/newCharacter",
+      JSON.stringify({ name: nome, name2: sobrenome, sex: sexo, loc: local }),
+    );
+  }
 });
