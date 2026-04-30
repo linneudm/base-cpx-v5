@@ -1,14 +1,14 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VRP
 -----------------------------------------------------------------------------------------------------------------------------------------
-local Tunnel = module("vrp","lib/Tunnel")
-local Proxy = module("vrp","lib/Proxy")
+local Tunnel = module("vrp", "lib/Tunnel")
+local Proxy = module("vrp", "lib/Proxy")
 vRP = Proxy.getInterface("vRP")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CONNECTION
 -----------------------------------------------------------------------------------------------------------------------------------------
 cRP = {}
-Tunnel.bindInterface("chest",cRP)
+Tunnel.bindInterface("chest", cRP)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PERMISSIONS
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -20,9 +20,9 @@ function cRP.Permissions(chestName)
 			return true
 		end
 
-		local consultChest = vRP.query("chests/getChests",{ name = chestName })
+		local consultChest = vRP.query("chests/getChests", { name = chestName })
 		if consultChest[1] then
-			if (vRP.hasGroup(user_id,consultChest[1]["perm"]) and not exports["hud"]:Wanted(user_id)) then
+			if (vRP.hasGroup(user_id, consultChest[1]["perm"]) and not exports["hud"]:Wanted(user_id)) then
 				return true
 			end
 		end
@@ -30,6 +30,7 @@ function cRP.Permissions(chestName)
 
 	return false
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- UPGRADESYSTEM
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -37,23 +38,24 @@ function cRP.upgradeSystem(chestName)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		local consultChest = vRP.query("chests/getChests",{ name = chestName })
+		local consultChest = vRP.query("chests/getChests", { name = chestName })
 		if consultChest[1] then
 			local upgradePrice = 15000
 
-			if vRP.hasGroup(user_id,consultChest[1]["perm"]) then
-				if vRP.request(source,"Aumentar <b>25Kg</b> por <b>$"..parseFormat(upgradePrice).."</b> dólares?","Comprar") then
-					if vRP.paymentFull(user_id,upgradePrice) then
-						vRP.execute("chests/upgradeChests",{ name = chestName })
-						TriggerClientEvent("Notify",source,"verde","Compra concluída.",3000)
+			if vRP.hasGroup(user_id, consultChest[1]["perm"]) then
+				if vRP.request(source, "Aumentar <b>25Kg</b> por <b>$" .. parseFormat(upgradePrice) .. "</b> dólares?", "Comprar") then
+					if vRP.paymentFull(user_id, upgradePrice) then
+						vRP.execute("chests/upgradeChests", { name = chestName })
+						TriggerClientEvent("Notify", source, "verde", "Compra concluída.", 3000)
 					else
-						TriggerClientEvent("Notify",source,"vermelho","<b>Dólares</b> insuficientes.",5000)
+						TriggerClientEvent("Notify", source, "vermelho", "<b>Dólares</b> insuficientes.", 5000)
 					end
 				end
 			end
 		end
 	end
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- OPENCHEST
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -63,7 +65,7 @@ function cRP.openChest(chestName)
 	if user_id then
 		local Inventory = {}
 		local inventory = vRP.userInventory(user_id)
-		for k,v in pairs(inventory) do
+		for k, v in pairs(inventory) do
 			v["amount"] = parseInt(v["amount"])
 			v["name"] = itemName(v["item"])
 			v["peso"] = itemWeight(v["item"])
@@ -75,7 +77,7 @@ function cRP.openChest(chestName)
 			v["key"] = v["item"]
 			v["slot"] = k
 
-			local splitName = splitString(v["item"],"-")
+			local splitName = splitString(v["item"], "-")
 			if splitName[2] ~= nil then
 				if itemDurability(v["item"]) then
 					v["durability"] = parseInt(os.time() - splitName[2])
@@ -93,8 +95,8 @@ function cRP.openChest(chestName)
 		end
 
 		local Chest = {}
-		local result = vRP.getSrvdata("stackChest:"..chestName)
-		for k,v in pairs(result) do
+		local result = vRP.getSrvdata("stackChest:" .. chestName)
+		for k, v in pairs(result) do
 			v["amount"] = parseInt(v["amount"])
 			v["name"] = itemName(v["item"])
 			v["peso"] = itemWeight(v["item"])
@@ -106,7 +108,7 @@ function cRP.openChest(chestName)
 			v["key"] = v["item"]
 			v["slot"] = k
 
-			local splitName = splitString(v["item"],"-")
+			local splitName = splitString(v["item"], "-")
 			if splitName[2] ~= nil then
 				if itemDurability(v["item"]) then
 					v["durability"] = parseInt(os.time() - splitName[2])
@@ -123,12 +125,14 @@ function cRP.openChest(chestName)
 			Chest[k] = v
 		end
 
-		local consultChest = vRP.query("chests/getChests",{ name = chestName })
+		local consultChest = vRP.query("chests/getChests", { name = chestName })
 		if consultChest[1] then
-			return Inventory,Chest,vRP.inventoryWeight(user_id),vRP.getWeight(user_id),vRP.chestWeight(result),consultChest[1]["weight"]
+			return Inventory, Chest, vRP.inventoryWeight(user_id), vRP.getWeight(user_id), vRP.chestWeight(result),
+					consultChest[1]["weight"]
 		end
 	end
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- NOSTORE
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -201,64 +205,78 @@ local noStore = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- STOREITEM
 -----------------------------------------------------------------------------------------------------------------------------------------
-function cRP.storeItem(nameItem,slot,amount,target,chestName)
+function cRP.storeItem(nameItem, slot, amount, target, chestName)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		if chestName ~= "trayShot" and chestName ~= "trayDesserts" and chestName ~= "trayPops" and chestName ~= "trayPizza" then
 			if noStore[nameItem] then
-				TriggerClientEvent("chest:Update",source,"requestChest")
-				TriggerClientEvent("Notify",source,"amarelo","Armazenamento proibido.",5000)
+				TriggerClientEvent("chest:Update", source, "requestChest")
+				TriggerClientEvent("Notify", source, "amarelo", "Armazenamento proibido.", 5000)
 				return
 			end
 		end
 
-		local consultChest = vRP.query("chests/getChests",{ name = chestName })
+		local consultChest = vRP.query("chests/getChests", { name = chestName })
 		if consultChest[1] then
-			if vRP.storeChest(user_id,"stackChest:"..chestName,amount,consultChest[1]["weight"],slot,target) then
-				TriggerClientEvent("chest:Update",source,"requestChest")
+			if vRP.storeChest(user_id, "stackChest:" .. chestName, amount, consultChest[1]["weight"], slot, target) then
+				TriggerClientEvent("chest:Update", source, "requestChest")
 			else
-				local result = vRP.getSrvdata("stackChest:"..chestName)
-				TriggerClientEvent("chest:UpdateWeight",source,vRP.inventoryWeight(user_id),vRP.getWeight(user_id),vRP.chestWeight(result),consultChest[1]["weight"])
+				local result = vRP.getSrvdata("stackChest:" .. chestName)
+				TriggerClientEvent("chest:UpdateWeight", source, vRP.inventoryWeight(user_id), vRP.getWeight(user_id),
+					vRP.chestWeight(result), consultChest[1]["weight"])
 
 				if parseInt(consultChest[1]["logs"]) >= 1 then
-					TriggerEvent("discordLogs",chestName,"**Passaporte:** "..parseFormat(user_id).."\n**Guardou:** "..parseFormat(amount).."x "..itemName(nameItem).."\n**Horário:** "..os.date("%H:%M:%S"),3042892)
+					TriggerEvent("discordLogs", chestName,
+						"**Passaporte:** " ..
+						parseFormat(user_id) ..
+						"\n**Guardou:** " .. parseFormat(amount) .. "x " ..
+						itemName(nameItem) .. "\n**Horário:** " .. os.date("%H:%M:%S"), 3042892)
 				end
 			end
 		end
 	end
+	TriggerClientEvent("inventory:Update", source, "updateMochila")
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TAKEITEM
 -----------------------------------------------------------------------------------------------------------------------------------------
-function cRP.takeItem(nameItem,slot,amount,target,chestName)
+function cRP.takeItem(slot, amount, target, chestName)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		local consultChest = vRP.query("chests/getChests",{ name = chestName })
+		local consultChest = vRP.query("chests/getChests", { name = chestName })
 		if consultChest[1] then
-			if vRP.tryChest(user_id,"stackChest:"..chestName,amount,slot,target) then
-				TriggerClientEvent("chest:Update",source,"requestChest")
+			if vRP.tryChest(user_id, "stackChest:" .. chestName, amount, slot, target) then
+				TriggerClientEvent("chest:Update", source, "requestChest")
 			else
-				local result = vRP.getSrvdata("stackChest:"..chestName)
-				TriggerClientEvent("chest:UpdateWeight",source,vRP.inventoryWeight(user_id),vRP.getWeight(user_id),vRP.chestWeight(result),consultChest[1]["weight"])
+				local result = vRP.getSrvdata("stackChest:" .. chestName)
+				TriggerClientEvent("chest:UpdateWeight", source, vRP.inventoryWeight(user_id), vRP.getWeight(user_id),
+					vRP.chestWeight(result), consultChest[1]["weight"])
 
 				if parseInt(consultChest[1]["logs"]) >= 1 then
-					TriggerEvent("discordLogs",chestName,"**Passaporte:** "..parseFormat(user_id).."\n**Retirou:** "..parseFormat(amount).."x "..itemName(nameItem).."\n**Horário:** "..os.date("%H:%M:%S"),9317187)
+					TriggerEvent("discordLogs", chestName,
+						"**Passaporte:** " ..
+						parseFormat(user_id) ..
+						"\n**Retirou:** " .. parseFormat(amount) .. "x " ..
+						itemName('xxx') .. "\n**Horário:** " .. os.date("%H:%M:%S"), 9317187)
 				end
 			end
 		end
 	end
+	TriggerClientEvent("inventory:Update", source, "updateMochila")
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- UPDATECHEST
 -----------------------------------------------------------------------------------------------------------------------------------------
-function cRP.updateChest(slot,target,amount,chestName)
+function cRP.updateChest(slot, target, amount, chestName)
 	local source = source
 	local user_id = vRP.getUserId(source)
 	if user_id then
-		if vRP.updateChest(user_id,"stackChest:"..chestName,slot,target,amount) then
-			TriggerClientEvent("chest:Update",source,"requestChest")
+		if vRP.updateChest(user_id, "stackChest:" .. chestName, slot, target, amount) then
+			TriggerClientEvent("chest:Update", source, "requestChest")
 		end
 	end
 end

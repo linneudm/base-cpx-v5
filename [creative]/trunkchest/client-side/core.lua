@@ -17,11 +17,12 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- INVCLOSE
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNUICallback("invClose", function()
+RegisterNUICallback("invClose", function(data, cb)
 	-- SendNUIMessage({ action = "hideMenu" })
 	-- SetNuiFocus(false, false)
 	TriggerEvent("inventory:Close")
 	vSERVER.chestClose()
+	cb("ok")
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TRUNK
@@ -35,43 +36,43 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TAKEITEM
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNUICallback("takeItem", function(data)
+RegisterNUICallback("takeItem", function(data, cb)
 	if MumbleIsConnected() then
 		vSERVER.takeItem(data["slot"], data["amount"], data["target"])
 	end
+	cb("ok")
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- STOREITEM
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNUICallback("storeItem", function(data)
+RegisterNUICallback("storeItem", function(data, cb)
 	if MumbleIsConnected() then
 		vSERVER.storeItem(data["item"], data["slot"], data["amount"], data["target"])
 	end
+	cb("ok")
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- UPDATESLOT
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNUICallback("updateChest", function(data)
+RegisterNUICallback("updateChest", function(data, cb)
 	if MumbleIsConnected() then
 		vSERVER.updateChest(data["slot"], data["target"], data["amount"])
 	end
+	cb("ok")
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- REQUESTCHEST
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("requestChest", function(data, cb)
 	local myInventory, myChest, invPeso, invMaxpeso, chestPeso, chestMaxpeso = vSERVER.openChest()
-	if myInventory then
-		cb({
-			myInventory = myInventory,
-			myChest = myChest,
-			invPeso = invPeso,
-			invMaxpeso = invMaxpeso,
-			chestPeso = chestPeso,
-			chestMaxpeso =
-					chestMaxpeso
-		})
-	end
+	cb({
+		myInventory = myInventory or {},
+		myChest = myChest or {},
+		invPeso = invPeso or 0,
+		invMaxpeso = invMaxpeso or 0,
+		chestPeso = chestPeso or 0,
+		chestMaxpeso = chestMaxpeso or 0
+	})
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TRUNKCHEST:UPDATE

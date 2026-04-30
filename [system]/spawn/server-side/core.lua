@@ -57,11 +57,10 @@ function cRP.initSystem()
 	if consult[1] then
 		for k, v in pairs(consult) do
 			table.insert(characterList,
-			{ user_id = v["id"], name = v["name"] .. " " .. v["name2"], locate = v["locate"], blood = v["blood"] })
+				{ user_id = v["id"], name = v["name"] .. " " .. v["name2"], locate = v["locate"], blood = v["blood"] })
 		end
 	end
 
-	print(json.encode(characterList))
 	return characterList
 end
 

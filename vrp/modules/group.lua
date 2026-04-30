@@ -9,6 +9,7 @@ permList["Emergency"] = {}
 permList["Foods"] = {}
 permList["Runners"] = {}
 permList["Bennys"] = {}
+permList["Mechanic"] = {}
 permList["Paramedic"] = {}
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PERMISSIONS

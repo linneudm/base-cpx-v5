@@ -61,7 +61,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("chest:Update")
 AddEventHandler("chest:Update", function(action)
-	SendNUIMessage({ action = action })
+	TriggerEvent("inventory:Update", action)
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- REQUESTCHEST

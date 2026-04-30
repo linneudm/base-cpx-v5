@@ -257,8 +257,8 @@ function cnVRP.storeItem(itemName, slot, amount)
 			if consult[1].name == tostring(chestOpen[parseInt(user_id)]) then
 				if vRP.storeChestItem(user_id, "chest:" .. tostring(chestOpen[parseInt(user_id)]), itemName, amount,
 							consult[1].weight, slot) then
-					-- TriggerClientEvent("chest:Update", source, "updateChest")
-					TriggerClientEvent("inventory:Update", source, "updateMochila")
+					TriggerClientEvent("chest:Update", source, "updateChest")
+					-- TriggerClientEvent("inventory:Update", source, "updateMochila")
 				end
 			end
 		end
