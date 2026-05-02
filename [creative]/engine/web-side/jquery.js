@@ -5,6 +5,9 @@ $(document).ready(function(){
 			if (event["data"]["show"] == true){
 				$(".title").html(event["data"]["title"]);
 				$(".legends").html(event["data"]["legends"]);
+				if (event["data"]["vehicle"] !== undefined){
+					$("#vehicle").html(event["data"]["vehicle"]);
+				}
 				$("#fuelMenu").css("background",event["data"]["background"]);
 				$("#fuelMenu").css("display","block");
 			}
@@ -18,6 +21,10 @@ $(document).ready(function(){
 			$("#lts").html(event["data"]["lts"] + " ¢");
 			$("#tank").html(event["data"]["tank"] + " %");
 			$("#price").html("$" + event["data"]["price"]);
+		}
+
+		if (event["data"]["vehicle"] !== undefined){
+			$("#vehicle").html(event["data"]["vehicle"]);
 		}
 	});
 });
