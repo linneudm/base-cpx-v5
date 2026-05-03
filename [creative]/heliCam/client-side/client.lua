@@ -31,7 +31,7 @@ end)
 CreateThread(function()
     while true do
         local delay = 1000
-        
+
         local lPed = GetPlayerPed(-1)
         local heli = GetVehiclePedIsIn(lPed)
 
@@ -39,8 +39,8 @@ CreateThread(function()
             delay = 1
             if IsHeliHighEnough(heli) then
                 if IsControlJustPressed(0, toggle_helicam) and not helicam then
-                    TriggerEvent("hudActived",false)
-                    SendNUIMessage({type = 'show'})
+                    TriggerEvent("hudActived", false)
+                    SendNUIMessage({ type = 'show' })
                     SetGameplayCamRelativeHeading(0.0)
                     SetGameplayCamRelativePitch(0.0)
 
@@ -75,9 +75,9 @@ CreateThread(function()
             while helicam and not IsEntityDead(lPed) and
                 (GetVehiclePedIsIn(lPed) == heli) and IsHeliHighEnough(heli) do
                 if IsControlJustPressed(0, toggle_helicam) then
-                    TriggerEvent("hudActived",true)
+                    TriggerEvent("hudActived", true)
                     helicam = false
-                    SendNUIMessage({type = 'hide'})
+                    SendNUIMessage({ type = 'hide' })
                 end
                 if IsControlJustPressed(0, toggle_vision) then
                     if vision_state == 0 then
@@ -96,9 +96,9 @@ CreateThread(function()
 
                 if locked_on_vehicle then
                     if DoesEntityExist(locked_on_vehicle) and not IsEntityInWater(locked_on_vehicle) and GetEntityType(locked_on_vehicle) == 2 then
-                        PointCamAtEntity(cam, locked_on_vehicle, 0.0, 0.0, 0.0,true)
+                        PointCamAtEntity(cam, locked_on_vehicle, 0.0, 0.0, 0.0, true)
                         vehicle = locked_on_vehicle
-                        
+
                         if IsControlJustPressed(0, toggle_lock_on) or not HasEntityClearLosToEntity(heli, locked_on_vehicle, 17) then
                             locked_on_vehicle = nil
                             local rot = GetCamRot(cam, 2)
@@ -134,11 +134,12 @@ CreateThread(function()
                 HandleSpotlight(cam)
 
                 local playerCoords = GetEntityCoords(lPed)
-                local streetname = GetStreetNameFromHashKey(GetStreetNameAtCoord(playerCoords.x, playerCoords.y, playerCoords.z))
+                local streetname = GetStreetNameFromHashKey(GetStreetNameAtCoord(playerCoords.x, playerCoords.y,
+                    playerCoords.z))
                 --local roadHashNearHeli
 
                 --local camRot = GetCamRot(cam,2)
-                    
+
                 if vehicle == nil then
                     SendNUIMessage({
                         type = "update",
@@ -159,8 +160,10 @@ CreateThread(function()
                     })
                 else
                     local vehicleCoords = GetEntityCoords(vehicle)
-                    local vehstreetname = GetStreetNameFromHashKey(GetStreetNameAtCoord(vehicleCoords.x, vehicleCoords.y, vehicleCoords.z))
-                    local vehspd = string.format("%." .. (numDecimalPlaces or 0) .. "f", GetEntitySpeed(vehicle) * 3.6) .. " KMH"
+                    local vehstreetname = GetStreetNameFromHashKey(GetStreetNameAtCoord(vehicleCoords.x, vehicleCoords.y,
+                        vehicleCoords.z))
+                    local vehspd = string.format("%." .. (numDecimalPlaces or 0) .. "f", GetEntitySpeed(vehicle) * 3.6) ..
+                        " KMH"
 
                     SendNUIMessage({
                         type = "update",
@@ -183,14 +186,14 @@ CreateThread(function()
 
                 Wait(0)
             end
-            TriggerEvent("hudActived",true)
+            TriggerEvent("hudActived", true)
             helicam = false
             fov = (fov_max + fov_min) * 0.5
             RenderScriptCams(false, false, 0, 1, 0)
             DestroyCam(cam, false)
             SetNightvision(false)
             SetSeethrough(false)
-            SendNUIMessage({type = "hide"})
+            SendNUIMessage({ type = "hide" })
             vision_state = 0
             spotlight_state = false
         end
@@ -253,21 +256,22 @@ function HandleZoom(cam)
 end
 
 function GetEntityInView(cam)
-	local coords = GetCamCoord(cam)
-	local forward_vector = RotAnglesToVec(GetCamRot(cam, 2))
-	local x, y, z = table.unpack(coords + (forward_vector*100.0))
+    local coords = GetCamCoord(cam)
+    local forward_vector = RotAnglesToVec(GetCamRot(cam, 2))
+    local x, y, z = table.unpack(coords + (forward_vector * 100.0))
     --local NorthCoord = tostring(y*10000000)
     --local WestCoord = tostring(x*10000000)
 
-	local rayhandle = StartShapeTestRay(coords, coords + (forward_vector * 10000.0), 10, GetVehiclePedIsIn(GetPlayerPed(-1)),4,0,7)
-	local retval, hit, endCoords, surfaceNormal , entityHit = GetShapeTestResult(rayhandle)
-	--local distancetoentity = GetDistanceBetweenCoords(coords, endCoords, true)
-	if entityHit > 0 then
-		--local entitySpeed = (GetEntitySpeed(entityHit))* 2.236936
-		return entityHit
-	else
-		return nil
-	end
+    local rayhandle = StartShapeTestRay(coords, coords + (forward_vector * 10000.0), 10,
+        GetVehiclePedIsIn(GetPlayerPed(-1)), 4, 0, 7)
+    local retval, hit, endCoords, surfaceNormal, entityHit = GetShapeTestResult(rayhandle)
+    --local distancetoentity = GetDistanceBetweenCoords(coords, endCoords, true)
+    if entityHit > 0 then
+        --local entitySpeed = (GetEntitySpeed(entityHit))* 2.236936
+        return entityHit
+    else
+        return nil
+    end
 end
 
 --local currentPlayerId = GetPlayerServerId(NetworkGetEntityOwner(GetPlayerPed(-1)))
@@ -281,7 +285,7 @@ function HandleSpotlight(cam)
         local forward_vector = RotAnglesToVec(rotation)
         local camcoords = GetCamCoord(cam)
         DrawSpotLight(camcoords, forward_vector, 255, 255, 255, 350.0, 8.0, 8.5,
-                      7.50, 75.0)
+            7.50, 75.0)
     end
 end
 

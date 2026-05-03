@@ -29,6 +29,7 @@ local fuelingStep = 0.50
 local enableHoseLine = true
 local hoseRibbonHalfWidth = 0.018
 local hoseMaxSegments = 14
+local fuelLocs, gasPumpModels, Eletric, vehiclesBlacklist
 
 local function drawHoseRibbonSegment(sx, sy, sz, ex, ey, ez, halfWidth, r, g, b, a)
 	local vx = ex - sx
@@ -89,18 +90,140 @@ local function clearPumpNozzle()
 end
 
 local function getVehicleFuelLabel(vehicle, vehPlate)
-	local modelName = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
-	if modelName == nil or modelName == "" or modelName == "CARNOTFOUND" then
-		modelName = "Desconhecido"
+	local modelCode = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
+	if modelCode == nil or modelCode == "" or modelCode == "CARNOTFOUND" then
+		modelCode = "unknown"
 	end
 
-	local translatedModel = GetLabelText(modelName)
+	local modelName = modelCode
+	local translatedModel = GetLabelText(modelCode)
 	if translatedModel ~= nil and translatedModel ~= "NULL" then
 		modelName = translatedModel
 	end
 
-	return modelName .. " [" .. vehPlate .. "]"
+	return modelName .. " [" .. vehPlate .. "]", string.lower(modelCode)
 end
+
+local function getFuelStationConfig(coords, vehModel)
+	for _, fuelData in pairs(fuelLocs) do
+		local distance = #(coords - vector3(fuelData[1], fuelData[2], fuelData[3]))
+		if distance <= fuelData[4] and ((fuelData[7] and Eletric[vehModel]) or (not fuelData[7] and not Eletric[vehModel])) then
+			return fuelData
+		end
+	end
+
+	return nil
+end
+
+local function getClosestPumpObject(coords)
+	for _, pumpData in ipairs(gasPumpModels) do
+		local pumpEntity = GetClosestObjectOfType(coords.x, coords.y, coords.z, 2.5, pumpData[1], false, false, false)
+		if pumpEntity and DoesEntityExist(pumpEntity) then
+			return pumpEntity, pumpData
+		end
+	end
+
+	return nil, nil
+end
+
+RegisterNetEvent("engine:openFuelPump")
+AddEventHandler("engine:openFuelPump", function()
+	if LocalPlayer["state"]["Route"] >= 900000 then
+		return
+	end
+
+	local ped = PlayerPedId()
+	if IsPedInAnyVehicle(ped) then
+		return
+	end
+
+	if pumpGunInHand then
+		TriggerEvent("Notify", "amarelo", "Você já está com o bico na mão.", 3000)
+		return
+	end
+
+	local coords = GetEntityCoords(ped)
+	local vehicle = GetPlayersLastVehicle()
+	if not DoesEntityExist(vehicle) then
+		TriggerEvent("Notify", "amarelo", "Nenhum veículo encontrado.", 3000)
+		return
+	end
+
+	local vehModel = GetEntityModel(vehicle)
+	if vehiclesBlacklist[vehModel] then
+		TriggerEvent("Notify", "amarelo", "Este veículo não pode ser abastecido aqui.", 3000)
+		return
+	end
+
+	local coordsVeh = GetEntityCoords(vehicle)
+	local distanceToVeh = #(coords - vector3(coordsVeh.x, coordsVeh.y, coordsVeh.z))
+	if distanceToVeh > 3.5 then
+		TriggerEvent("Notify", "amarelo", "Aproxime-se do veículo para abastecer.", 3000)
+		return
+	end
+
+	local fuelConfig = getFuelStationConfig(coords, vehModel)
+	if not fuelConfig then
+		TriggerEvent("Notify", "amarelo", "Você não está em um posto compatível.", 3000)
+		return
+	end
+
+	local pumpEntity, pumpData = getClosestPumpObject(coords)
+	if not pumpEntity then
+		TriggerEvent("Notify", "amarelo", "Aproxime-se da bomba de combustível.", 3000)
+		return
+	end
+
+	local vehFuel = GetVehicleFuelLevel(vehicle)
+	if vehFuel >= 100.0 then
+		TriggerEvent("Notify", "amarelo", "O tanque já está cheio.", 3000)
+		return
+	end
+
+	local vehPlate = GetVehicleNumberPlateText(vehicle)
+	local vehLabel, vehModelImage = getVehicleFuelLabel(vehicle, vehPlate)
+
+	LastPump = pumpEntity
+	PumpCoords = GetEntityCoords(LastPump)
+	PumpConfig = pumpData
+	pumpGunInHand = true
+	isFuel = false
+	isPrice = 0
+	gameTimer = GetGameTimer() + 800
+
+	vRP.removeObjects("one")
+	playNozzlePullAnim(ped)
+	Wait(180)
+	LoadModel(`prop_cs_fuel_nozle`)
+	currentPumpEntity = CreateObjectNoOffset(`prop_cs_fuel_nozle`, coords.x, coords.y, coords.z, false, false, false)
+	if DoesEntityExist(currentPumpEntity) then
+		SetEntityCollision(currentPumpEntity, false, false)
+		AttachEntityToEntity(currentPumpEntity, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), 60309), 0.055, 0.05, 0.0, -50.0,
+			-90.0, -50.0, true, true, false, true, 0, true)
+
+		local Title = "Posto de Gasolina"
+		local Legends = "Abastecimento de combustível"
+		local Background = "url(background.png) rgba(15,15,15,.75)"
+
+		SendNUIMessage({
+			show = true,
+			background = Background,
+			title = Title,
+			legends = Legends,
+			vehicle = vehLabel,
+			vehicleModel = vehModelImage
+		})
+		SendNUIMessage({
+			tank = parseInt(floor(vehFuel)),
+			price = parseInt(isPrice),
+			lts = 0
+		})
+		showNui = true
+	else
+		pumpGunInHand = false
+		LastPump = nil
+	end
+end)
 
 local function drawPumpHoseLine()
 	if not enableHoseLine or not pumpGunInHand then
@@ -219,7 +342,7 @@ local vehFuel = {
 -- FUELLOCS
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- Radius sempre >= 8.0
-local fuelLocs = {
+fuelLocs = {
 	--	{ 4329.7,7983.2,92.78,5.0,0.001,true,false },
 	--	{ 4306.29,7997.75,92.52,5.0,0.001,true,false },
 	--	{ 4288.86,8007.55,92.62,5.0,0.001,true,false },
@@ -267,7 +390,7 @@ local fuelLocs = {
 	["33"] = { 317.31, -1460.28, 45.52, 25.0, 0.095, false, false }, -- gaep/hospita lado direito
 }
 
-local gasPumpModels = {
+gasPumpModels = {
 	{ GetHashKey("prop_gas_pump_1d"),   0.0, 0.0, 2.3 },
 	{ GetHashKey("prop_gas_pump_1a"),   0.0, 0.0, 2.3 },
 	{ GetHashKey("prop_gas_pump_1b"),   0.0, 0.0, 2.3 },
@@ -280,7 +403,7 @@ local gasPumpModels = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ELETRIC
 -----------------------------------------------------------------------------------------------------------------------------------------
-local Eletric = { --VOLTAR PRA TRUE DEPOIS
+Eletric = { --VOLTAR PRA TRUE DEPOIS
 	[1392481335] = false,
 	[-1529242755] = false,
 	[-1848994066] = false,
@@ -347,7 +470,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREDREFUEL
 -----------------------------------------------------------------------------------------------------------------------------------------
-local vehiclesBlacklist = {
+vehiclesBlacklist = {
 	[`kwid`] = true,
 	[`betazoe`] = true
 }
@@ -454,53 +577,11 @@ CreateThread(function()
 									end
 								end
 								local distanceToPump = #(coords - PumpCoords)
-								local vehLabel = getVehicleFuelLabel(vehicle, vehPlate)
+								local vehLabel, vehModelImage = getVehicleFuelLabel(vehicle, vehPlate)
 								drawPumpHoseLine()
 
 								if distanceToPump > 5.0 and pumpGunInHand then
 									clearPumpNozzle()
-								end
-
-								if not pumpGunInHand and distanceToPump < 2.0 and vehFuel < 100.0 then
-									text3D(PumpCoords.x, PumpCoords.y, PumpCoords.z + 1, "~g~E~w~   ABRIR")
-
-									if IsControlJustPressed(1, 38) and GetGameTimer() >= gameTimer then
-										pumpGunInHand = true
-										isFuel = false
-										isPrice = 0
-										gameTimer = GetGameTimer() + 800
-										vRP.removeObjects("one")
-										playNozzlePullAnim(ped)
-										Wait(180)
-										LoadModel(`prop_cs_fuel_nozle`)
-										currentPumpEntity = CreateObjectNoOffset(`prop_cs_fuel_nozle`, coords.x, coords.y, coords.z, false,
-											false, false)
-										if DoesEntityExist(currentPumpEntity) then
-											SetEntityCollision(currentPumpEntity, false, false)
-											AttachEntityToEntity(currentPumpEntity, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), 60309), 0.055,
-												0.05, 0.0, -50.0, -90.0, -50.0, true, true, false, true, 0, true)
-											local Title = "Posto de Gasolina"
-											local Legends = "Abastecimento de combustível"
-											local Background = "url(background.png) rgba(15,15,15,.75)"
-
-											SendNUIMessage({
-												show = true,
-												background = Background,
-												title = Title,
-												legends = Legends,
-												vehicle = vehLabel
-											})
-											SendNUIMessage({
-												tank = parseInt(floor(vehFuel)),
-												price = parseInt(isPrice),
-												lts = 0
-											})
-											showNui = true
-										else
-											pumpGunInHand = false
-											LastPump = nil
-										end
-									end
 								end
 
 								if pumpGunInHand and distanceToVeh <= 3.5 then
@@ -532,7 +613,8 @@ CreateThread(function()
 											tank = parseInt(floor(vehFuel)),
 											price = parseInt(isPrice),
 											lts = ltsPerSecond,
-											vehicle = vehLabel
+											vehicle = vehLabel,
+											vehicleModel = vehModelImage
 										})
 										text3D(wheelCoords["x"], wheelCoords["y"], wheelCoords["z"] + 1,
 											"~g~E~w~   FINALIZAR")

@@ -1,87 +1,60 @@
-* {
+html,
+body {
 	margin: 0;
 	padding: 0;
+	background: transparent !important;
+	font-family: "Inter", "Segoe UI", sans-serif;
 }
 
-html,body {
-	color: #ccc;
-	font-size: 13px;
-	overflow: hidden;
-	font-family: "Roboto";
-	background: transparent;
+#fuelWrap {
+	background: transparent !important;
 }
 
-#fuelMenu {
-	left: 50px;
-	bottom: 50px;
-	width: 275px;
-	display: none;
-	padding: 30px;
-	border-radius: 3px;
-	position: absolute;
-	background-position: top;
-	background-repeat: no-repeat;
-	background: url("background.png") rgba(15,15,15,.75);
+#fuelPanel {
+	background: linear-gradient(145deg, rgba(10, 19, 34, 0.68), rgba(7, 12, 23, 0.62));
+	border: 1px solid rgba(255, 255, 255, 0.14);
+	transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
-.title {
-	color: #fff;
-	float: left;
-	width: 275px;
-	font-size: 15px;
-	letter-spacing: 2px;
-	text-transform: uppercase;
+#fuelPanel.nui-enter {
+	animation: fuelSlideIn 280ms cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
 
-.legends {
-	color: #ccc;
-	float: left;
-	opacity: .75;
-	width: 275px;
-	font-size: 9px;
-	letter-spacing: 2px;
-	padding-bottom: 25px;
-	text-transform: uppercase;
+#fuelPanel.nui-exit {
+	animation: fuelSlideOut 240ms cubic-bezier(0.55, 0.06, 0.68, 0.19) forwards;
 }
 
-.fuelButton {
-	float: left;
-	width: 100px;
-	font-size: 16px;
+@keyframes fuelSlideIn {
+	0% {
+		transform: translateX(-48px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
 }
 
-.fuelVehicleLabel {
-	width: 275px;
-	padding-top: 14px;
+@keyframes fuelSlideOut {
+	0% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+	100% {
+		transform: translateX(48px);
+		opacity: 0;
+	}
 }
 
-.fuelStats {
-	float: left;
-	width: 100px;
-	font-size: 14px;
+#fuelPanel:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 0 48px rgba(56, 189, 248, 0.25);
 }
 
-.fuelVehicleValue {
-	width: 275px;
-	color: #d8d8d8;
-	font-size: 12px;
-	padding-top: 4px;
-	letter-spacing: 1px;
-	text-transform: uppercase;
+.vehicle-image-wrap {
+	background: linear-gradient(145deg, rgba(15, 23, 42, 0.72), rgba(8, 14, 28, 0.7));
 }
 
-#tank {
-	color: #64b4f1;
-	padding-top: 6px;
-}
-
-#price {
-	color: #b8f5d4;
-	padding-top: 6px;
-}
-
-#lts {
-	width: 75px;
-	color: #e1c256;
-	padding-top: 6px;
+#vehicleImage {
+	display: block;
 }

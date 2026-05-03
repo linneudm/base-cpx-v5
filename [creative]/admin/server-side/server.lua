@@ -384,13 +384,57 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TPCDS
 -----------------------------------------------------------------------------------------------------------------------------------------
+function sanitizeString(msg)
+	local str = msg
+
+	-- Captura apenas os números (com sinal e decimal)
+	local result = {}
+
+	for num in string.gmatch(str, "[-]?%d+%.?%d*") do
+		table.insert(result, num)
+	end
+
+	-- Junta com vírgula
+	local sanitized = table.concat(result, ",")
+
+	return sanitized
+end
+
+RegisterCommand("tpcds2", function(source, args, rawCommand)
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		if vRP.hasGroup(user_id, "Admin") then
+			-- Pega todo o texto após o nome do comando para aceitar a string completa do F8.
+			local text = rawCommand and rawCommand:match("^%S+%s+(.+)$") or nil
+			if not text or text == "" then
+				text = table.concat(args, " ")
+			end
+
+			if text and text ~= "" then
+				local sanitized = sanitizeString(text)
+				local split = splitString(sanitized, ",")
+				if split[1] and split[2] and split[3] then
+					vRP.teleport(source, split[1], split[2], split[3])
+				else
+					TriggerClientEvent("Notify", source, "amarelo",
+						"Formato inválido. Use uma string do F8 contendo x, y, z.", 5000)
+				end
+			else
+				TriggerClientEvent("Notify", source, "amarelo",
+					"Informe as coordenadas em uma string única do F8.", 5000)
+			end
+		end
+	end
+end)
+
 RegisterCommand("tpcds", function(source)
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		if vRP.hasGroup(user_id, "Admin") then
 			local Keyboard = vKEYBOARD.keySingle(source, "Cordenadas:")
 			if Keyboard then
-				local Split = splitString(Keyboard[1], ",")
+				local sanitized = sanitizeString(Keyboard[1])
+				local Split = splitString(sanitized, ",")
 				vRP.teleport(source, Split[1] or 0, Split[2] or 0, Split[3] or 0)
 			end
 		end
@@ -1099,6 +1143,19 @@ RegisterCommand("admindebug", function(source, args, rawCommand)
 	if user_id then
 		if vRP.hasPermission(user_id, "Admin") then
 			TriggerClientEvent("ToggleDebug", source)
+		end
+	end
+end)
+
+
+RegisterCommand("killx", function(source, args, rawCommand)
+	local user_id = vRP.getUserId(source)
+	if user_id then
+		if vRP.hasPermission(user_id, "Admin") then
+			local nplayer = vRP.getUserSource(parseInt(args[1]))
+			if nplayer then
+				vRPC.revivePlayer(nplayer, 0)
+			end
 		end
 	end
 end)

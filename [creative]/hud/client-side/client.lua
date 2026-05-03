@@ -26,6 +26,29 @@ local homeInterior = false
 local playerActive = true
 local flexDirection = "Norte"
 local updateFoods = GetGameTimer()
+
+local function setMaskVariationSafe(drawable, texture, palette)
+	local ped = PlayerPedId()
+	local maxDrawable = GetNumberOfPedDrawableVariations(ped, 1)
+	if maxDrawable <= 0 then
+		return
+	end
+
+	if drawable < 0 or drawable >= maxDrawable then
+		drawable = 0
+		texture = 0
+		palette = 0
+	end
+
+	local maxTexture = GetNumberOfPedTextureVariations(ped, 1, drawable)
+	if maxTexture <= 0 then
+		texture = 0
+	elseif texture < 0 or texture >= maxTexture then
+		texture = 0
+	end
+
+	SetPedComponentVariation(ped, 1, drawable, texture, palette)
+end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- NITRO
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -445,9 +468,9 @@ AddEventHandler("hud:toggleHood", function()
 	showHood = not showHood
 
 	if showHood then
-		SetPedComponentVariation(PlayerPedId(), 1, 69, 0, 1)
+		setMaskVariationSafe(69, 0, 1)
 	else
-		SetPedComponentVariation(PlayerPedId(), 1, 0, 0, 1)
+		setMaskVariationSafe(0, 0, 1)
 	end
 
 	SendNUIMessage({ hood = showHood })
@@ -460,7 +483,7 @@ AddEventHandler("hud:removeHood", function()
 	if showHood then
 		showHood = false
 		SendNUIMessage({ hood = showHood })
-		SetPedComponentVariation(PlayerPedId(), 1, 0, 0, 1)
+		setMaskVariationSafe(0, 0, 1)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-shared_script "lib/lib.lua"
+-- shared_script "lib/lib.lua"
 
 fx_version "bodacious"
 game "gta5"
@@ -8,6 +8,7 @@ ui_page "gui/index.html"
 
 client_scripts {
 	"config/Vehicles.lua",
+	"config/Global.lua",
 	"config/Item.lua",
 	"config/Native.lua",
 	"lib/utils.lua",

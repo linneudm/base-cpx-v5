@@ -680,6 +680,11 @@ CreateThread(function()
 	AddTargetModel({ -2007231801, 1339433404, 1694452750, 1933174915, -462817101, -469694731, -164877493 }, {
 		options = {
 			{
+				event = "engine:openFuelPump",
+				label = "Abrir",
+				tunnel = "client"
+			},
+			{
 				event = "crafting:Fuels",
 				label = "Combustível",
 				tunnel = "client"
@@ -1647,6 +1652,7 @@ function playerTargetEnable()
 									else
 										for _, v in pairs(Exclusives) do
 											local Distance = #(coords - vec3(v[1], v[2], v[3]))
+											print(Distance)
 											if Distance <= 10 then
 												if v[4] == "Desmanche" and vehPlate == "DISM" .. (1000 + LocalPlayer["state"]["Id"]) then
 													table.insert(Menu, { event = "inventory:Dismantle", label = "Desmanchar", tunnel = "police" })

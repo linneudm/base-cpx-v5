@@ -101,17 +101,17 @@ local Skinshops = {
 	{ 387.29,   799.17,   187.45 }, -- Departamento Ranger
 	{ 1841.13,  3679.86,  34.19 }, -- Departamento Sheriff
 	{ -437.49,  6009.62,  36.99 }, -- Departamento Sheriff
-	{ 361.77,   -1593.19, 25.9 }, -- Departamento State
+	{ 361.77,   -1593.19, 25.9 },  -- Departamento State
 	{ -586.89,  -1049.92, 22.34 }, -- Uwu Café
-	{ -824.49,  -1239.46, 7.33 }, -- Hospital Sul
-	{ -826.53,  -1237.49, 7.33 }, -- Hospital Sul 2
+	{ -824.49,  -1239.46, 7.33 },  -- Hospital Sul
+	{ -826.53,  -1237.49, 7.33 },  -- Hospital Sul 2
 	{ -256.56,  6327.32,  32.42 }, -- Hospital Norte
 	{ 909.14,   -2056.76, 34.88 }, -- Mecânica Sul
 	{ 550.21,   -182.36,  54.49 }, -- Mecânica Sul
 	{ 810.31,   -760.23,  31.26 }, -- Pizza This
 	{ 8.33,     528.35,   170.64 }, -- CASA DA LOLO
 	{ -637.45,  942.9,    243.95 }, -- BLX
-	{ -709.95,  -153.28,  37.41 } -- LOjinha do jojo
+	{ -709.95,  -153.28,  37.41 }  -- LOjinha do jojo
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADHOVERFY
@@ -241,7 +241,7 @@ function GetMaxValues()
 		if v["type"] == "variation" then
 			maxModelValues[k]["item"] = GetNumberOfPedDrawableVariations(ped, v["id"]) - 1
 			maxModelValues[k]["texture"] = GetNumberOfPedTextureVariations(ped, v["id"], GetPedDrawableVariation(ped, v["id"])) -
-			1
+					1
 
 			if maxModelValues[k]["texture"] <= 0 then
 				maxModelValues[k]["texture"] = 0
@@ -425,6 +425,7 @@ function ChangeVariation(data)
 	local types = data["type"]
 	local item = data["articleNumber"]
 	local category = data["clothingType"]
+
 
 	if category == "pants" then
 		if types == "item" then

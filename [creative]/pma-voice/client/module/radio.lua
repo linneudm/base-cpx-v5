@@ -17,7 +17,8 @@ local function createLocalRadioProp(ped)
 		return nil
 	end
 
-	AttachEntityToEntity(obj, ped, GetPedBoneIndex(ped, 28422), 0.0750, 0.0230, -0.0230, -90.0000, 0.0, -59.9999, true, false, false, false, 2, true)
+	AttachEntityToEntity(obj, ped, GetPedBoneIndex(ped, 28422), 0.0750, 0.0230, -0.0230, -90.0000, 0.0, -59.9999, true,
+		false, false, false, 2, true)
 	SetModelAsNoLongerNeeded(radioModel)
 	return obj
 end
@@ -187,7 +188,9 @@ RegisterCommand('+radiotalk', function()
 			TriggerServerEvent('pma-voice:setTalkingOnRadio', true)
 			radioPressed = true
 			playMicClicks(true)
-			if GetConvarInt('voice_enableRadioAnim', 1) == 1 and not (GetConvarInt('voice_disableVehicleRadioAnim', 0) == 1 and IsPedInAnyVehicle(PlayerPedId(), false)) then
+
+			print(GetConvarInt('voice_enableRadioAnim', 0))
+			if GetConvarInt('voice_enableRadioAnim', 0) == 1 and not (GetConvarInt('voice_disableVehicleRadioAnim', 0) == 1 and IsPedInAnyVehicle(PlayerPedId(), false)) then
 				if not disableRadioAnim then
 					local radioAnimDict = 'anim@male@holding_radio'
 					local radioAnimName = 'holding_radio_clip'
@@ -229,7 +232,7 @@ RegisterCommand('-radiotalk', function()
 		playerTargets(MumbleIsPlayerTalking(PlayerId()) and callData or {})
 		TriggerEvent("pma-voice:radioActive", false)
 		playMicClicks(false)
-		if GetConvarInt('voice_enableRadioAnim', 1) == 1 then
+		if GetConvarInt('voice_enableRadioAnim', 0) == 1 then
 			StopAnimTask(PlayerPedId(), "anim@male@holding_radio", "holding_radio_clip", -4.0)
 			if radioProp and DoesEntityExist(radioProp) then
 				DeleteObject(radioProp)

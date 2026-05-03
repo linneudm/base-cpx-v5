@@ -1684,6 +1684,7 @@ local craftList = {
 function cRP.requestPerm(craftType)
 	local source = source
 	local user_id = vRP.getUserId(source)
+	print(craftType)
 	if user_id then
 		if craftList[craftType]["perm"] ~= nil then
 			if not vRP.hasGroup(user_id, craftList[craftType]["perm"]) then
@@ -1710,8 +1711,17 @@ function cRP.requestCrafting(craftType)
 			end
 
 			table.insert(inventoryShop,
-				{ name = itemName(k), index = itemIndex(k), key = k, peso = itemWeight(k), list = craftList, amount = parseInt(v
-				["amount"]), desc = itemDescription(k), economy = itemEconomy(k) })
+				{
+					name = itemName(k),
+					index = itemIndex(k),
+					key = k,
+					peso = itemWeight(k),
+					list = craftList,
+					amount = parseInt(v
+						["amount"]),
+					desc = itemDescription(k),
+					economy = itemEconomy(k)
+				})
 		end
 
 		local inventoryUser = {}

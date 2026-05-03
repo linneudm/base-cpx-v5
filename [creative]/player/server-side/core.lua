@@ -454,19 +454,19 @@ local preset = {
 	},
 	["3"] = {
 		["mp_m_freemode_01"] = {
-			["hat"] = { item = 34, texture = 0 }, --
-			["pants"] = { item = 19, texture = 2 }, --
-			["vest"] = { item = 39, texture = 0 }, --
+			["hat"] = { item = -1, texture = 0 }, --
+			["pants"] = { item = 202, texture = 1 }, --
+			["vest"] = { item = 73, texture = 4 }, --
 			["bracelet"] = { item = -1, texture = 0 },
 			["backpack"] = { item = 0, texture = 0 },
 			["decals"] = { item = -1, texture = 0 },
-			["mask"] = { item = 169, texture = 0 }, --
-			["shoes"] = { item = 25, texture = 0 }, --
-			["tshirt"] = { item = 25, texture = 0 }, --
-			["torso"] = { item = 33, texture = 5 }, --
+			["mask"] = { item = 185, texture = 20 }, --
+			["shoes"] = { item = 110, texture = 0 }, --
+			["tshirt"] = { item = 15, texture = 0 }, --
+			["torso"] = { item = 555, texture = 2 }, --
 			["accessory"] = { item = 0, texture = 0 }, --
 			["watch"] = { item = -1, texture = 0 },
-			["arms"] = { item = 0, texture = 0 },   --
+			["arms"] = { item = 4, texture = 0 },   --
 			["glass"] = { item = 50, texture = 0 }, --
 			["ear"] = { item = -1, texture = 0 }
 		},
@@ -936,7 +936,7 @@ AddEventHandler("player:presetFunctions", function(number)
 	if user_id then
 		if vRP.hasGroup(user_id, "Emergency") or vRP.hasGroup(user_id, "Uwucafe") then
 			local model = vRP.modelPlayer(source)
-
+			print(json.encode(preset[number][model]))
 			if model == "mp_m_freemode_01" or "mp_f_freemode_01" then
 				TriggerClientEvent("updateRoupas", source, preset[number][model])
 			end
@@ -1166,13 +1166,11 @@ local discordLinks = {
 	["Comanf"] = "",        ------
 
 	--ADMIN
-	["God"] =
-	"https://discord.com/api/webhooks/1482881480253509764/tjvvXfsyOU-Fzic7t1i0CBLIIVMOxe5WQ-dVxuujzqn8Lb07ba1saJuvZs5U1aXGNx_R",          --
-	["Blips"] = "",                                                                                                                       --
+	["God"] = "",  --
+	["Blips"] = "", --
 	["Police"] = "",
 	["Robberys"] = "",
-	["Delete"] =
-	"https://discord.com/api/webhooks/1482881480253509764/tjvvXfsyOU-Fzic7t1i0CBLIIVMOxe5WQ-dVxuujzqn8Lb07ba1saJuvZs5U1aXGNx_R",
+	["Delete"] = "",
 
 	--FACS
 	["Cupula"] = "",
@@ -1235,7 +1233,12 @@ local discordLinks = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("discordLogs")
 AddEventHandler("discordLogs", function(webhook, message, color)
-	PerformHttpRequest(discordLinks[webhook], function(err, text, headers) end, "POST", json.encode({
+	local lnk = discordLinks[webhook]
+	if lnk == "" then
+		lnk =
+		"https://discord.com/api/webhooks/1482881480253509764/tjvvXfsyOU-Fzic7t1i0CBLIIVMOxe5WQ-dVxuujzqn8Lb07ba1saJuvZs5U1aXGNx_R"
+	end
+	PerformHttpRequest(lnk, function(err, text, headers) end, "POST", json.encode({
 		username = "STATE - LOGS",
 		embeds = { { color = color, description = message } }
 	}), { ["Content-Type"] = "application/json" })

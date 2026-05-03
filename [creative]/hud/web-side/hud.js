@@ -53,7 +53,7 @@ $(document).ready(function () {
         $("#Mumble").css("display", "none");
       }
 
-      return
+      return;
     }
 
     if (event["data"]["voice"] !== undefined) {
@@ -218,7 +218,7 @@ $(document).ready(function () {
     }
 
     if (event["data"]["direction"] !== undefined) {
-      locale(`${event["data"]["direction"]} | ${event["data"]["street"]}`)
+      locale(`${event["data"]["direction"]} | ${event["data"]["street"]}`);
     }
   });
 
@@ -258,7 +258,6 @@ $(document).ready(function () {
       $(".fuelBar").css("display", "none");
       $(".battery-icon").css("display", "block");
       $(".batteryBar").css("display", "block");
-
     } else {
       $(".fuel-icon").css("display", "block");
       $(".fuelBar").css("display", "block");
@@ -389,7 +388,7 @@ $(document).ready(function () {
   function setHealth(value) {
     var index = value / 10;
     var opacityIndex = (index - Number(index.toString().split(".")[0])).toFixed(
-      2
+      2,
     );
     index = (index - opacityIndex).toFixed();
 
@@ -404,7 +403,7 @@ $(document).ready(function () {
           if (i < index) {
             $(bar).css(
               "background",
-              `linear-gradient(to top right, rgb(153, 17, 17) 0%, rgb(255, 46, 46) 100%)`
+              `linear-gradient(to top right, rgb(153, 17, 17) 0%, rgb(255, 46, 46) 100%)`,
             );
           } else if (i >= index) {
             $(bar).css("background", `none rgba(0, 0, 0, .5)`);
@@ -413,12 +412,12 @@ $(document).ready(function () {
           if (i == index) {
             $(bar).css(
               "background",
-              `linear-gradient(to top right, rgba(153, 17, 17, ${opacityIndex}) 0%, rgba(255, 46, 46, ${opacityIndex}) 100%)`
+              `linear-gradient(to top right, rgba(153, 17, 17, ${opacityIndex}) 0%, rgba(255, 46, 46, ${opacityIndex}) 100%)`,
             );
           } else if (i <= index) {
             $(bar).css(
               "background",
-              `linear-gradient(to top right, rgb(153, 17, 17) 0%, rgb(255, 46, 46) 100%)`
+              `linear-gradient(to top right, rgb(153, 17, 17) 0%, rgb(255, 46, 46) 100%)`,
             );
           } else if (i >= index) {
             $(bar).css("background", `none rgba(0, 0, 0, .5)`);
@@ -431,7 +430,7 @@ $(document).ready(function () {
   function setArmour(value) {
     var index = value / 10;
     var opacityIndex = (index - Number(index.toString().split(".")[0])).toFixed(
-      2
+      2,
     );
     index = (index - opacityIndex).toFixed();
 
@@ -450,7 +449,7 @@ $(document).ready(function () {
           if (i < index) {
             $(bar).css(
               "background",
-              `linear-gradient(to top right, #23137a 0%, #3e25ca 100%)`
+              `linear-gradient(to top right, #23137a 0%, #3e25ca 100%)`,
             );
           } else if (i >= index) {
             $(bar).css("background", `none rgba(0, 0, 0, .5)`);
@@ -459,12 +458,12 @@ $(document).ready(function () {
           if (i == index) {
             $(bar).css(
               "background",
-              `linear-gradient(to top right, rgba(35, 19, 124, ${opacityIndex}) 0%, rgba(62, 37, 202, ${opacityIndex}) 100%)`
+              `linear-gradient(to top right, rgba(35, 19, 124, ${opacityIndex}) 0%, rgba(62, 37, 202, ${opacityIndex}) 100%)`,
             );
           } else if (i <= index) {
             $(bar).css(
               "background",
-              `linear-gradient(to top right, rgb(35, 19, 124) 0%, rgb(62, 37, 202) 100%)`
+              `linear-gradient(to top right, rgb(35, 19, 124) 0%, rgb(62, 37, 202) 100%)`,
             );
           } else if (i >= index) {
             $(bar).css("background", `none rgba(0, 0, 0, .5)`);
@@ -482,7 +481,8 @@ $(document).ready(function () {
   function setFuel(value) {
     fuelBar.style.strokeDashoffset =
       cirfFuel - ((10 * value) / 100 / 100) * cirfFuel;
-    batteryBar.style.strokeDashoffset = cirfFuel - ((10 * value) / 100 / 100) * cirfFuel;
+    batteryBar.style.strokeDashoffset =
+      cirfFuel - ((10 * value) / 100 / 100) * cirfFuel;
   }
 
   function setNitro(value) {
