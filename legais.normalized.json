@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "generated_from": "codebase",
+  "legais": {
+    "state": {
+      "aliases": [
+        "State"
+      ],
+      "points": [
+        {
+          "type": "service",
+          "coords": {
+            "x": 382.01,
+            "y": -1596.39,
+            "z": 29.91
+          },
+          "source": "[creative]/service/client-side/core.lua"
+        },
+        {
+          "type": "chest",
+          "coords": {
+            "x": 360.43,
+            "y": -1600.48,
+            "z": 25.83
+          },
+          "source": "[creative]/chest/client-side/core.lua"
+        }
+      ]
+    },
+    "police_s": {
+      "aliases": [
+        "PoliceS",
+        "Police-1"
+      ],
+      "points": [
+        {
+          "type": "service",
+          "coords": {
+            "x": -914.4,
+            "y": -2026.97,
+            "z": 10.65
+          },
+          "source": "[creative]/service/client-side/core.lua"
+        },
+        {
+          "type": "chest",
+          "coords": {
+            "x": -944.92,
+            "y": -2040.84,
+            "z": 9.4
+          },
+          "source": "[creative]/chest/client-side/core.lua"
+        }
+      ]
+    },
+    "police_core": {
+      "aliases": [
+        "PoliceCore", // sem base
+        "Police"
+      ],
+      "points": [
+        {
+          "type": "service",
+          "coords": {
+            "x": 377.27,
+            "y": -1605.78,
+            "z": 31.17
+          },
+          "source": "[creative]/service/client-side/core.lua"
+        },
+        {
+          "type": "chest",
+          "coords": {
+            "x": 833.52,
+            "y": -1300.53,
+            "z": 24.31
+          },
+          "source": "[creative]/chest/client-side/core.lua"
+        }
+      ]
+    },
+    "sheriff": {
+      "aliases": [
+        "Sheriff"
+      ],
+      "points": [
+        {
+          "type": "chest",
+          "coords": {
+            "x": -450.77,
+            "y": 6011.15,
+            "z": 31.71
+          },
+          "source": "[creative]/chest/client-side/core.lua"
+        }
+      ]
+    },
+    "sheriff_2": {
+      "aliases": [
+        "Sheriff2"
+      ],
+      "points": [
+        {
+          "type": "chest",
+          "coords": {
+            "x": 1848.9,
+            "y": 3687.88,
+            "z": 34.26
+          },
+          "source": "[creative]/chest/client-side/core.lua"
+        }
+      ]
+    },
+    "comanf": {
+      "aliases": [
+        "Comanf" // sem base
+      ],
+      "points": [
+        {
+          "type": "service",
+          "coords": {
+            "x": 382.87,
+            "y": 797.48,
+            "z": 187.67
+          },
+          "source": "[creative]/service/client-side/core.lua"
+        },
+        {
+          "type": "chest",
+          "coords": {
+            "x": 383.85,
+            "y": 793.89,
+            "z": 190.49
+          },
+          "source": "[creative]/chest/client-side/core.lua"
+        }
+      ]
+    },
+    "corrections": {
+      "aliases": [
+        "Corrections"
+      ],
+      "points": [
+        {
+          "type": "service",
+          "coords": {
+            "x": 1840.2,
+            "y": 2578.48,
+            "z": 46.07
+          },
+          "source": "[creative]/service/client-side/core.lua"
+        },
+        {
+          "type": "chest",
+          "coords": {
+            "x": 1844.31,
+            "y": 2573.84,
+            "z": 46.26
+          },
+          "source": "[creative]/chest/client-side/core.lua"
+        }
+      ]
+    },
+    "paramedic": {
+      "aliases": [
+        "Paramedic",
+        "Paramedic-1",
+        "Paramedic-2",
+        "Paramedic-3"
+      ],
+      "points": [
+        {
+          "type": "service", // limbo
+          "coords": {
+            "x": -672.94,
+            "y": 327.12,
+            "z": 87.75
+          },
+          "source": "[creative]/service/client-side/core.lua"
+        },
+        {
+          "type": "service",
+          "coords": {
+            "x": -254.77,
+            "y": 6331.03,
+            "z": 32.79
+          },
+          "source": "[creative]/service/client-side/core.lua"
+        },
+        {
+          "type": "service", // limbo
+          "coords": {
+            "x": 1188.05,
+            "y": -1468.31,
+            "z": 34.66
+          },
+          "source": "[creative]/service/client-side/core.lua"
+        },
+        {
+          "type": "chest", // limbo
+          "coords": {
+            "x": -670.81,
+            "y": 327.3,
+            "z": 88.01
+          },
+          "source": "[creative]/chest/client-side/core.lua"
+        },
+        {
+          "type": "chest", // limbo
+          "coords": {
+            "x": -670.77,
+            "y": 328.03,
+            "z": 88.01
+          },
+          "source": "[creative]/chest/client-side/core.lua"
+        }
+      ]
+    },
+    "cupula": {
+      "aliases": [
+        "Cupula"
+      ],
+      "points": [
+        {
+          "type": "chest", // limbo / sem base
+          "coords": {
+            "x": -5867.09,
+            "y": 1146.99,
+            "z": 13.19
+          },
+          "source": "[creative]/chest/client-side/core.lua"
+        }
+      ]
+    },
+    "bennys": {
+      "aliases": [
+        "Bennys",
+        "Mechanic"
+      ],
+      "points": [
+        {
+          "type": "service",
+          "coords": {
+            "x": 811.46,
+            "y": -986.86,
+            "z": 26.64
+          },
+          "source": "[creative]/service/client-side/core.lua"
+        },
+        {
+          "type": "chest",
+          "coords": {
+            "x": 840.15,
+            "y": -930.92,
+            "z": 20.29
+          },
+          "source": "[creative]/chest/client-side/core.lua"
+        },
+        {
+          "type": "crafting",
+          "coords": {
+            "x": 840.12,
+            "y": -936.93,
+            "z": 20.29
+          },
+          "source": "[creative]/crafting/client-side/core.lua"
+        }
+      ]
+    }
+  }
+}

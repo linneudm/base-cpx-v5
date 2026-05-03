@@ -1,1 +1,9 @@
-[addons]
+# Pasta literal "[addons]" — em .gitignore, [ e ] precisam ser escapados assim:
+[[]addons[]]/
+[[]addons[]]/**
+
+[[]veiculos[]]/
+[[]veiculos[]]/**
+
+# Arquivo compactado com o mesmo nome (opcional)
+[[]addons[]].zip

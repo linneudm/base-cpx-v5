@@ -1,0 +1,1325 @@
+{
+    "schema_version": 1,
+    "generated_from": "codebase",
+    "ilegais": {
+        "motoclub": {
+            "aliases": [
+                "Motoclub"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": 977.1,
+                        "y": -104.16,
+                        "z": 74.85
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": 971.28,
+                        "y": -99.01,
+                        "z": 74.85
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": 978.64,
+                        "y": -91.87,
+                        "z": 74.85
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Motoclub",
+                "craftables": [
+                    "dismantle",
+                    "credential",
+                    "lockpick",
+                    "lockpick2",
+                    "plate"
+                ],
+                "total": 5,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "ballas": {
+            "aliases": [
+                "Ballas"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": 105.37,
+                        "y": -1996.53,
+                        "z": 14.88
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": 112.41,
+                        "y": -1998.15,
+                        "z": 14.88
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": 103.71,
+                        "y": -1995.33,
+                        "z": 14.88
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": 112.62,
+                        "y": -1995.7,
+                        "z": 14.88
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Ballas",
+                "craftables": [
+                    "ecstasy"
+                ],
+                "total": 1,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "vagos": {
+            "aliases": [
+                "Vagos"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": 428.34,
+                        "y": -2050.18,
+                        "z": 18.74
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": 422.33,
+                        "y": -2046.15,
+                        "z": 18.74
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": 429.43,
+                        "y": -2051.89,
+                        "z": 18.74
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": 421.27,
+                        "y": -2048.39,
+                        "z": 18.74
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Vagos",
+                "craftables": [
+                    "lancap"
+                ],
+                "total": 1,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "salieris": {
+            "aliases": [
+                "Salieris"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": 426.43,
+                        "y": -1501.96,
+                        "z": 33.8
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": 423.41,
+                        "y": -1497.2,
+                        "z": 33.8
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": 413.29,
+                        "y": -1498.45,
+                        "z": 33.8
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": 413.32,
+                        "y": -1500.79,
+                        "z": 33.8
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Salieris",
+                "craftables": [
+                    "vest",
+                    "attachsMagazine",
+                    "attachsMuzzleFat",
+                    "attachsGrip",
+                    "attachsBarrel",
+                    "attachsSilencer",
+                    "attachsCrosshair",
+                    "attachsMuzzleHeavy"
+                ],
+                "total": 8,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "faveladk": {
+            "aliases": [
+                "FavelaDK"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": -132.87,
+                        "y": 2761.59,
+                        "z": 58.06
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": -125.53,
+                        "y": 2752.46,
+                        "z": 58.22
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": -128.37,
+                        "y": 2790.18,
+                        "z": 53.11
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": -118.94,
+                        "y": 2768.89,
+                        "z": 57.73
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "FavelaDK",
+                "craftables": [
+                    "joint"
+                ],
+                "total": 1,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "vinhedo": {
+            "aliases": [
+                "Vinhedo"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": -1861.72,
+                        "y": 2054.71,
+                        "z": 135.46
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": -1864.03,
+                        "y": 2060.01,
+                        "z": 135.46
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": -1862.84,
+                        "y": 2053.63,
+                        "z": 140.98
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": -1870.52,
+                        "y": 2061.71,
+                        "z": 135.44
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": -1863.44,
+                        "y": 2054.33,
+                        "z": 135.46
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Vinhedo",
+                "craftables": [
+                    "WEAPON_PISTOL_AMMO",
+                    "WEAPON_SMG_AMMO",
+                    "WEAPON_SHOTGUN_AMMO",
+                    "WEAPON_RIFLE_AMMO"
+                ],
+                "total": 4,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "fazenda": {
+            "aliases": [
+                "Fazenda"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": 1403.21,
+                        "y": 1152.59,
+                        "z": 114.33
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": 1391.5,
+                        "y": 1158.97,
+                        "z": 114.33
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": 1402.17,
+                        "y": 1139.95,
+                        "z": 109.74
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": 1400.01,
+                        "y": 1139.78,
+                        "z": 114.33
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Fazenda",
+                "craftables": [
+                    "WEAPON_PISTOL_AMMO",
+                    "WEAPON_SMG_AMMO",
+                    "WEAPON_SHOTGUN_AMMO",
+                    "WEAPON_RIFLE_AMMO"
+                ],
+                "total": 4,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "grota": {
+            "aliases": [
+                "Grota"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": 1274.47,
+                        "y": -195.86,
+                        "z": 108.01
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": 1277.27,
+                        "y": -194.91,
+                        "z": 108.01
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": 1278.39,
+                        "y": -197.2,
+                        "z": 105.08
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": 1362.82,
+                        "y": -106.8,
+                        "z": 123.14
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Grota",
+                "craftables": [
+                    "meth"
+                ],
+                "total": 1,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "favelanh": {
+            "aliases": [
+                "FavelaNH"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": 2248.62,
+                        "y": 49.97,
+                        "z": 251.42
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": 2238.51,
+                        "y": 74.39,
+                        "z": 248.8
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": 2249.5,
+                        "y": 51.88,
+                        "z": 251.42
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": 2245.84,
+                        "y": 70.49,
+                        "z": 248.52
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "FavelaNH",
+                "craftables": [
+                    "cocaine"
+                ],
+                "total": 1,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "favelasv": {
+            "aliases": [
+                "FavelaSV"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": 1778.14,
+                        "y": 468.47,
+                        "z": 174.31
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": 1779.51,
+                        "y": 467.48,
+                        "z": 174.31
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": 1777.3,
+                        "y": 473.46,
+                        "z": 174.31
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": 1777.59,
+                        "y": 472.65,
+                        "z": 174.31
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "FavelaSV",
+                "craftables": [
+                    "heroine"
+                ],
+                "total": 1,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "pedreira": {
+            "aliases": [
+                "Pedreira"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": 2995.65,
+                        "y": 3031.73,
+                        "z": 105.73
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": 2995.94,
+                        "y": 3030.45,
+                        "z": 105.73
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": 2993.6,
+                        "y": 3032.56,
+                        "z": 105.73
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": 3002.25,
+                        "y": 3036.49,
+                        "z": 105.73
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Pedreira",
+                "craftables": [
+                    "lean"
+                ],
+                "total": 1,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "chacara": {
+            "aliases": [
+                "Chacara"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": 2444.09,
+                        "y": 4966.96,
+                        "z": 46.81
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": 2443.43,
+                        "y": 4964.47,
+                        "z": 46.81
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": 2436.04,
+                        "y": 4965.34,
+                        "z": 42.34
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Chacara",
+                "craftables": [
+                    "soap",
+                    "card01",
+                    "card02",
+                    "card03",
+                    "card04",
+                    "card05"
+                ],
+                "total": 6,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "arcade": {
+            "aliases": [
+                "Arcade"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": -571.62,
+                        "y": 289.01,
+                        "z": 79.18
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": -576.21,
+                        "y": 291.37,
+                        "z": 79.18
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": -560.66,
+                        "y": 282.1,
+                        "z": 85.68
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Arcade",
+                "craftables": [
+                    "vest",
+                    "attachsMuzzleFat",
+                    "attachsMagazine",
+                    "attachsGrip",
+                    "attachsBarrel",
+                    "attachsSilencer",
+                    "attachsCrosshair",
+                    "attachsMuzzleHeavy"
+                ],
+                "total": 8,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "vanilla": {
+            "aliases": [
+                "Vanilla"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": 93.93,
+                        "y": -1291.06,
+                        "z": 29.27
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": 92.38,
+                        "y": -1291.79,
+                        "z": 29.27
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": 95.06,
+                        "y": -1292.82,
+                        "z": 29.27
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Vanilla",
+                "craftables": [
+                    "handcuff",
+                    "pager",
+                    "dollars"
+                ],
+                "total": 3,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "cosanostra": {
+            "aliases": [
+                "Cosanostra"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": -1790.05,
+                        "y": 420.02,
+                        "z": 128.6
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": -1841.67,
+                        "y": 452.08,
+                        "z": 126.88
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": -1839.99,
+                        "y": 453.37,
+                        "z": 126.9
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": -1837.52,
+                        "y": 457.42,
+                        "z": 126.88
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Cosanostra",
+                "craftables": [
+                    "WEAPON_PISTOL",
+                    "WEAPON_MACHINEPISTOL",
+                    "WEAPON_MICROSMG",
+                    "WEAPON_REVOLVER",
+                    "WEAPON_PUMPSHOTGUN_MK2",
+                    "WEAPON_SAWNOFFSHOTGUN",
+                    "WEAPON_GUSENBERG",
+                    "WEAPON_SNSPISTOL",
+                    "WEAPON_PISTOL50",
+                    "WEAPON_MINISMG",
+                    "WEAPON_PISTOL_MK2",
+                    "WEAPON_SNSPISTOL_MK2",
+                    "WEAPON_VINTAGEPISTOL",
+                    "WEAPON_COMPACTRIFLE",
+                    "WEAPON_ADVANCEDRIFLE",
+                    "WEAPON_BULLPUPRIFLE",
+                    "WEAPON_BULLPUPRIFLE_MK2",
+                    "WEAPON_SPECIALCARBINE",
+                    "WEAPON_SPECIALCARBINE_MK2",
+                    "WEAPON_SMG_MK2",
+                    "WEAPON_ASSAULTRIFLE",
+                    "WEAPON_ASSAULTRIFLE_MK2",
+                    "WEAPON_PARAFAL",
+                    "WEAPON_ASSAULTSMG"
+                ],
+                "total": 24,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "bahamas": {
+            "aliases": [
+                "Bahamas"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": -1369.12,
+                        "y": -624.47,
+                        "z": 30.31
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": -1365.49,
+                        "y": -616.97,
+                        "z": 30.31
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": -1367.43,
+                        "y": -625.62,
+                        "z": 30.31
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": -1390.62,
+                        "y": -607.12,
+                        "z": 30.31
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Bahamas",
+                "craftables": [
+                    "handcuff",
+                    "pager",
+                    "dollars"
+                ],
+                "total": 3,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "playboy": {
+            "aliases": [
+                "PlayBoy"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": -1519.75,
+                        "y": 115.84,
+                        "z": 50.04
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": -1522.83,
+                        "y": 117.84,
+                        "z": 50.04
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": -1517.61,
+                        "y": 112,
+                        "z": 50.04
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": -1526.13,
+                        "y": 114.77,
+                        "z": 50.03
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "PlayBoy",
+                "craftables": [
+                    "WEAPON_PISTOL",
+                    "WEAPON_MACHINEPISTOL",
+                    "WEAPON_MICROSMG",
+                    "WEAPON_REVOLVER",
+                    "WEAPON_PUMPSHOTGUN_MK2",
+                    "WEAPON_SAWNOFFSHOTGUN",
+                    "WEAPON_GUSENBERG",
+                    "WEAPON_SNSPISTOL",
+                    "WEAPON_PISTOL50",
+                    "WEAPON_MINISMG",
+                    "WEAPON_PISTOL_MK2",
+                    "WEAPON_SNSPISTOL_MK2",
+                    "WEAPON_VINTAGEPISTOL",
+                    "WEAPON_COMPACTRIFLE",
+                    "WEAPON_ADVANCEDRIFLE",
+                    "WEAPON_BULLPUPRIFLE",
+                    "WEAPON_BULLPUPRIFLE_MK2",
+                    "WEAPON_SPECIALCARBINE",
+                    "WEAPON_SPECIALCARBINE_MK2",
+                    "WEAPON_SMG_MK2",
+                    "WEAPON_ASSAULTRIFLE",
+                    "WEAPON_ASSAULTRIFLE_MK2",
+                    "WEAPON_PARAFAL",
+                    "WEAPON_ASSAULTSMG"
+                ],
+                "total": 24,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "yakuza": {
+            "aliases": [
+                "Yakuza"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": 2550.86,
+                        "y": 3874.22,
+                        "z": 37.32
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": 2554.95,
+                        "y": 3875.16,
+                        "z": 37.32
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": 2564.17,
+                        "y": 3866.6,
+                        "z": 37.32
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": 2564.21,
+                        "y": 3864.88,
+                        "z": 37.32
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": null,
+                "craftables": [],
+                "total": 0,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "duros": {
+            "aliases": [
+                "Duros"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": 1970.13,
+                        "y": 3815.02,
+                        "z": 33.43
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": 1970.8,
+                        "y": 3819.14,
+                        "z": 33.43
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": 1975.6,
+                        "y": 3818.37,
+                        "z": 33.43
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Duros",
+                "craftables": [
+                    "lancap"
+                ],
+                "total": 1,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "primatas": {
+            "aliases": [
+                "Primatas" // Falta base
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": -74.39,
+                        "y": 6509.37,
+                        "z": 31.26
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": -71.76,
+                        "y": 6512.02,
+                        "z": 31.26
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": -76.04,
+                        "y": 6512.18,
+                        "z": 31.27
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": -64.04,
+                        "y": 6525.53,
+                        "z": 31.27
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Primatas",
+                "craftables": [
+                    "dismantle",
+                    "credential",
+                    "lockpick",
+                    "lockpick2",
+                    "plate"
+                ],
+                "total": 5,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "blx": {
+            "aliases": [
+                "BLX" // Falta base
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": -638.08,
+                        "y": 949.23,
+                        "z": 243.95
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": -627.89,
+                        "y": 948.4,
+                        "z": 243.95
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": -660.05,
+                        "y": 951.02,
+                        "z": 243.95
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": -641.77,
+                        "y": 949.28,
+                        "z": 243.95
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "BLX",
+                "craftables": [
+                    "WEAPON_PISTOL_AMMO",
+                    "WEAPON_SMG_AMMO",
+                    "WEAPON_SHOTGUN_AMMO",
+                    "WEAPON_RIFLE_AMMO"
+                ],
+                "total": 4,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "hotgirls": {
+            "aliases": [
+                "HotGirls"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": 1108.61,
+                        "y": 250.03,
+                        "z": -45.85
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": 1114.87,
+                        "y": 243.95,
+                        "z": -45.85
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": 1115.13,
+                        "y": 253.42,
+                        "z": -45.83
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": 1114.54,
+                        "y": 248.3,
+                        "z": -45.85
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "HotGirls", // Casino, precisa do elevador
+                "craftables": [
+                    "handcuff",
+                    "pager",
+                    "dollars"
+                ],
+                "total": 3,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "bloods": {
+            "aliases": [
+                "Bloods"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": -1076.54,
+                        "y": -1679.38,
+                        "z": 4.58
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": -1079.86,
+                        "y": -1679.59,
+                        "z": 4.57
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": -1077.91,
+                        "y": -1675.83,
+                        "z": 4.57
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": -1075.23,
+                        "y": -1678.8,
+                        "z": 4.57
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Bloods",
+                "craftables": [
+                    "lsd"
+                ],
+                "total": 1,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "crips": {
+            "aliases": [
+                "Crips"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": 1274.87,
+                        "y": -1712.26,
+                        "z": 54.76
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": 1273.56,
+                        "y": -1720.12,
+                        "z": 54.76
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": 1268.41,
+                        "y": -1710.17,
+                        "z": 54.76
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                },
+                {
+                    "type": "service",
+                    "coords": {
+                        "x": 1275.59,
+                        "y": -1710.25,
+                        "z": 54.76
+                    },
+                    "source": "[works]/facs/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "Crips",
+                "craftables": [
+                    "xanax"
+                ],
+                "total": 1,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        },
+        "ferrovelho": {
+            "aliases": [
+                "FerroVelho"
+            ],
+            "points": [
+                {
+                    "type": "chest",
+                    "coords": {
+                        "x": -595.08,
+                        "y": -1604.12,
+                        "z": 27.01
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "leader_chest",
+                    "coords": {
+                        "x": -598.25,
+                        "y": -1610.05,
+                        "z": 27.01
+                    },
+                    "source": "[creative]/chest/client-side/core.lua"
+                },
+                {
+                    "type": "crafting",
+                    "coords": {
+                        "x": -602.91,
+                        "y": -1606.57,
+                        "z": 27.01
+                    },
+                    "source": "[creative]/crafting/client-side/core.lua"
+                }
+            ],
+            "crafting_capabilities": {
+                "craft_group": "FerroVelho",
+                "craftables": [
+                    "WEAPON_PISTOL_AMMO",
+                    "WEAPON_SMG_AMMO",
+                    "WEAPON_SHOTGUN_AMMO",
+                    "WEAPON_RIFLE_AMMO"
+                ],
+                "total": 4,
+                "source": "[creative]/crafting/server-side/core.lua"
+            }
+        }
+    }
+}
