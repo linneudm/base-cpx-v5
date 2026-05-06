@@ -503,7 +503,8 @@ local itemlist = {
 	["mushroomtea"] = {
 		["index"] = "mushroomtea",
 		["name"] = "Chá de Cogumelo",
-		["desc"] = "Tempo pedalando reduzido para <green>10 minutos</green> por <green>60 minutos</green>, lembrando que o efeito passa desconectando da cidade.",
+		["desc"] =
+		"Tempo pedalando reduzido para <green>10 minutos</green> por <green>60 minutos</green>, lembrando que o efeito passa desconectando da cidade.",
 		["durability"] = 1,
 		["type"] = "Usável",
 		["weight"] = 0.75,
@@ -1239,6 +1240,15 @@ local itemlist = {
 		["weight"] = 0.75,
 		["economy"] = 870
 	},
+	["radiodamaged"] = {
+		["index"] = "radiodamaged",
+		["name"] = "Rádio Danificado",
+		["desc"] = "Rádio danificado",
+		["repair"] = "repairkit01",
+		["type"] = "Usável",
+		["weight"] = 0.75,
+		["economy"] = 0
+	},
 	["vest"] = {
 		["index"] = "vest",
 		["name"] = "Colete",
@@ -1401,7 +1411,7 @@ local itemlist = {
 		["type"] = "Comum",
 		["weight"] = 0.30
 	},
-	
+
 	["joint"] = {
 		["index"] = "joint",
 		["name"] = "Baseado",
@@ -3430,29 +3440,31 @@ local itemlist = {
 -- ITEMBODY
 -----------------------------------------------------------------------------------------------------------------------------------------
 function itemBody(Item)
-	local Split = splitString(Item,"-")
+	local Split = splitString(Item, "-")
 	local Item = Split[1]
 
 	if itemlist[Item] then
 		return itemlist[Item]
 	end
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMINDEX
 -----------------------------------------------------------------------------------------------------------------------------------------
 function itemIndex(Item)
-	local Split = splitString(Item,"-")
+	local Split = splitString(Item, "-")
 	local Item = Split[1]
 
 	if itemlist[Item] then
 		return itemlist[Item]["index"]
 	end
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMNAME
 -----------------------------------------------------------------------------------------------------------------------------------------
 function itemName(Item)
-	local Split = splitString(Item,"-")
+	local Split = splitString(Item, "-")
 	local Item = Split[1]
 
 	if itemlist[Item] then
@@ -3461,33 +3473,36 @@ function itemName(Item)
 
 	return "Deletado"
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMTYPE
 -----------------------------------------------------------------------------------------------------------------------------------------
 function itemType(Item)
-	local Split = splitString(Item,"-")
+	local Split = splitString(Item, "-")
 	local Item = Split[1]
 
 	if itemlist[Item] then
 		return itemlist[Item]["type"]
 	end
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMAMMO
 -----------------------------------------------------------------------------------------------------------------------------------------
 function itemAmmo(Item)
-	local Split = splitString(Item,"-")
+	local Split = splitString(Item, "-")
 	local Item = Split[1]
 
 	if itemlist[Item] then
 		return itemlist[Item]["ammo"]
 	end
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMVEHICLE
 -----------------------------------------------------------------------------------------------------------------------------------------
 function itemVehicle(Item)
-	local Split = splitString(Item,"-")
+	local Split = splitString(Item, "-")
 	local Item = Split[1]
 
 	if itemlist[Item] then
@@ -3496,11 +3511,12 @@ function itemVehicle(Item)
 
 	return false
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMWEIGHT
 -----------------------------------------------------------------------------------------------------------------------------------------
 function itemWeight(Item)
-	local Split = splitString(Item,"-")
+	local Split = splitString(Item, "-")
 	local Item = Split[1]
 
 	if itemlist[Item] then
@@ -3509,11 +3525,12 @@ function itemWeight(Item)
 
 	return 0.0
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMMAXAMOUNT
 -----------------------------------------------------------------------------------------------------------------------------------------
 function itemMaxAmount(Item)
-	local Split = splitString(Item,"-")
+	local Split = splitString(Item, "-")
 	local Item = Split[1]
 
 	if itemlist[Item] then
@@ -3522,11 +3539,12 @@ function itemMaxAmount(Item)
 
 	return nil
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMSCAPE
 -----------------------------------------------------------------------------------------------------------------------------------------
 function itemScape(Item)
-	local Split = splitString(Item,"-")
+	local Split = splitString(Item, "-")
 	local Item = Split[1]
 
 	if itemlist[Item] then
@@ -3535,11 +3553,12 @@ function itemScape(Item)
 
 	return nil
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMDESCRIPTION
 -----------------------------------------------------------------------------------------------------------------------------------------
 function itemDescription(Item)
-	local Split = splitString(Item,"-")
+	local Split = splitString(Item, "-")
 	local Item = Split[1]
 
 	if itemlist[Item] then
@@ -3548,11 +3567,12 @@ function itemDescription(Item)
 
 	return nil
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMDURABILITY
 -----------------------------------------------------------------------------------------------------------------------------------------
 function itemDurability(Item)
-	local Split = splitString(Item,"-")
+	local Split = splitString(Item, "-")
 	local Item = Split[1]
 
 	if itemlist[Item] then
@@ -3561,11 +3581,12 @@ function itemDurability(Item)
 
 	return false
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMCHARGES
 -----------------------------------------------------------------------------------------------------------------------------------------
 function itemCharges(Item)
-	local Split = splitString(Item,"-")
+	local Split = splitString(Item, "-")
 	local Item = Split[1]
 
 	if itemlist[Item] then
@@ -3574,11 +3595,12 @@ function itemCharges(Item)
 
 	return nil
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMECONOMY
 -----------------------------------------------------------------------------------------------------------------------------------------
 function itemEconomy(Item)
-	local Split = splitString(Item,"-")
+	local Split = splitString(Item, "-")
 	local Item = Split[1]
 
 	if itemlist[Item] then
@@ -3587,11 +3609,12 @@ function itemEconomy(Item)
 
 	return "S/V"
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMBLOCK
 -----------------------------------------------------------------------------------------------------------------------------------------
 function itemBlock(Item)
-	local Split = splitString(Item,"-")
+	local Split = splitString(Item, "-")
 	local Item = Split[1]
 
 	if itemlist[Item] then
@@ -3600,11 +3623,12 @@ function itemBlock(Item)
 
 	return nil
 end
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMREPAIR
 -----------------------------------------------------------------------------------------------------------------------------------------
 function itemRepair(Item)
-	local splitName = splitString(Item,"-")
+	local splitName = splitString(Item, "-")
 	local nameItem = splitName[1]
 
 	if itemlist[nameItem] then

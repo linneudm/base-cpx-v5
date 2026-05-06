@@ -200,7 +200,11 @@ RegisterCommand("criar", function(source, args)
 	if user_id then
 		if vRP.hasGroup(user_id, "Admin") then
 			if args[1] and args[2] and itemBody(args[1]) ~= nil then
-				vRP.generateItem(user_id, args[1], parseInt(args[2]), true)
+				if (args[3]) then
+					vRP.generateItem(user_id, args[1] .. "-" .. args[3], parseInt(args[2]), true)
+				else
+					vRP.generateItem(user_id, args[1], parseInt(args[2]), true)
+				end
 			end
 		end
 	end
