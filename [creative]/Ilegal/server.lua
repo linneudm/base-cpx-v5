@@ -662,7 +662,6 @@ end)
 -- [[
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent( "uz_painel:addlogbau", function(user_id, acao, item, quantidade, grupo)
-        print(grupo)
         if Config.printbau then
             print(grupo)
         end
