@@ -1652,7 +1652,6 @@ function playerTargetEnable()
 									else
 										for _, v in pairs(Exclusives) do
 											local Distance = #(coords - vec3(v[1], v[2], v[3]))
-											print(Distance)
 											if Distance <= 10 then
 												if v[4] == "Desmanche" and vehPlate == "DISM" .. (1000 + LocalPlayer["state"]["Id"]) then
 													table.insert(Menu, { event = "inventory:Dismantle", label = "Desmanchar", tunnel = "police" })
