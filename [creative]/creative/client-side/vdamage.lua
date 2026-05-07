@@ -22,7 +22,7 @@ local sameVehicle = false
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CLASSDAMAGE
 -----------------------------------------------------------------------------------------------------------------------------------------
-local classDamage = { 1.5,1.5,1.5,1.5,1.5,1.5,1.5,1.5,1.0,1.5,1.5,1.5,1.5,0.0,0.0,1.5,1.5,1.5,1.5,1.5,1.5,1.5 }
+local classDamage = { 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.0, 1.5, 1.5, 1.5, 1.5, 0.0, 0.0, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 2.0 }
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADHEALTHVEH
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -42,14 +42,14 @@ CreateThread(function()
 						engineTorque = (engineNew + 200.0) / 1100
 					end
 
-					SetVehicleEngineTorqueMultiplier(vehicle,engineTorque)
+					SetVehicleEngineTorqueMultiplier(vehicle, engineTorque)
 				end
 
-				if GetPedInVehicleSeat(vehicle,-1) == ped then
+				if GetPedInVehicleSeat(vehicle, -1) == ped then
 					local vehRoll = GetEntityRoll(vehicle)
 					if vehRoll > 75.0 or vehRoll < -75.0 then
-						DisableControlAction(1,59,true)
-						DisableControlAction(1,60,true)
+						DisableControlAction(1, 59, true)
+						DisableControlAction(1, 60, true)
 					end
 				end
 
@@ -72,11 +72,11 @@ CreateThread(function()
 				bodyScaled = bodyDelta * 0.6 * classDamage[vehClass + 1]
 
 				if engineCurrent > 101.0 and bodyCurrent > 101.0 then
-					SetVehicleUndriveable(vehicle,false)
+					SetVehicleUndriveable(vehicle, false)
 				end
 
 				if engineCurrent <= 101.0 or bodyCurrent <= 101.0 then
-					SetVehicleUndriveable(vehicle,true)
+					SetVehicleUndriveable(vehicle, true)
 				end
 
 				if vehicle ~= lastVehicle then
@@ -85,7 +85,7 @@ CreateThread(function()
 
 				if sameVehicle then
 					if engineCurrent ~= 1000.0 or bodyCurrent ~= 1000.0 then
-						local engineCombine = math.max(engineScaled,bodyScaled)
+						local engineCombine = math.max(engineScaled, bodyScaled)
 						if engineCombine > (engineCurrent - 100.0) then
 							engineCombine = engineCombine * 0.7
 						end
@@ -124,14 +124,14 @@ CreateThread(function()
 				end
 
 				if engineNew ~= engineCurrent then
-					SetVehicleEngineHealth(vehicle,engineNew)
+					SetVehicleEngineHealth(vehicle, engineNew)
 				end
 
 				if bodyNew ~= bodyCurrent then
-					SetVehicleBodyHealth(vehicle,bodyNew)
+					SetVehicleBodyHealth(vehicle, bodyNew)
 				end
 
-				SetVehiclePetrolTankHealth(vehicle,1000.0)
+				SetVehiclePetrolTankHealth(vehicle, 1000.0)
 
 				bodyLast = bodyNew
 				engineLast = engineNew
@@ -152,27 +152,27 @@ CreateThread(function()
 		local ped = PlayerPedId()
 		if IsPedInAnyVehicle(ped) then
 			local Vehicle = GetVehiclePedIsUsing(ped)
-			if GetPedInVehicleSeat(Vehicle,-1) == ped then
+			if GetPedInVehicleSeat(Vehicle, -1) == ped then
 				local vehRoll = GetEntityRoll(Vehicle)
 				if vehRoll > 75.0 or vehRoll < -75.0 then
 					if math.random(100) <= 50 and GetVehicleClass(Vehicle) ~= 8 then
 						local Tyre = math.random(4)
 
 						if Tyre == 1 then
-							if GetTyreHealth(Vehicle,0) == 1000.0 then
-								SetVehicleTyreBurst(Vehicle,0,true,1000.0)
+							if GetTyreHealth(Vehicle, 0) == 1000.0 then
+								SetVehicleTyreBurst(Vehicle, 0, true, 1000.0)
 							end
 						elseif Tyre == 2 then
-							if GetTyreHealth(Vehicle,1) == 1000.0 then
-								SetVehicleTyreBurst(Vehicle,1,true,1000.0)
+							if GetTyreHealth(Vehicle, 1) == 1000.0 then
+								SetVehicleTyreBurst(Vehicle, 1, true, 1000.0)
 							end
 						elseif Tyre == 3 then
-							if GetTyreHealth(Vehicle,4) == 1000.0 then
-								SetVehicleTyreBurst(Vehicle,4,true,1000.0)
+							if GetTyreHealth(Vehicle, 4) == 1000.0 then
+								SetVehicleTyreBurst(Vehicle, 4, true, 1000.0)
 							end
 						elseif Tyre == 4 then
-							if GetTyreHealth(Vehicle,5) == 1000.0 then
-								SetVehicleTyreBurst(Vehicle,5,true,1000.0)
+							if GetTyreHealth(Vehicle, 5) == 1000.0 then
+								SetVehicleTyreBurst(Vehicle, 5, true, 1000.0)
 							end
 						end
 					end
