@@ -161,7 +161,6 @@ end
 -- BANDAGE
 -----------------------------------------------------------------------------------------------------------------------------------------
 function cnVRP.Bandage()
-	print('gauze ')
 	for bone, _ in pairs(damaged) do
 		damaged[bone] = nil
 		bleeding = bleeding - 1
