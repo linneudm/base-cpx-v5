@@ -936,7 +936,6 @@ AddEventHandler("player:presetFunctions", function(number)
 	if user_id then
 		if vRP.hasGroup(user_id, "Emergency") or vRP.hasGroup(user_id, "Uwucafe") then
 			local model = vRP.modelPlayer(source)
-			print(json.encode(preset[number][model]))
 			if model == "mp_m_freemode_01" or "mp_f_freemode_01" then
 				TriggerClientEvent("updateRoupas", source, preset[number][model])
 			end
