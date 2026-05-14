@@ -28,11 +28,11 @@ local function tunnel_resolve(itable,key)
 		local r = nil
 		local profile
 
-		local args = {...} 
+		local Message = {...} 
 		local dest = nil
 		if SERVER then
-			dest = args[1]
-			args = { table.unpack(args,2,table.maxn(args)) }
+			dest = Message[1]
+			Message = { table.unpack(Message,2,table.maxn(Message)) }
 			if parseInt(dest) >= 0 and not no_wait then
 				r = async()
 			end
@@ -40,37 +40,16 @@ local function tunnel_resolve(itable,key)
 			r = async()
 		end
 
-		local delay_data = { 0,0 }
-		local add_delay = delay_data[1]
-		delay_data[2] = delay_data[2] + add_delay
+		local rid = -1
+		if r then
+			rid = ids:gen()
+			callbacks[rid] = r
+		end
 
-		if delay_data[2] > 0 then
-			SetTimeout(delay_data[2],function()
-				delay_data[2] = delay_data[2] - add_delay
-				local rid = -1
-				if r then
-					rid = ids:gen()
-					callbacks[rid] = r
-				end
-
-				if SERVER then
-					TriggerRemoteEvent(iname..":tunnel_req",dest,fname,args,identifier,rid)
-				else
-					TriggerRemoteEvent(iname..":tunnel_req",fname,args,identifier,rid)
-				end
-			end)
+		if SERVER then
+			TriggerRemoteEvent(iname..":tunnel_req",dest,fname,Message,identifier,rid)
 		else
-			local rid = -1
-			if r then
-				rid = ids:gen()
-				callbacks[rid] = r
-			end
-
-			if SERVER then
-				TriggerRemoteEvent(iname..":tunnel_req",dest,fname,args,identifier,rid)
-			else
-				TriggerRemoteEvent(iname..":tunnel_req",fname,args,identifier,rid)
-			end
+			TriggerRemoteEvent(iname..":tunnel_req",fname,Message,identifier,rid)
 		end
 
 		if r then
@@ -84,22 +63,23 @@ local function tunnel_resolve(itable,key)
 	end
 
 	itable[key] = fcall
+
 	return fcall
 end
 
 function Tunnel.bindInterface(name,interface)
 	RegisterLocalEvent(name..":tunnel_req")
-	AddEventHandler(name..":tunnel_req",function(member,args,identifier,rid)
+	AddEventHandler(name..":tunnel_req",function(member,Message,identifier,rid)
 		local source = source
 
 		local f = interface[member]
 
 		local rets = {}
 		if type(f) == "function" then
-			rets = { f(table.unpack(args,1,table.maxn(args))) }
+			rets = { f(table.unpack(Message,1,table.maxn(Message))) }
 		end
 
-		if rid >= 0 then
+		if rid and rid >= 0 then
 			if SERVER then
 				TriggerRemoteEvent(name..":"..identifier..":tunnel_res",source,rid,rets)
 			else
@@ -119,14 +99,15 @@ function Tunnel.getInterface(name,identifier)
 	local r = setmetatable({},{ __index = tunnel_resolve, name = name, tunnel_ids = ids, tunnel_callbacks = callbacks, identifier = identifier })
 
 	RegisterLocalEvent(name..":"..identifier..":tunnel_res")
-	AddEventHandler(name..":"..identifier..":tunnel_res",function(rid,args)
+	AddEventHandler(name..":"..identifier..":tunnel_res",function(rid,Message)
 		local callback = callbacks[rid]
 		if callback then
 			ids:free(rid)
 			callbacks[rid] = nil
-			callback(table.unpack(args,1,table.maxn(args)))
+			callback(table.unpack(Message,1,table.maxn(Message)))
 		end
 	end)
+
 	return r
 end
 

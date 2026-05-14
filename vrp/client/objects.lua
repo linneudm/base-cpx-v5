@@ -1,239 +1,298 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
+local Init = {}
 local Objects = {}
-local initObjects = {}
-local ContainerBlip = nil
+local Switch = false
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- OBJECTS:TABLE
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("objects:Table")
-AddEventHandler("objects:Table", function(Table)
+AddEventHandler("objects:Table",function(Table)
 	Objects = Table
 
-	for k, v in pairs(Objects) do
-		if tonumber(k) <= 61 then
-			local Blip = AddBlipForRadius(v["x"], v["y"], v["z"], 7.5)
-			SetBlipAlpha(Blip, 150)
-			SetBlipColour(Blip, 15)
-		end
-	end
+	for Number,v in pairs(Objects) do
+		if v["Mode"] then
+			if (v["Mode"] == "LootMedics" or v["Mode"] == "LootWeapons" or v["Mode"] == "LootSupplies" or v["Mode"] == "LootLegendary") then
+				local Blip = AddBlipForRadius(v["Coords"][1],v["Coords"][2],v["Coords"][3],25.0)
+				SetBlipAlpha(Blip,200)
 
-	if Objects["9999"] then
-		if DoesBlipExist(ContainerBlip) then
-			RemoveBlip(ContainerBlip)
-			ContainerBlip = nil
+				if v["Mode"] == "LootMedics" then
+					SetBlipColour(Blip,76)
+				elseif v["Mode"] == "LootWeapons" then
+					SetBlipColour(Blip,52)
+				elseif v["Mode"] == "LootSupplies" then
+					SetBlipColour(Blip,56)
+				elseif v["Mode"] == "LootLegendary" then
+					SetBlipColour(Blip,81)
+				end
+			end
 		end
-
-		ContainerBlip = AddBlipForCoord(Objects["9999"]["x"], Objects["9999"]["y"], Objects["9999"]["z"])
-		SetBlipSprite(ContainerBlip, 478)
-		SetBlipDisplay(ContainerBlip, 4)
-		SetBlipAsShortRange(ContainerBlip, true)
-		SetBlipColour(ContainerBlip, 47)
-		SetBlipScale(ContainerBlip, 0.8)
-		BeginTextCommandSetBlipName("STRING")
-		AddTextComponentString("Container")
-		EndTextCommandSetBlipName(ContainerBlip)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- OBJECTS:ADICIONAR
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("objects:Adicionar")
-AddEventHandler("objects:Adicionar", function(Number, Table)
+AddEventHandler("objects:Adicionar",function(Number,Table)
 	Objects[Number] = Table
-
-	if Number == "9999" then
-		if DoesBlipExist(ContainerBlip) then
-			RemoveBlip(ContainerBlip)
-			ContainerBlip = nil
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- OBJECTS:REMOVER
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNetEvent("objects:Remover")
+AddEventHandler("objects:Remover",function(Number)
+	if Init[Number] then
+		if DoesEntityExist(Init[Number]) then
+			DeleteEntity(Init[Number])
 		end
 
-		ContainerBlip = AddBlipForCoord(Objects[Number]["x"], Objects[Number]["y"], Objects[Number]["z"])
-		SetBlipSprite(ContainerBlip, 478)
-		SetBlipDisplay(ContainerBlip, 4)
-		SetBlipAsShortRange(ContainerBlip, true)
-		SetBlipColour(ContainerBlip, 47)
-		SetBlipScale(ContainerBlip, 0.8)
-		BeginTextCommandSetBlipName("STRING")
-		AddTextComponentString("Container")
-		EndTextCommandSetBlipName(ContainerBlip)
+		if Objects[Number] and Objects[Number]["Mode"] then
+			exports["target"]:RemCircleZone("Objects:"..Number)
+		end
+
+		Init[Number] = nil
+	end
+
+	if Objects[Number] and Objects[Number]["Active"] and Objects[Number]["Active"] == "Spikes" then
+		TriggerEvent("spikes:Remover",Number)
+	end
+
+	if Objects[Number] then
+		Objects[Number] = nil
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- OBJECTCOORDS
+-- TARGETLABEL
 -----------------------------------------------------------------------------------------------------------------------------------------
-function targetLabel(x, y, z, Number, item, mode)
-	if mode == "Spray" then
-		exports["target"]:AddCircleZone("Objects:" .. Number, vec3(x, y, z), 0.75, {
-			name = "Objects:" .. Number,
-			heading = 3374176
-		}, {
+function TargetLabel(Number,Coords,Mode,Weight,Item)
+	if Mode == "Store" then
+		exports["target"]:AddCircleZone("Objects:"..Number,vec3(Coords[1],Coords[2],Coords[3] + Weight),0.75,{
+			name = "Objects:"..Number,
+			heading = Coords[4] or 0.0,
+			useZ = true
+		},{
 			shop = Number,
-			distance = 1.5,
+			Distance = 1.5,
 			options = {
 				{
-					event = "objects:Guardar",
-					label = "Remover",
-					tunnel = "shop"
+					event = "inventory:StoreObjects",
+					label = "Guardar",
+					tunnel = "server"
 				}
 			}
 		})
-	elseif mode == "1" then
-		exports["target"]:AddCircleZone("Objects:" .. Number, vec3(x, y, z), 0.75, {
-			name = "Objects:" .. Number,
-			heading = 3374176
-		}, {
+	elseif Mode == "Craftings" then
+		exports["target"]:AddCircleZone("Objects:"..Number,vec3(Coords[1],Coords[2],Coords[3] + Weight),0.25,{
+			name = "Objects:"..Number,
+			heading = Coords[4] or 0.0,
+			useZ = true
+		},{
 			shop = Number,
-			distance = 1.5,
+			Distance = 1.5,
 			options = {
 				{
-					event = "objects:Guardar",
+					event = "crafting:Open",
+					label = "Abrir",
+					tunnel = "products",
+					service = SplitOne(Item)
+				},{
+					event = "inventory:StoreObjects",
 					label = "Guardar",
-					tunnel = "shop"
-				}, {
-				event = "inventory:makeProducts",
-				label = "Produzir",
-				tunnel = "police",
-				service = item
-			}
-			}
-		})
-	elseif mode == "2" then
-		exports["target"]:AddCircleZone("Objects:" .. Number, vec3(x, y, z), 0.75, {
-			name = "Objects:" .. Number,
-			heading = 3374176
-		}, {
-			shop = Number,
-			distance = 2.5,
-			options = {
-				{
-					event = "inventory:makeProducts",
-					label = "Cozinhar Filé de Peixe",
-					tunnel = "police",
-					service = "fishfillet"
-				}, {
-				event = "inventory:makeProducts",
-				label = "Cozinhar Carne Animal",
-				tunnel = "police",
-				service = "animalmeat"
-			}, {
-				event = "inventory:makeProducts",
-				label = "Assar Marshmallow",
-				tunnel = "police",
-				service = "marshmallow"
-			}
-			}
-		})
-	elseif mode == "3" then
-		exports["target"]:AddCircleZone("Objects:" .. Number, vec3(x, y, z), 0.75, {
-			name = "Objects:" .. Number,
-			heading = 3374176
-		}, {
-			shop = Number,
-			distance = 1.5,
-			options = {
-				{
-					event = "objects:Guardar",
-					label = "Guardar",
-					tunnel = "shop"
+					tunnel = "server"
 				}
 			}
 		})
-	elseif mode == "4" then
-		exports["target"]:AddCircleZone("Objects:" .. Number, vec3(x, y, z), 0.75, {
-			name = "Objects:" .. Number,
-			heading = 3374176
-		}, {
+	elseif Mode == "Shops" then
+		exports["target"]:AddCircleZone("Objects:"..Number,vec3(Coords[1],Coords[2],Coords[3] + Weight),0.45,{
+			name = "Objects:"..Number,
+			heading = Coords[4] or 0.0,
+			useZ = true
+		},{
 			shop = Number,
-			distance = 1.5,
+			Distance = 1.5,
 			options = {
 				{
-					event = "objects:Guardar",
+					event = "shops:Open",
+					label = "Abrir",
+					tunnel = "products",
+					service = SplitOne(Item)
+				},{
+					event = "inventory:StoreObjects",
 					label = "Guardar",
-					tunnel = "shop"
-				}, {
-				event = "vRP:Sentar",
-				label = "Sentar",
-				tunnel = "shop"
-			}
+					tunnel = "server"
+				}
 			}
 		})
-	elseif mode == "5" then
-		exports["target"]:AddCircleZone("Objects:" .. Number, vec3(x, y, z), 0.75, {
-			name = "Objects:" .. Number,
-			heading = 3374176
-		}, {
+	elseif Mode == "Chests" and Item then
+		local Split = splitString(Item)
+		exports["target"]:AddBoxZone("Objects:"..Number,vec3(Coords[1],Coords[2],Coords[3] + Weight),1.4,1.7,{
+			name = "Objects:"..Number,
+			heading = Coords[4] or 0.0,
+			minZ = Coords[3] + 0.0,
+			maxZ = Coords[3] + 1.5
+		},{
 			shop = Number,
-			distance = 1.5,
+			Distance = 1.75,
 			options = {
 				{
-					event = "objects:Guardar",
+					event = "chest:Item",
+					label = "Abrir",
+					tunnel = "products",
+					service = Split[1]..":"..Split[3]
+				},{
+					event = "inventory:StoreObjects",
 					label = "Guardar",
-					tunnel = "shop"
-				}, {
-				event = "shops:medicBag",
-				label = "Abrir",
-				tunnel = "client"
-			}
+					tunnel = "server"
+				}
 			}
 		})
-	elseif mode == "Containers" then
-		exports["target"]:AddCircleZone("Objects:" .. Number, vec3(x, y, z), 3.75, {
-			name = "Objects:" .. Number,
-			heading = 3374176
-		}, {
-			shop = Number,
-			distance = 3.75,
+	elseif Mode == "Recycle" then
+		exports["target"]:AddBoxZone("Objects:"..Number,vec3(Coords[1],Coords[2],Coords[3] + 1.0),1.5,3.75,{
+			name = "Objects:"..Number,
+			heading = Coords[4] or 0.0,
+			minZ = Coords[3],
+			maxZ = Coords[3] + 2.0
+		},{
+			Distance = 2.25,
 			options = {
 				{
-					event = "crafting:Containers",
+					event = "chest:Recycle",
 					label = "Abrir",
 					tunnel = "client"
 				}
 			}
 		})
+	elseif Mode == "LootLegendary" then
+		exports["target"]:AddBoxZone("Objects:"..Number,vec3(Coords[1],Coords[2],Coords[3] + 0.5),1.15,2.15,{
+			name = "Objects:"..Number,
+			heading = Coords[4] or 0.0,
+			minZ = Coords[3],
+			maxZ = Coords[3] + 0.8
+		},{
+			shop = Number,
+			Distance = 2.0,
+			options = {
+				{
+					event = "inventory:Loot",
+					label = "Abrir",
+					tunnel = "server",
+					service = Mode
+				}
+			}
+		})
+	elseif Mode == "LootSupplies" then
+		exports["target"]:AddBoxZone("Objects:"..Number,vec3(Coords[1],Coords[2],Coords[3] + 0.35),0.5,1.0,{
+			name = "Objects:"..Number,
+			heading = Coords[4] or 0.0,
+			minZ = Coords[3],
+			maxZ = Coords[3] + 0.55
+		},{
+			shop = Number,
+			Distance = 1.5,
+			options = {
+				{
+					event = "inventory:Loot",
+					label = "Abrir",
+					tunnel = "server",
+					service = Mode
+				}
+			}
+		})
+	elseif Mode == "LootWeapons" then
+		exports["target"]:AddBoxZone("Objects:"..Number,vec3(Coords[1],Coords[2],Coords[3] + 0.35),0.9,1.5,{
+			name = "Objects:"..Number,
+			heading = Coords[4] or 0.0,
+			minZ = Coords[3],
+			maxZ = Coords[3] + 0.65
+		},{
+			shop = Number,
+			Distance = 1.5,
+			options = {
+				{
+					event = "inventory:Loot",
+					label = "Abrir",
+					tunnel = "server",
+					service = Mode
+				}
+			}
+		})
+	elseif Mode == "LootMedics" then
+		exports["target"]:AddBoxZone("Objects:"..Number,vec3(Coords[1],Coords[2],Coords[3] + 0.15),0.75,1.0,{
+			name = "Objects:"..Number,
+			heading = Coords[4] or 0.0,
+			minZ = Coords[3] - 0.25,
+			maxZ = Coords[3] + 0.55
+		},{
+			shop = Number,
+			Distance = 1.5,
+			options = {
+				{
+					event = "inventory:Loot",
+					label = "Abrir",
+					tunnel = "server",
+					service = Mode
+				}
+			}
+		})
+	elseif Mode == "LootCode" then
+		exports["target"]:AddBoxZone("Objects:"..Number,vec3(Coords[1],Coords[2],Coords[3] + 1.0),1.0,1.0,{
+			name = "Objects:"..Number,
+			heading = Coords[4] or 0.0,
+			minZ = Coords[3] - 0.0,
+			maxZ = Coords[3] + 1.75
+		},{
+			shop = Number,
+			Distance = 1.5,
+			options = {
+				{
+					event = "inventory:Loot",
+					label = "Abrir",
+					tunnel = "server",
+					service = Mode
+				}
+			}
+		})
 	end
 end
-
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- THREADOBJECTS
 -----------------------------------------------------------------------------------------------------------------------------------------
 CreateThread(function()
 	while true do
-		local ped = PlayerPedId()
-		local coords = GetEntityCoords(ped)
+		local Ped = PlayerPedId()
+		local Coords = GetEntityCoords(Ped)
 
-		for k, v in pairs(Objects) do
-			local distance = #(coords - vec3(v["x"], v["y"], v["z"]))
-			if distance <= v["distance"] then
-				if initObjects[k] == nil then
-					local mHash = GetHashKey(v["object"])
+		for Number,v in pairs(Objects) do
+			if (not v["Route"] or v["Route"] == LocalPlayer["state"]["Route"]) and v["Coords"] then
+				local OtherCoords = vec3(v["Coords"][1],v["Coords"][2],v["Coords"][3])
+				if #(Coords - OtherCoords) <= (v["Distance"] or 100) then
+					if not Init[Number] and LoadModel(v["Object"]) then
+						Init[Number] = CreateObjectNoOffset(v["Object"],v["Coords"][1],v["Coords"][2],v["Coords"][3],false,false,false)
+						SetEntityHeading(Init[Number],v["Coords"][4])
+						FreezeEntityPosition(Init[Number],true)
+						SetModelAsNoLongerNeeded(v["Object"])
 
-					RequestModel(mHash)
-					while not HasModelLoaded(mHash) do
-						Wait(1)
+						if v["Mode"] then
+							TargetLabel(Number,v["Coords"],v["Mode"],v["Weight"] or 0.0,v["Item"])
+						end
+
+						if not v["Ground"] then
+							PlaceObjectOnGroundProperly(Init[Number])
+						end
+
+						if v["Active"] and v["Active"] == "Spikes" then
+							local Max = GetOffsetFromEntityInWorldCoords(Init[Number],0.0,1.84,0.1)
+							local Min = GetOffsetFromEntityInWorldCoords(Init[Number],0.0,-1.84,-0.1)
+
+							TriggerEvent("spikes:Adicionar",Number,v["Coords"],Min,Max)
+						end
 					end
-
-					if HasModelLoaded(mHash) then
-						targetLabel(v["x"], v["y"], v["z"], k, v["item"], v["mode"])
-
-						initObjects[k] = CreateObjectNoOffset(mHash, v["x"], v["y"], v["z"], false, false, false)
-						FreezeEntityPosition(initObjects[k], true)
-						SetEntityHeading(initObjects[k], v["h"])
-						SetEntityLodDist(initObjects[k], 0xFFFF)
-						SetModelAsNoLongerNeeded(mHash)
-					end
+				elseif Init[Number] then
+					DestroyObject(Number,v)
 				end
-			else
-				if initObjects[k] then
-					exports["target"]:RemCircleZone("Objects:" .. k)
-
-					if DoesEntityExist(initObjects[k]) then
-						DeleteEntity(initObjects[k])
-						initObjects[k] = nil
-					end
-				end
+			elseif Init[Number] then
+				DestroyObject(Number,v)
 			end
 		end
 
@@ -241,149 +300,179 @@ CreateThread(function()
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- OBJECTS:GUARDAR
+-- DESTROYOBJECT
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("objects:Guardar")
-AddEventHandler("objects:Guardar", function(Number)
-	TriggerServerEvent("objects:Guardar", Number)
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- OBJECTS:REMOVER
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("objects:Remover")
-AddEventHandler("objects:Remover", function(Number)
-	Objects[Number] = nil
+function DestroyObject(Number,v)
+	if Init[Number] then
+		if v["Mode"] then
+			exports["target"]:RemCircleZone("Objects:"..Number)
+		end
 
-	if initObjects[Number] then
-		exports["target"]:RemCircleZone("Objects:" .. Number)
+		if DoesEntityExist(Init[Number]) then
+			DeleteEntity(Init[Number])
+		end
 
-		if DoesEntityExist(initObjects[Number]) then
-			DeleteEntity(initObjects[Number])
-			initObjects[Number] = nil
+		if v["Active"] and v["Active"] == "Spikes" then
+			TriggerEvent("spikes:Remover",Number)
+		end
+
+		Init[Number] = nil
+	end
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- OBJECTCONTROLLING
+-----------------------------------------------------------------------------------------------------------------------------------------
+function tvRP.ObjectControlling(Model,Rotate,Align)
+	local Aplication = false
+	local OtherCoords = false
+
+	if LoadModel(Model) then
+		local Progress = true
+		local Ped = PlayerPedId()
+		local Heading = GetEntityHeading(Ped)
+		local Coords = GetOffsetFromEntityInWorldCoords(Ped,0.0,Align or 1.0,0.0)
+		local NextObject = CreateObjectNoOffset(Model,Coords["x"],Coords["y"],Coords["z"],false,false,false)
+		SetEntityHeading(NextObject,Heading + (Rotate or 0.0))
+		SetEntityAlpha(NextObject,175,false)
+		PlaceObjectOnGroundProperly(NextObject)
+		SetEntityCollision(NextObject,false,false)
+
+		TriggerEvent("inventory:Buttons",{
+			{ "F","Cancelar" },
+			{ "H","Posicionar" },
+			{ "Q","Rotacionar Esquerda" },
+			{ "E","Rotacionar Direita" },
+			{ "Z","Trocar Modo" }
+		})
+
+		while Progress do
+			if not Switch then
+				local Ped = PlayerPedId()
+				local Cam = GetGameplayCamCoord()
+				local Handle = StartExpensiveSynchronousShapeTestLosProbe(Cam,GetCoordsFromCam(10.0,Cam),-1,Ped,4)
+				local _,_,Coords = GetShapeTestResult(Handle)
+
+				SetEntityCoords(NextObject,Coords["x"],Coords["y"],Coords["z"],false,false,false,false)
+			else
+				if IsDisabledControlPressed(1,314) then
+					local Coords = GetOffsetFromEntityInWorldCoords(NextObject,0.0,0.0,0.005)
+					SetEntityCoordsNoOffset(NextObject,Coords["x"],Coords["y"],Coords["z"],false,false,false)
+				end
+
+				if IsDisabledControlPressed(1,315) then
+					local Coords = GetOffsetFromEntityInWorldCoords(NextObject,0.0,0.0,-0.005)
+					SetEntityCoordsNoOffset(NextObject,Coords["x"],Coords["y"],Coords["z"],false,false,false)
+				end
+
+				if IsDisabledControlPressed(1,172) then
+					local Coords = GetOffsetFromEntityInWorldCoords(NextObject,0.0,0.005,0.0)
+					SetEntityCoordsNoOffset(NextObject,Coords["x"],Coords["y"],Coords["z"],false,false,false)
+				end
+
+				if IsDisabledControlPressed(1,173) then
+					local Coords = GetOffsetFromEntityInWorldCoords(NextObject,0.0,-0.005,0.0)
+					SetEntityCoordsNoOffset(NextObject,Coords["x"],Coords["y"],Coords["z"],false,false,false)
+				end
+
+				if IsDisabledControlPressed(1,174) then
+					local Coords = GetOffsetFromEntityInWorldCoords(NextObject,-0.005,0.0,0.0)
+					SetEntityCoordsNoOffset(NextObject,Coords["x"],Coords["y"],Coords["z"],false,false,false)
+				end
+
+				if IsDisabledControlPressed(1,175) then
+					local Coords = GetOffsetFromEntityInWorldCoords(NextObject,0.005,0.0,0.0)
+					SetEntityCoordsNoOffset(NextObject,Coords["x"],Coords["y"],Coords["z"],false,false,false)
+				end
+
+				DrawGraphOutline(NextObject)
+			end
+
+			if IsControlPressed(0,38) then
+				local Heading = GetEntityHeading(NextObject)
+				SetEntityHeading(NextObject,Heading + 0.25)
+			end
+
+			if IsControlPressed(0,52) then
+				local Heading = GetEntityHeading(NextObject)
+				SetEntityHeading(NextObject,Heading - 0.25)
+			end
+
+			if IsControlJustPressed(0,48) then
+				Switch = not Switch
+
+				if Switch then
+					TriggerEvent("inventory:Buttons",{
+						{ "F","Cancelar" },
+						{ "H","Posicionar" },
+						{ "Q","Rotacionar Esquerda" },
+						{ "E","Rotacionar Direita" },
+						{ "-","Descer" },
+						{ "+","Subir" },
+						{ "↑","Movimentar para Frente" },
+						{ "←","Movimentar para Esquerda" },
+						{ "↓","Movimentar para Baixo" },
+						{ "→","Movimentar para Direita" },
+						{ "Z","Trocar Modo" }
+					})
+				else
+					TriggerEvent("inventory:Buttons",{
+						{ "F","Cancelar" },
+						{ "H","Posicionar" },
+						{ "Q","Rotacionar Esquerda" },
+						{ "E","Rotacionar Direita" },
+						{ "Z","Trocar Modo" }
+					})
+				end
+			end
+
+			if IsControlJustPressed(1,74) then
+				TriggerEvent("inventory:CloseButtons")
+				Aplication = true
+				Progress = false
+				Switch = false
+			end
+
+			if IsControlJustPressed(0,49) then
+				TriggerEvent("inventory:CloseButtons")
+				Aplication = false
+				Progress = false
+				Switch = false
+			end
+
+			Wait(1)
+		end
+
+		if NextObject and DoesEntityExist(NextObject) then
+			local oCoords = GetEntityCoords(NextObject)
+			local oHeading = GetEntityHeading(NextObject)
+
+			OtherCoords = { Optimize(oCoords["x"]),Optimize(oCoords["y"]),Optimize(oCoords["z"]),Optimize(oHeading) }
+
+			DeleteEntity(NextObject)
 		end
 	end
-end)
+
+	return Aplication,OtherCoords
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- DRAWGRAPHOUTLINE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function DrawGraphOutline(Object)
+	local Coords = GetEntityCoords(Object)
+	local x,y,z = Coords - GetOffsetFromEntityInWorldCoords(Object,2.0,0.0,0.0),Coords - GetOffsetFromEntityInWorldCoords(Object,0.0,2.0,0.0),Coords - GetOffsetFromEntityInWorldCoords(Object,0.0,0.0,2.0)
+	local x1,x2,y1,y2,z1,z2 = Coords - x,Coords + x,Coords - y,Coords + y,Coords - z,Coords + z
+
+	DrawLine(x1["x"],x1["y"],x1["z"],x2["x"],x2["y"],x2["z"],255,0,0,255)
+	DrawLine(y1["x"],y1["y"],y1["z"],y2["x"],y2["y"],y2["z"],0,0,255,255)
+	DrawLine(z1["x"],z1["y"],z1["z"],z2["x"],z2["y"],z2["z"],0,255,0,255)
+end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- GETCOORDSFROMCAM
 -----------------------------------------------------------------------------------------------------------------------------------------
-function GetCoordsFromCam(distance, coords)
-	local rotation = GetGameplayCamRot()
-	local adjustedRotation = vec3((math.pi / 180) * rotation["x"], (math.pi / 180) * rotation["y"],
-		(math.pi / 180) * rotation["z"])
-	local direction = vec3(-math.sin(adjustedRotation[3]) * math.abs(math.cos(adjustedRotation[1])),
-		math.cos(adjustedRotation[3]) * math.abs(math.cos(adjustedRotation[1])), math.sin(adjustedRotation[1]))
+function GetCoordsFromCam(Distance,Coords)
+	local Rotation = GetGameplayCamRot()
+	local Adjusted = vec3((math.pi / 180) * Rotation["x"],(math.pi / 180) * Rotation["y"],(math.pi / 180) * Rotation["z"])
+	local Direction = vec3(-math.sin(Adjusted[3]) * math.abs(math.cos(Adjusted[1])),math.cos(Adjusted[3]) * math.abs(math.cos(Adjusted[1])),math.sin(Adjusted[1]))
 
-	return vec3(coords[1] + direction[1] * distance, coords[2] + direction[2] * distance,
-		coords[3] + direction[3] * distance)
+	return vec3(Coords[1] + Direction[1] * Distance, Coords[2] + Direction[2] * Distance, Coords[3] + Direction[3] * Distance)
 end
-
------------------------------------------------------------------------------------------------------------------------------------------
--- OBJECTCOORDS
------------------------------------------------------------------------------------------------------------------------------------------
-function tvRP.objectCoords(model)
-	local ped = PlayerPedId()
-	local objectProgress = true
-	local aplicationObject = false
-	local mHash = GetHashKey(model)
-
-	RequestModel(mHash)
-	while not HasModelLoaded(mHash) do
-		Wait(1)
-	end
-
-	local coords = GetEntityCoords(ped)
-	local pedHeading = GetEntityHeading(ped)
-	local newObject = CreateObjectNoOffset(mHash, coords["x"], coords["y"], coords["z"], false, false, false)
-	SetEntityCollision(newObject, false, false)
-	SetEntityHeading(newObject, pedHeading)
-	SetEntityAlpha(newObject, 100, false)
-	SetModelAsNoLongerNeeded(mHash)
-
-	while objectProgress do
-		local ped = PlayerPedId()
-		local cam = GetGameplayCamCoord()
-		local handle = StartExpensiveSynchronousShapeTestLosProbe(cam, GetCoordsFromCam(10.0, cam), -1, ped, 4)
-		local _, _, coords = GetShapeTestResult(handle)
-
-		if model == "prop_ld_binbag_01" then
-			SetEntityCoords(newObject, coords["x"], coords["y"], coords["z"] + 0.9, false, false, false, false)
-		else
-			SetEntityCoords(newObject, coords["x"], coords["y"], coords["z"], false, false, false, false)
-		end
-
-		dwText("~g~F~w~  CANCELAR", 4, 0.015, 0.86, 0.38, 255, 255, 255, 255)
-		dwText("~g~E~w~  COLOCAR OBJETO", 4, 0.015, 0.89, 0.38, 255, 255, 255, 255)
-		dwText("~y~SCROLL UP~w~  GIRA ESQUERDA", 4, 0.015, 0.92, 0.38, 255, 255, 255, 255)
-		dwText("~y~SCROLL DOWN~w~  GIRA DIREITA", 4, 0.015, 0.95, 0.38, 255, 255, 255, 255)
-
-		if IsControlJustPressed(1, 38) then
-			aplicationObject = true
-			objectProgress = false
-		end
-
-		if IsControlJustPressed(1, 49) then
-			objectProgress = false
-		end
-
-		if IsControlJustPressed(1, 180) then
-			local headObject = GetEntityHeading(newObject)
-			SetEntityHeading(newObject, headObject + 0.5)
-		end
-
-		if IsControlJustPressed(1, 181) then
-			local headObject = GetEntityHeading(newObject)
-			SetEntityHeading(newObject, headObject - 0.5)
-		end
-
-		Wait(1)
-	end
-
-	local coordsObject = GetEntityCoords(newObject)
-	local headObject = GetEntityHeading(newObject)
-
-	DeleteEntity(newObject)
-
-	return aplicationObject, coordsObject, headObject
-end
-
------------------------------------------------------------------------------------------------------------------------------------------
--- DWTEXT
------------------------------------------------------------------------------------------------------------------------------------------
-function dwText(text, font, x, y, scale, r, g, b, a)
-	SetTextFont(font)
-	SetTextScale(scale, scale)
-	SetTextColour(r, g, b, a)
-	SetTextOutline()
-	SetTextEntry("STRING")
-	AddTextComponentString(text)
-	DrawText(x, y)
-end
-
------------------------------------------------------------------------------------------------------------------------------------------
--- VRP:EXPLOSION
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("vRP:Explosion")
-AddEventHandler("vRP:Explosion", function(Coords)
-	AddExplosion(Coords, 2, 1.0, true, false, false)
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- CHAIRS
------------------------------------------------------------------------------------------------------------------------------------------
-local chairs = {
-	[536071214] = 0.5
-}
------------------------------------------------------------------------------------------------------------------------------------------
--- VRP:SENTAR
------------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent("vRP:Sentar")
-AddEventHandler("vRP:Sentar", function(Number)
-	local ped = PlayerPedId()
-	local model = GetEntityModel(initObjects[Number])
-	local heading = GetEntityHeading(initObjects[Number])
-	local objCoords = GetEntityCoords(initObjects[Number])
-
-	SetEntityCoords(ped, objCoords["x"], objCoords["y"], objCoords["z"] + chairs[model], 1, 0, 0, 0)
-	SetEntityHeading(ped, heading - 180.0)
-
-	tvRP.playAnim(false, { task = "PROP_HUMAN_SEAT_CHAIR_MP_PLAYER" }, false)
-end)

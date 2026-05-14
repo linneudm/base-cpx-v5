@@ -1,3639 +1,5640 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
--- ITEMLIST
+-- LIST
 -----------------------------------------------------------------------------------------------------------------------------------------
-local itemlist = {
-	["dollarsz"] = {
-		["index"] = "dollarsz",
-		["name"] = "Dólares Marcados",
-		["type"] = "Dinheiro",
-		["weight"] = 0.0001,
-	},
-	["key"] = {
-		["index"] = "key",
-		["name"] = "Chaves",
-		["type"] = "Comum",
-		["durability"] = 1,
-		["weight"] = 0.25
-	},
-	["diagram"] = {
-		["index"] = "diagram",
-		["name"] = "Diagrama",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 40000,
-	},
-	["propertys"] = {
-		["index"] = "propertys",
-		["name"] = "Cartão de Segurança",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.35,
-		["economy"] = 695,
-		["max"] = 1
-	},
-	["megaphone"] = {
-		["index"] = "megaphone",
-		["name"] = "Megafone",
-		["type"] = "Usável",
-		["durability"] = 7,
-		["block"] = true,
-		["weight"] = 3.25
-	},
-	["backpack2"] = {
-		["index"] = "backpack2",
-		["name"] = "Mochila Premium",
-		["type"] = "Usável",
-		["weight"] = 0.50
-	},
-	["backpack"] = {
-		["index"] = "backpack",
-		["name"] = "Mochila",
-		["type"] = "Usável",
-		["weight"] = 0.50
-	},
-	["tablet"] = {
-		["index"] = "tablet",
-		["name"] = "Tablet",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["max"] = 1,
-		["economy"] = 1500
-	},
-	["coptablet"] = {
-		["index"] = "coptablet",
-		["name"] = "Tablet Policial",
-		["type"] = "Usável",
-		["weight"] = 0.35,
-		["max"] = 1,
-		["economy"] = 1500
-	},
-	["sprays01"] = {
-		["index"] = "sprays",
-		["name"] = "Spray",
-		["type"] = "Usável",
-		["weight"] = 0.75
-	},
-	["enginea"] = {
-		["index"] = "enginea",
-		["name"] = "Motor",
-		["type"] = "Usável",
-		["weight"] = 9.25
-	},
-	["engineb"] = {
-		["index"] = "engineb",
-		["name"] = "Motor",
-		["type"] = "Usável",
-		["weight"] = 10.25
-	},
-	["enginec"] = {
-		["index"] = "enginec",
-		["name"] = "Motor",
-		["type"] = "Usável",
-		["weight"] = 11.25
-	},
-	["engined"] = {
-		["index"] = "engined",
-		["name"] = "Motor",
-		["type"] = "Usável",
-		["weight"] = 12.25
-	},
-	["enginee"] = {
-		["index"] = "enginee",
-		["name"] = "Motor",
-		["type"] = "Usável",
-		["weight"] = 13.25
-	},
-	["transmissiona"] = {
-		["index"] = "transmissiona",
-		["name"] = "Transmissão",
-		["type"] = "Usável",
-		["weight"] = 9.25
-	},
-	["transmissionb"] = {
-		["index"] = "transmissionb",
-		["name"] = "Transmissão",
-		["type"] = "Usável",
-		["weight"] = 10.25
-	},
-	["transmissionc"] = {
-		["index"] = "transmissionc",
-		["name"] = "Transmissão",
-		["type"] = "Usável",
-		["weight"] = 11.25
-	},
-	["transmissiond"] = {
-		["index"] = "transmissiond",
-		["name"] = "Transmissão",
-		["type"] = "Usável",
-		["weight"] = 12.25
-	},
-	["transmissione"] = {
-		["index"] = "transmissione",
-		["name"] = "Transmissão",
-		["type"] = "Usável",
-		["weight"] = 13.25
-	},
-	["brakea"] = {
-		["index"] = "brakea",
-		["name"] = "Freios",
-		["type"] = "Usável",
-		["weight"] = 7.25
-	},
-	["brakeb"] = {
-		["index"] = "brakeb",
-		["name"] = "Freios",
-		["type"] = "Usável",
-		["weight"] = 8.25
-	},
-	["brakec"] = {
-		["index"] = "brakec",
-		["name"] = "Freios",
-		["type"] = "Usável",
-		["weight"] = 9.25
-	},
-	["braked"] = {
-		["index"] = "braked",
-		["name"] = "Freios",
-		["type"] = "Usável",
-		["weight"] = 10.25
-	},
-	["brakee"] = {
-		["index"] = "brakee",
-		["name"] = "Freios",
-		["type"] = "Usável",
-		["weight"] = 11.25
-	},
-	["suspensiona"] = {
-		["index"] = "suspensiona",
-		["name"] = "Suspensão",
-		["type"] = "Usável",
-		["weight"] = 7.25
-	},
-	["suspensionb"] = {
-		["index"] = "suspensionb",
-		["name"] = "Suspensão",
-		["type"] = "Usável",
-		["weight"] = 8.25
-	},
-	["suspensionc"] = {
-		["index"] = "suspensionc",
-		["name"] = "Suspensão",
-		["type"] = "Usável",
-		["weight"] = 9.25
-	},
-	["suspensiond"] = {
-		["index"] = "suspensiond",
-		["name"] = "Suspensão",
-		["type"] = "Usável",
-		["weight"] = 10.25
-	},
-	["suspensione"] = {
-		["index"] = "suspensione",
-		["name"] = "Suspensão",
-		["type"] = "Usável",
-		["weight"] = 11.25
-	},
-	["dismantle"] = {
-		["index"] = "dismantle",
-		["name"] = "Contrato",
-		["desc"] = "Ativando o mesmo você assume a responsabilidade com o <b>Lester</b> de desmanchar um veículo.",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 5000,
-		["max"] = 1
-	},
-	["subscriber"] = {
-		["index"] = "subscriber",
-		["name"] = "Inscrição Twitch",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 18000
-	},
+local List = {
+	-- REPAROS
 	["repairkit01"] = {
-		["index"] = "repairkit01",
-		["name"] = "Kit de Reparos - Comum",
-		["type"] = "Comum",
-		["weight"] = 3.25,
-		["economy"] = 525
+		["Index"] = "repairkit01",
+		["Name"] = "Kit de Reparos",
+		["Description"] =
+		"Solucione problemas com facilidade, seja em casa, no carro ou em qualquer lugar, indispensável para manter tudo funcionando perfeitamente.",
+		["Rarity"] = "common",
+		["Type"] = "Comum",
+		["Weight"] = 3.75,
+		["Economy"] = 425,
+		["Recycle"] = {
+			["copper"] = 15,
+			["aluminum"] = 15
+		}
 	},
 	["repairkit02"] = {
-		["index"] = "repairkit02",
-		["name"] = "Kit de Reparos - Raro",
-		["type"] = "Comum",
-		["weight"] = 3.75,
-		["economy"] = 3225
+		["Index"] = "repairkit02",
+		["Name"] = "Kit de Reparos",
+		["Description"] =
+		"Solucione problemas com facilidade, seja em casa, no carro ou em qualquer lugar, indispensável para manter tudo funcionando perfeitamente.",
+		["Rarity"] = "rare",
+		["Type"] = "Comum",
+		["Weight"] = 3.75,
+		["Economy"] = 875,
+		["Recycle"] = {
+			["sheetmetal"] = 1,
+			["roadsigns"] = 1,
+			["copper"] = 15,
+			["aluminum"] = 15
+		}
 	},
 	["repairkit03"] = {
-		["index"] = "repairkit03",
-		["name"] = "Kit de Reparos - Épico",
-		["type"] = "Comum",
-		["weight"] = 4.25,
-		["economy"] = 7225
+		["Index"] = "repairkit03",
+		["Name"] = "Kit de Reparos",
+		["Description"] =
+		"Solucione problemas com facilidade, seja em casa, no carro ou em qualquer lugar, indispensável para manter tudo funcionando perfeitamente.",
+		["Rarity"] = "epic",
+		["Type"] = "Comum",
+		["Weight"] = 3.75,
+		["Economy"] = 2225,
+		["Recycle"] = {
+			["sheetmetal"] = 1,
+			["roadsigns"] = 1,
+			["copper"] = 35,
+			["aluminum"] = 35
+		}
 	},
 	["repairkit04"] = {
-		["index"] = "repairkit04",
-		["name"] = "Kit de Reparos - Lendário",
-		["type"] = "Comum",
-		["weight"] = 5.75,
-		["economy"] = 15225
-	},
-	["backpolice"] = {
-		["index"] = "backpolice",
-		["name"] = "Mochila da Polícia",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 0
-	},
-	["backwar"] = {
-		["index"] = "backwar",
-		["name"] = "Mochila de Guerra",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 0
-	},
-	["backtwitch"] = {
-		["index"] = "backtwitch",
-		["name"] = "Mochila da Twitch",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["block"] = true,
-		["economy"] = 0
-	},
-	["backpascoa"] = {
-		["index"] = "backpascoa",
-		["name"] = "Mochila Páscoa 2022",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 0
-	},
-	["backschool"] = {
-		["index"] = "backschool",
-		["name"] = "Mochila de Escola",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 100000
-	},
-	["backcyclist"] = {
-		["index"] = "backcyclist",
-		["name"] = "Mochila de Ciclista",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 100000
-	},
-	["backcamping"] = {
-		["index"] = "backcamping",
-		["name"] = "Mochila de Acampamento",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 100000
-	},
-	["backalohomorawhite"] = {
-		["index"] = "backalohomorawhite",
-		["name"] = "Mochila Alohomora Branca",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 150000
-	},
-	["backalohomorablack"] = {
-		["index"] = "backalohomorablack",
-		["name"] = "Mochila Alohomora Preta",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 150000
-	},
-	["backalohomorared"] = {
-		["index"] = "backalohomorared",
-		["name"] = "Mochila Alohomora Vermelha",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 150000
-	},
-	["backrudolphpurple"] = {
-		["index"] = "backrudolphpurple",
-		["name"] = "Mochila Rudolph Roxo",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 150000
-	},
-	["backrudolphred"] = {
-		["index"] = "backrudolphred",
-		["name"] = "Mochila Rudolph Vermelho",
-		["type"] = "Usável",
-		["weight"] = 5.25,
-		["economy"] = 150000
-	},
-	["paper"] = {
-		["index"] = "paper",
-		["name"] = "Papel",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["economy"] = 120
-	},
-	-- ["rentalveh"] = {
-	--  	["index"] = "rentalveh",
-	--  	["name"] = "Taxa Veiculo VIP",
-	--  	["desc"] = "Utilizado para pagar taxa de veiculo VIP",
-	--  	["type"] = "Usável",
-	--  	["weight"] = 0.15,
-	--  	["economy"] = 0
-	-- },
-	-- ["rentalveh80"] = {
-	-- 	["index"] = "rentalveh80",
-	-- 	["name"] = "Veículo VIP Permanente 80 gemas",
-	-- 	["desc"] = "Adquiri um veiculo VIP de até 80 gemas",
-	-- 	["type"] = "Usável",
-	-- 	["weight"] = 0.15,
-	-- 	["economy"] = 0
-	-- },
-	-- ["rentalveh120"] = {
-	-- 	["index"] = "rentalveh120",
-	-- 	["name"] = "Veículo VIP Permanente 120 gemas",
-	-- 	["desc"] = "Adquiri um veiculo VIP de até 120 gemas",
-	-- 	["type"] = "Usável",
-	-- 	["weight"] = 0.15,
-	-- 	["economy"] = 0
-	-- },
-	["mushroomteaplus"] = {
-		["index"] = "mushroomtea",
-		["name"] = "Chá de Cogumelo",
-		["desc"] = "Aumenta a mochila em 10Kg.",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 325
-	},
-	["newgarage"] = {
-		["index"] = "newgarage",
-		["name"] = "+1 Garagem",
-		["type"] = "Usável",
-		["desc"] = "Limite de garagem em +1.",
-		["weight"] = 0.00,
-		["economy"] = 25000
-	},
-	["instaverify"] = {
-		["index"] = "instaverify",
-		["name"] = "Verificado",
-		["desc"] = "Ativa o verificado no instagram.",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 25000
-	},
-	["spotify"] = {
-		["index"] = "spotify",
-		["name"] = "Spotify",
-		["desc"] = "Permite o uso do Spotify.",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 0
-	},
-	["medicpass"] = {
-		["index"] = "medicbag",
-		["name"] = "Vale - Médico",
-		["desc"] = "Leve até um médico para troca-lo.",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 0
-	},
-	["luckywheelpass"] = {
-		["index"] = "luckywheelpass",
-		["name"] = "Vale - Roda da Fortuna",
-		["desc"] = "Leve até o cassino para usa-lo.",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 5000
-	},
-	["mechanicpass"] = {
-		["index"] = "mechanicpass",
-		["name"] = "Vale - Mecânico",
-		["desc"] = "Leve até um mecânico para troca-lo.",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 0
-	},
-	["dessertspass"] = {
-		["index"] = "foodpass",
-		["name"] = "Vale - Uwu Café",
-		["desc"] = "Leve até o restaurante para troca-lo.",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 0
-	},
-	["pizzathispass"] = {
-		["index"] = "foodpass",
-		["name"] = "Vale - Pizza This",
-		["desc"] = "Leve até o restaurante para troca-lo.",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 0
-	},
-	["burgershotpass"] = {
-		["index"] = "foodpass",
-		["name"] = "Vale - BurgerShot",
-		["desc"] = "Leve até o restaurante para troca-lo.",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 0
-	},
-	["c4"] = {
-		["index"] = "c4",
-		["name"] = "C4",
-		["type"] = "Usável",
-		["weight"] = 2.75,
-		["max"] = 1,
-		["economy"] = 625
-	},
-	["geode"] = {
-		["index"] = "geode",
-		["name"] = "Geodo",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 10
-	},
-	["pickaxe"] = {
-		["index"] = "pickaxe",
-		["name"] = "Picareta",
-		["repair"] = "repairkit01",
-		["type"] = "Comum",
-		["durability"] = 7,
-		["weight"] = 2.25,
-		["economy"] = 525
-	},
-	["suitcase"] = {
-		["index"] = "suitcase",
-		["name"] = "Maleta",
-		["type"] = "Usável",
-		["weight"] = 1.0,
-		["economy"] = 275
-	},
-	["badge"] = {
-		["index"] = "badge01",
-		["name"] = "Distintivo",
-		["desc"] = "<green>San Andreas Police Department</green>",
-		["type"] = "Usável",
-		["block"] = true,
-		["weight"] = 0.75,
-		["economy"] = 10
-	},
-	["badge02"] = {
-		["index"] = "badge02",
-		["name"] = "Distintivo",
-		["desc"] = "<green>Emergency Medical Services</green>",
-		["type"] = "Usável",
-		["block"] = true,
-		["weight"] = 0.75,
-		["economy"] = 10
-	},
-	["oab"] = {
-		["index"] = "badge01",
-		["name"] = "OAB - Advogado",
-		["desc"] = "<green>OAB de Advogado da Cidade de State</green>",
-		["type"] = "Usável",
-		["block"] = true,
-		["weight"] = 0.75,
-		["economy"] = 10
-	},
-	["oab2"] = {
-		["index"] = "badge02",
-		["name"] = "OAB - Juiz",
-		["desc"] = "<green>OAB de Juiz da Cidade de State</green>",
-		["type"] = "Usável",
-		["block"] = true,
-		["weight"] = 0.75,
-		["economy"] = 10
-	},
-	["mushroomtea"] = {
-		["index"] = "mushroomtea",
-		["name"] = "Chá de Cogumelo",
-		["desc"] =
-		"Tempo pedalando reduzido para <green>10 minutos</green> por <green>60 minutos</green>, lembrando que o efeito passa desconectando da cidade.",
-		["durability"] = 1,
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 325
-	},
-	["nigirizushi"] = {
-		["index"] = "nigirizushi",
-		["name"] = "Nigirizushi",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.65,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 75
-	},
-	["sushi"] = {
-		["index"] = "sushi",
-		["name"] = "Sushi",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.65,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 75
-	},
-	["cupcake"] = {
-		["index"] = "cupcake",
-		["name"] = "Cupcake",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.55,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 75
-	},
-	["milkshake"] = {
-		["index"] = "milkshake",
-		["name"] = "Milk Shake",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.8555,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 125
-	},
-	["cappuccino"] = {
-		["index"] = "cappuccino",
-		["name"] = "Cappuccino",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.65,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 150
-	},
-	["applelove"] = {
-		["index"] = "applelove",
-		["name"] = "Maça do Amor",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.55,
-		["scape"] = true,
-		["max"] = 2,
-		["economy"] = 75
-	},
-	["credential"] = {
-		["index"] = "credential",
-		["name"] = "Credencial",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 1000
-	},
-	["racetrophy"] = {
-		["index"] = "racetrophy",
-		["name"] = "Troféu",
-		["type"] = "Comum",
-		["weight"] = 7.25,
-		["economy"] = 2250
-	},
-	["scanner"] = {
-		["index"] = "scanner",
-		["name"] = "Scanner",
-		["repair"] = "repairkit02",
-		["type"] = "Usável",
-		["durability"] = 7,
-		["weight"] = 4.75,
-		["economy"] = 6750
-	},
-	["nitro"] = {
-		["index"] = "nitro",
-		["name"] = "Nitro",
-		["type"] = "Usável",
-		["weight"] = 7.25,
-		["economy"] = 400
-	},
-	["postit"] = {
-		["index"] = "postit",
-		["name"] = "Post-It",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 20
-	},
-	["attachsFlashlight"] = {
-		["index"] = "attachsFlashlight",
-		["name"] = "Lanterna Tatica",
-		["type"] = "Usável",
-		["weight"] = 1.15,
-		["economy"] = 1750
-	},
-	["attachsCrosshair"] = {
-		["index"] = "attachsCrosshair",
-		["name"] = "Mira Holográfica",
-		["type"] = "Usável",
-		["weight"] = 1.15,
-		["economy"] = 1750
-	},
-	["attachsSilencer"] = {
-		["index"] = "attachsSilencer",
-		["name"] = "Silenciador",
-		["type"] = "Usável",
-		["weight"] = 1.15,
-		["economy"] = 1750
-	},
-	["attachsMagazine"] = {
-		["index"] = "attachsMagazine",
-		["name"] = "Pente Estendido",
-		["type"] = "Usável",
-		["weight"] = 1.15,
-		["economy"] = 1750
-	},
-	["attachsGrip"] = {
-		["index"] = "attachsGrip",
-		["name"] = "Empunhadura",
-		["type"] = "Usável",
-		["weight"] = 1.15,
-		["economy"] = 1750
-	},
-	["attachsMuzzleFat"] = {
-		["index"] = "attachsMuzzleFat",
-		["name"] = "Compensador Pesado",
-		["type"] = "Usável",
-		["weight"] = 1.15,
-		["economy"] = 1750
-	},
-	["attachsBarrel"] = {
-		["index"] = "attachsBarrel",
-		["name"] = "Cano Pesado",
-		["type"] = "Usável",
-		["weight"] = 1.15,
-		["economy"] = 1750
-	},
-	["attachsMuzzleHeavy"] = {
-		["index"] = "attachsMuzzleHeavy",
-		["name"] = "Compensador Tatico",
-		["type"] = "Usável",
-		["weight"] = 1.15,
-		["economy"] = 1750
-	},
-	["cheese"] = {
-		["index"] = "cheese",
-		["name"] = "Queijo",
-		["type"] = "Comum",
-		["weight"] = 0.55,
-		["economy"] = 10
-	},
-	["silk"] = {
-		["index"] = "silk",
-		["name"] = "Seda",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["economy"] = 5
-	},
-	["tablecoke"] = {
-		["index"] = "tablecoke",
-		["name"] = "Mesa de Criação",
-		["desc"] = "Utilizada para criação de Cocaína.",
-		["repair"] = "repairkit02",
-		["type"] = "Usável",
-		["durability"] = 7,
-		["weight"] = 12.75,
-		["economy"] = 1750
-	},
-	["tablemeth"] = {
-		["index"] = "tablemeth",
-		["name"] = "Mesa de Criação",
-		["desc"] = "Utilizada para criação de Metanfetamina.",
-		["repair"] = "repairkit02",
-		["type"] = "Usável",
-		["durability"] = 7,
-		["weight"] = 12.75,
-		["economy"] = 1750
-	},
-	["tableweed"] = {
-		["index"] = "tableweed",
-		["name"] = "Mesa de Criação",
-		["desc"] = "Utilizada para criação de Baseados.",
-		["repair"] = "repairkit02",
-		["type"] = "Usável",
-		["durability"] = 7,
-		["weight"] = 12.75,
-		["economy"] = 1750
-	},
-	["campfire"] = {
-		["index"] = "campfire",
-		["name"] = "Fogueira",
-		["type"] = "Usável",
-		["weight"] = 5.75,
-		["economy"] = 675
-	},
-	["barrier"] = {
-		["index"] = "barrier",
-		["name"] = "Barreira",
-		["type"] = "Usável",
-		["weight"] = 1.75,
-		["economy"] = 250
-	},
-	["medicbag"] = {
-		["index"] = "medicbag",
-		["name"] = "Bolsa Médica",
-		["repair"] = "repairkit01",
-		["type"] = "Usável",
-		["durability"] = 7,
-		["weight"] = 2.75,
-		["economy"] = 425
-	},
-	["medicbed"] = {
-		["index"] = "medicbed",
-		["name"] = "Maca Médica",
-		["repair"] = "repairkit01",
-		["type"] = "Usável",
-		["durability"] = 7,
-		["weight"] = 7.25,
-		["economy"] = 725
-	},
-	["chair01"] = {
-		["index"] = "chair01",
-		["name"] = "Cadeira",
-		["repair"] = "repairkit01",
-		["type"] = "Usável",
-		["durability"] = 7,
-		["weight"] = 7.25,
-		["economy"] = 750
-	},
-	["techtrash"] = {
-		["index"] = "techtrash",
-		["name"] = "Lixo Eletrônico",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 125
-	},
-	["tarp"] = {
-		["index"] = "tarp",
-		["name"] = "Lona",
-		["type"] = "Comum",
-		["weight"] = 0.65,
-		["economy"] = 50
-	},
-	["sheetmetal"] = {
-		["index"] = "sheetmetal",
-		["name"] = "Chapa de Metal",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 50
-	},
-	["roadsigns"] = {
-		["index"] = "roadsigns",
-		["name"] = "Placas de Trânsito",
-		["type"] = "Comum",
-		["weight"] = 0.65,
-		["economy"] = 50
-	},
-	["leather"] = {
-		["index"] = "leather",
-		["name"] = "Couro",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 20
-	},
-	["explosives"] = {
-		["index"] = "explosives",
-		["name"] = "Explosivos",
-		["type"] = "Comum",
-		["weight"] = 0.55,
-		["economy"] = 75
-	},
-	["animalfat"] = {
-		["index"] = "animalfat",
-		["name"] = "Gordura Animal",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["economy"] = 10
-	},
-	["fidentity"] = {
-		["index"] = "identity",
-		["name"] = "Passaporte",
-		["type"] = "Usável",
-		["weight"] = 0.15,
-		["economy"] = 10000
-	},
-	["identity"] = {
-		["index"] = "identity",
-		["name"] = "Passaporte",
-		["type"] = "Usável",
-		["weight"] = 0.15,
-		["economy"] = 5000
-	},
-	["blocksignal"] = {
-		["index"] = "blocksignal",
-		["name"] = "Bloqueador de Sinal",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 325
-	},
-	["pistolbody"] = {
-		["index"] = "pistolbody",
-		["name"] = "Corpo de Pistola",
-		["type"] = "Comum",
-		["weight"] = 0.55,
-		["economy"] = 425
-	},
-	["smgbody"] = {
-		["index"] = "smgbody",
-		["name"] = "Corpo de Sub-Metralhadora",
-		["type"] = "Comum",
-		["weight"] = 0.55,
-		["economy"] = 525
-	},
-	["riflebody"] = {
-		["index"] = "riflebody",
-		["name"] = "Corpo de Rifle",
-		["type"] = "Comum",
-		["weight"] = 0.44,
-		["economy"] = 625
-	},
-	["cotton"] = {
-		["index"] = "cotton",
-		["name"] = "Algodão",
-		["type"] = "Comum",
-		["weight"] = 0.35,
-		["economy"] = 45
-	},
-	["plaster"] = {
-		["index"] = "plaster",
-		["name"] = "Esparadrapo",
-		["type"] = "Comum",
-		["weight"] = 0.45,
-		["economy"] = 35
-	},
-	["sulfuric"] = {
-		["index"] = "sulfuric",
-		["name"] = "Ácido Sulfúrico",
-		["type"] = "Usável",
-		["weight"] = 0.55,
-		["economy"] = 30
-	},
-	["saline"] = {
-		["index"] = "saline",
-		["name"] = "Soro Fisiológico",
-		["type"] = "Comum",
-		["weight"] = 0.55,
-		["economy"] = 25
-	},
-	["defibrillator"] = {
-		["index"] = "defibrillator",
-		["name"] = "Desfibrilador",
-		["repair"] = "repairkit01",
-		["type"] = "Usável",
-		["durability"] = 3,
-		["weight"] = 3.75,
-		["economy"] = 325
-	},
-	["alcohol"] = {
-		["index"] = "alcohol",
-		["name"] = "Álcool",
-		["type"] = "Comum",
-		["weight"] = 0.65,
-		["economy"] = 40
-	},
-	["adrenaline"] = {
-		["index"] = "adrenaline",
-		["name"] = "Adrenalina",
-		["type"] = "Usável",
-		["weight"] = 0.65,
-		["economy"] = 4000
-	},
-	["notebook"] = {
-		["index"] = "notebook",
-		["name"] = "Notebook",
-		["repair"] = "repairkit02",
-		["type"] = "Usável",
-		["durability"] = 3,
-		["weight"] = 7.25,
-		["economy"] = 4250
-	},
-	["syringe"] = {
-		["index"] = "syringe",
-		["name"] = "Seringa",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["economy"] = 2
-	},
-	["syringe01"] = {
-		["index"] = "syringe2",
-		["name"] = "Seringa A+",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 10
-	},
-	["syringe02"] = {
-		["index"] = "syringe2",
-		["name"] = "Seringa B+",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 10
-	},
-	["syringe03"] = {
-		["index"] = "syringe2",
-		["name"] = "Seringa A-",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 10
-	},
-	["syringe04"] = {
-		["index"] = "syringe2",
-		["name"] = "Seringa B-",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 10
-	},
-	["burgershot1"] = {
-		["index"] = "burgershot1",
-		["name"] = "Copo de Suco",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["burgershot2"] = {
-		["index"] = "burgershot2",
-		["name"] = "Caixa de Lanche",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["burgershot3"] = {
-		["index"] = "burgershot3",
-		["name"] = "Combo",
-		["type"] = "Comum",
-		["weight"] = 1.25,
-		["max"] = 2,
-		["economy"] = 120
-	},
-	["burgershot4"] = {
-		["index"] = "burgershot3",
-		["name"] = "Combo + Brinquedo",
-		["type"] = "Comum",
-		["weight"] = 1.25,
-		["max"] = 2,
-		["economy"] = 270
-	},
-	["pizzathis1"] = {
-		["index"] = "pizzathis1",
-		["name"] = "Copo de Suco",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["pizzathis2"] = {
-		["index"] = "pizzathis2",
-		["name"] = "Caixa de Lanche",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["pizzathis3"] = {
-		["index"] = "pizzathis3",
-		["name"] = "Combo",
-		["type"] = "Comum",
-		["weight"] = 1.25,
-		["max"] = 2,
-		["economy"] = 120
-	},
-	["pizzathis4"] = {
-		["index"] = "pizzathis3",
-		["name"] = "Combo + Brinquedo",
-		["type"] = "Comum",
-		["weight"] = 1.25,
-		["max"] = 2,
-		["economy"] = 270
-	},
-	["uwucoffee1"] = {
-		["index"] = "uwucoffee1",
-		["name"] = "Copo de Suco",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["uwucoffee2"] = {
-		["index"] = "uwucoffee2",
-		["name"] = "Caixa de Lanche",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["uwucoffee3"] = {
-		["index"] = "uwucoffee3",
-		["name"] = "Combo",
-		["type"] = "Comum",
-		["weight"] = 1.25,
-		["max"] = 2,
-		["economy"] = 120
-	},
-	["uwucoffee4"] = {
-		["index"] = "uwucoffee3",
-		["name"] = "Combo + Brinquedo",
-		["type"] = "Comum",
-		["weight"] = 1.25,
-		["max"] = 2,
-		["economy"] = 270
-	},
-	["beanmachine1"] = {
-		["index"] = "beanmachine1",
-		["name"] = "Copo de Suco",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["beanmachine2"] = {
-		["index"] = "beanmachine2",
-		["name"] = "Caixa de Lanche",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["max"] = 1,
-		["economy"] = 10
-	},
-	["beanmachine3"] = {
-		["index"] = "beanmachine3",
-		["name"] = "Combo",
-		["type"] = "Comum",
-		["weight"] = 1.25,
-		["max"] = 2,
-		["economy"] = 120
-	},
-	["beanmachine4"] = {
-		["index"] = "beanmachine3",
-		["name"] = "Combo + Brinquedo",
-		["type"] = "Comum",
-		["weight"] = 1.25,
-		["max"] = 2,
-		["economy"] = 270
-	},
-	["wheelchair"] = {
-		["index"] = "wheelchair",
-		["name"] = "Cadeira de Rodas",
-		["type"] = "Usável",
-		["weight"] = 7.25,
-		["block"] = true,
-		["economy"] = 2750
-	},
-	["vehkey"] = {
-		["index"] = "vehkey",
-		["name"] = "Chave Cópia",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 0
-	},
-	["evidence01"] = {
-		["index"] = "evidence01",
-		["name"] = "Evidência",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 0
-	},
-	["evidence02"] = {
-		["index"] = "evidence02",
-		["name"] = "Evidência",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 0
-	},
-	["evidence03"] = {
-		["index"] = "evidence03",
-		["name"] = "Evidência",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 0
-	},
-	["evidence04"] = {
-		["index"] = "evidence04",
-		["name"] = "Evidência",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 0
-	},
-	["pig"] = {
-		["index"] = "pig",
-		["name"] = "Coleira de Porco",
-		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
-	},
-	["rottweiler"] = {
-		["index"] = "rottweiler",
-		["name"] = "Coleira de Rottweiler",
-		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
-	},
-	["husky"] = {
-		["index"] = "husky",
-		["name"] = "Coleira de Husky",
-		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
-	},
-	["shepherd"] = {
-		["index"] = "shepherd",
-		["name"] = "Coleira de Shepherd",
-		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
-	},
-	["retriever"] = {
-		["index"] = "retriever",
-		["name"] = "Coleira de Retriever",
-		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
-	},
-	["poodle"] = {
-		["index"] = "poodle",
-		["name"] = "Coleira de Poodle",
-		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
-	},
-	["pug"] = {
-		["index"] = "pug",
-		["name"] = "Coleira de Pug",
-		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
-	},
-	["westy"] = {
-		["index"] = "westy",
-		["name"] = "Coleira de Westy",
-		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
-	},
-	["cat"] = {
-		["index"] = "cat",
-		["name"] = "Coleira de Gato",
-		["type"] = "Animal",
-		["weight"] = 1.25,
-		["economy"] = 25000
-	},
-	["card01"] = {
-		["index"] = "card01",
-		["name"] = "Cartão Comum",
-		["desc"] = "Roubar Lojas de Departamento ou Teatro.",
-		["repair"] = "repairkit01",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 325
-	},
-	["card02"] = {
-		["index"] = "card02",
-		["name"] = "Cartão In-Comum",
-		["desc"] = "Roubar Lojas de Armas ou o Estabulo.",
-		["repair"] = "repairkit01",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 325
-	},
-	["card03"] = {
-		["index"] = "card03",
-		["name"] = "Cartão Épico",
-		["desc"] = "Roubar Bancos Fleeca ou Yellow Jack.",
-		["repair"] = "repairkit01",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 375
-	},
-	["card04"] = {
-		["index"] = "card04",
-		["name"] = "Cartão Raro",
-		["desc"] = "Roubar Barbearias e a Festa Junina.",
-		["repair"] = "repairkit01",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 275
-	},
-	["card05"] = {
-		["index"] = "card05",
-		["name"] = "Cartão Lendário",
-		["desc"] = "Roubar Bancos ou o Auditorio.",
-		["repair"] = "repairkit01",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 425
-	},
-	["card06"] = {
-		["index"] = "card03",
-		["name"] = "Cartão Mitíco",
-		["desc"] = "Roubar a Humane ou o Obs.",
-		["repair"] = "repairkit01",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 375
-	},
-	["card07"] = {
-		["index"] = "card02",
-		["name"] = "Cartão Rustico",
-		["desc"] = "Roubar o Açougue ou o Comedy.",
-		["repair"] = "repairkit01",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 325
-	},
-	["radio"] = {
-		["index"] = "radio",
-		["name"] = "Rádio",
-		["type"] = "Usável",
-		["repair"] = "repairkit01",
-		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 870
-	},
-	["radiodamaged"] = {
-		["index"] = "radiodamaged",
-		["name"] = "Rádio Danificado",
-		["desc"] = "Rádio danificado",
-		["repair"] = "repairkit01",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 0
-	},
-	["vest"] = {
-		["index"] = "vest",
-		["name"] = "Colete",
-		["repair"] = "repairkit01",
-		["type"] = "Usável",
-		["durability"] = 3,
-		["weight"] = 3.75,
-		["max"] = 4,
-		["economy"] = 500
-	},
-	["bandage"] = {
-		["index"] = "bandage",
-		["name"] = "Bandagem",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["max"] = 5,
-		["economy"] = 225
-	},
-	["medkit"] = {
-		["index"] = "medkit",
-		["name"] = "Kit Médico",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["max"] = 4,
-		["economy"] = 575
-	},
-	["pouch"] = {
-		["index"] = "pouch",
-		["name"] = "Malote",
-		["type"] = "Comum",
-		["weight"] = 1.25,
-		["economy"] = 80
-	},
-	["woodlog"] = {
-		["index"] = "woodlog",
-		["name"] = "Tora de Madeira",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 40
-	},
-	["fishingrod"] = {
-		["index"] = "fishingrod",
-		["name"] = "Vara de Pescar",
-		["repair"] = "repairkit01",
-		["type"] = "Usável",
-		["durability"] = 7,
-		["weight"] = 2.75,
-		["economy"] = 725
-	},
-	["switchblade"] = {
-		["index"] = "switchblade",
-		["name"] = "Canivete",
-		["repair"] = "repairkit01",
-		["type"] = "Usável",
-		["desc"] = "Utilizada para remoção de carne.",
-		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 525
-	},
-	["octopus"] = {
-		["index"] = "octopus",
-		["name"] = "Polvo",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 14
-	},
-	["shrimp"] = {
-		["index"] = "shrimp",
-		["name"] = "Camarão",
-		["type"] = "Comum",
-		["weight"] = 0.50,
-		["economy"] = 14
-	},
-	["carp"] = {
-		["index"] = "carp",
-		["name"] = "Carpa",
-		["type"] = "Usável",
-		["weight"] = 0.50,
-		["economy"] = 12
-	},
-	["codfish"] = {
-		["index"] = "codfish",
-		["name"] = "Bacalhau",
-		["type"] = "Usável",
-		["weight"] = 0.50,
-		["economy"] = 16
-	},
-	["catfish"] = {
-		["index"] = "catfish",
-		["name"] = "Bagre",
-		["type"] = "Usável",
-		["weight"] = 0.50,
-		["economy"] = 16
-	},
-	["goldenfish"] = {
-		["index"] = "goldenfish",
-		["name"] = "Dourado",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 30
-	},
-	["horsefish"] = {
-		["index"] = "horsefish",
-		["name"] = "Cavala",
-		["type"] = "Usável",
-		["weight"] = 0.50,
-		["economy"] = 12
-	},
-	["tilapia"] = {
-		["index"] = "tilapia",
-		["name"] = "Tilápia",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 14
-	},
-	["pacu"] = {
-		["index"] = "pacu",
-		["name"] = "Pacu",
-		["type"] = "Usável",
-		["weight"] = 0.50,
-		["economy"] = 24
-	},
-	["pirarucu"] = {
-		["index"] = "pirarucu",
-		["name"] = "Pirarucu",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 26
-	},
-	["tambaqui"] = {
-		["index"] = "tambaqui",
-		["name"] = "Tambaqui",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 28
-	},
-	["bait"] = {
-		["index"] = "bait",
-		["name"] = "Isca",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 5
-	},
-	["animalpelt"] = {
-		["index"] = "animalpelt",
-		["name"] = "Pele Animal",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 25
-	},
-	["weedclone"] = {
-		["index"] = "weedclone",
-		["name"] = "Clonagem de Maconha",
-		["type"] = "Usável",
-		["weight"] = 0.15
-	},
-	["weedleaf"] = {
-		["index"] = "weedleaf",
-		["name"] = "Folha de Maconha",
-		["type"] = "Comum",
-		["weight"] = 0.30
-	},
-
-	["joint"] = {
-		["index"] = "joint",
-		["name"] = "Baseado",
-		["type"] = "Usável",
-		["weight"] = 0.10
-	},
-	["codeine"] = {
-		["index"] = "codeine",
-		["name"] = "Codeína",
-		["type"] = "Comum",
-		["weight"] = 0.10,
-		["economy"] = 20
-	},
-	["amphetamine"] = {
-		["index"] = "amphetamine",
-		["name"] = "Anfetamina",
-		["type"] = "Comum",
-		["weight"] = 0.10,
-		["economy"] = 20
-	},
-	["ecstasy"] = {
-		["index"] = "ecstasy",
-		["name"] = "Ecstasy",
-		["type"] = "Usável",
-		["weight"] = 0.10,
-		["economy"] = 150
-	},
-	["lancap"] = {
-		["index"] = "lancap",
-		["name"] = "Lança Perfume",
-		["type"] = "Usável",
-		["weight"] = 0.10,
-		["economy"] = 150
-	},
-	["cocaine"] = {
-		["index"] = "cocaine",
-		["name"] = "Cocaína",
-		["type"] = "Usável",
-		["weight"] = 0.10,
-		["economy"] = 150
-	},
-	["heroine"] = {
-		["index"] = "heroine",
-		["name"] = "Heroina",
-		["type"] = "Usável",
-		["weight"] = 0.10,
-		["economy"] = 150
-	},
-	["cokeseed"] = {
-		["index"] = "cokeseed",
-		["name"] = "Semente de Cocaína",
-		["type"] = "Usável",
-		["weight"] = 0.10
-	},
-	["cokeleaf"] = {
-		["index"] = "cokeleaf",
-		["name"] = "Folha de Coca",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["economy"] = 20
-	},
-	["wheatflour"] = {
-		["index"] = "wheatflour",
-		["name"] = "Farinha de Trigo",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["economy"] = 20
-	},
-	["meth"] = {
-		["index"] = "meth",
-		["name"] = "Metanfetamina",
-		["type"] = "Usável",
-		["weight"] = 0.10,
-		["economy"] = 150
-	},
-	["lsd"] = {
-		["index"] = "lsd",
-		["name"] = "Lsd",
-		["type"] = "Usável",
-		["weight"] = 0.10,
-		["economy"] = 150
-	},
-	["xanax"] = {
-		["index"] = "xanax",
-		["name"] = "Xanax",
-		["type"] = "Usável",
-		["weight"] = 0.10,
-		["economy"] = 150
-	},
-	["acetone"] = {
-		["index"] = "acetone",
-		["name"] = "Acetona",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 40
-	},
-	["drugtoy"] = {
-		["index"] = "drugtoy",
-		["name"] = "Brinquedo",
-		["type"] = "Comum",
-		["weight"] = 0.50,
-		["economy"] = 100
-	},
-	["rolepass"] = {
-		["index"] = "rolepass",
-		["name"] = "Rolepass",
-		["type"] = "Usável",
-		["weight"] = 0.15,
-		["economy"] = 200000
-	},
-	["premium"] = {
-		["index"] = "premium",
-		["name"] = "Premium",
-		["type"] = "Usável",
-		["weight"] = 0.15,
-		["economy"] = 150000
-	},
-	["premiumplate"] = {
-		["index"] = "platepremium",
-		["name"] = "Placa Premium",
-		["type"] = "Usável",
-		["desc"] = "Personaliza a placa do veículo.",
-		["weight"] = 0.75,
-		["economy"] = 100000
-	},
-	["newchars"] = {
-		["index"] = "newchars",
-		["name"] = "+1 Personagem",
-		["type"] = "Usável",
-		["desc"] = "Limite de personagem em +1.",
-		["weight"] = 0.25,
-		["economy"] = 150000
-	},
-	["chip"] = {
-		["index"] = "chip",
-		["name"] = "Chip Telefônico",
-		["type"] = "Usável",
-		["desc"] = "Troca o número telefônico.",
-		["weight"] = 0.25,
-		["economy"] = 120000
-	},
-	["namechange"] = {
-		["index"] = "namechange",
-		["name"] = "Troca de Nome",
-		["type"] = "Usável",
-		["desc"] = "Troca o nome do personagem.",
-		["weight"] = 0.25,
-		["economy"] = 100000
-	},
-	["milkbottle"] = {
-		["index"] = "milkbottle",
-		["name"] = "Garrafa de Leite",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["scape"] = true,
-		["max"] = 5,
-		["economy"] = 35
-	},
-	["guarananatural"] = {
-		["index"] = "guarananatural",
-		["name"] = "Guaraná Natural",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.25,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 100
-	},
-	["water"] = {
-		["index"] = "water",
-		["name"] = "Água",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 30
-	},
-	["emptybottle"] = {
-		["index"] = "emptybottle",
-		["name"] = "Garrafa Vazia",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["scape"] = true,
-		["max"] = 5,
-		["economy"] = 30
-	},
-	["energetic"] = {
-		["index"] = "energetic",
-		["name"] = "Energetico",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["max"] = 20,
-		["economy"] = 150
-	},
-	["coffee"] = {
-		["index"] = "coffee",
-		["name"] = "Copo de Café",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["max"] = 4,
-		["economy"] = 150
-	},
-	["coffeemilk"] = {
-		["index"] = "coffeemilk",
-		["name"] = "Café com Leite",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.35,
-		["max"] = 4,
-		["economy"] = 24
-	},
-	["cola"] = {
-		["index"] = "cola",
-		["name"] = "Cola",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.25,
-		["max"] = 4,
-		["economy"] = 15
-	},
-	["tacos"] = {
-		["index"] = "tacos",
-		["name"] = "Tacos",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.25,
-		["max"] = 4,
-		["economy"] = 25
-	},
-	["fries"] = {
-		["index"] = "fries",
-		["name"] = "Fritas",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.25,
-		["max"] = 4,
-		["economy"] = 30
-	},
-	["soda"] = {
-		["index"] = "soda",
-		["name"] = "Sprunk",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.25,
-		["max"] = 4,
-		["economy"] = 15
-	},
-	["apple"] = {
-		["index"] = "apple",
-		["name"] = "Maça",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
-	},
-	["orange"] = {
-		["index"] = "orange",
-		["name"] = "Laranja",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
-	},
-	["strawberry"] = {
-		["index"] = "strawberry",
-		["name"] = "Morango",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
-	},
-	["coffee2"] = {
-		["index"] = "coffee2",
-		["name"] = "Grão de Café",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
-	},
-	["grape"] = {
-		["index"] = "grape",
-		["name"] = "Uva",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
-	},
-	["tange"] = {
-		["index"] = "tange",
-		["name"] = "Tangerina",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
-	},
-	["banana"] = {
-		["index"] = "banana",
-		["name"] = "Banana",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
-	},
-	["guarana"] = {
-		["index"] = "guarana",
-		["name"] = "Guaraná",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 15
-	},
-	["acerola"] = {
-		["index"] = "acerola",
-		["name"] = "Acerola",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 15
-	},
-	["passion"] = {
-		["index"] = "passion",
-		["name"] = "Maracujá",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 5
-	},
-	["tomato"] = {
-		["index"] = "tomato",
-		["name"] = "Tomate",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 15
-	},
-	["mushroom"] = {
-		["index"] = "mushroom",
-		["name"] = "Cogumelo",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
-	},
-	["sugar"] = {
-		["index"] = "sugar",
-		["name"] = "Açucar",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["economy"] = 5
-	},
-	["cookies"] = {
-		["index"] = "cookies",
-		["name"] = "Cookies",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.25,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 24
-	},
-	["orangejuice"] = {
-		["index"] = "orangejuice",
-		["name"] = "Suco de Laranja",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 20
-	},
-	["tangejuice"] = {
-		["index"] = "tangejuice",
-		["name"] = "Suco de Tangerina",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 20
-	},
-	["grapejuice"] = {
-		["index"] = "grapejuice",
-		["name"] = "Suco de Uva",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 20
-	},
-	["strawberryjuice"] = {
-		["index"] = "strawberryjuice",
-		["name"] = "Suco de Morango",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 20
-	},
-	["bananajuice"] = {
-		["index"] = "bananajuice",
-		["name"] = "Suco de Banana",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 20
-	},
-	["acerolajuice"] = {
-		["index"] = "acerolajuice",
-		["name"] = "Suco de Acerola",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 20
-	},
-	["passionjuice"] = {
-		["index"] = "passionjuice",
-		["name"] = "Suco de Maracujá",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 20
-	},
-	["bread"] = {
-		["index"] = "bread",
-		["name"] = "Pão",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 5
-	},
-	["ketchup"] = {
-		["index"] = "ketchup",
-		["name"] = "Ketchup",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 75
-	},
-	["cannedsoup"] = {
-		["index"] = "cannedsoup",
-		["name"] = "Sopa em Lata",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.75,
-		["economy"] = 55
-	},
-	["canofbeans"] = {
-		["index"] = "canofbeans",
-		["name"] = "Lata de Feijão",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["economy"] = 55
-	},
-	["meat"] = {
-		["index"] = "meat",
-		["name"] = "Carne Animal",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 16
-	},
-	["fishfillet"] = {
-		["index"] = "fishfillet",
-		["name"] = "Filé de Peixe",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 10
-	},
-	["marshmallow"] = {
-		["index"] = "marshmallow",
-		["name"] = "Marshmallow",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.25,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 35
-	},
-	["cookedfishfillet"] = {
-		["index"] = "cookedfishfillet",
-		["name"] = "Filé de Peixe Cozido",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.55,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 35
-	},
-	["cookedmeat"] = {
-		["index"] = "cookedmeat",
-		["name"] = "Carne Animal Cozida",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.55,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 35
-	},
-	["hamburger"] = {
-		["index"] = "hamburger",
-		["name"] = "Hambúrguer",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.55,
-		["max"] = 4,
-		["economy"] = 25
-	},
-	["hamburger2"] = {
-		["index"] = "hamburger2",
-		["name"] = "Hambúrguer Artesanal",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 60
-	},
-	["onionrings"] = {
-		["index"] = "onionrings",
-		["name"] = "Anéis de Cebola",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.55,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 30
-	},
-	["chickenfries"] = {
-		["index"] = "chickenfries",
-		["name"] = "Frango Frito",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["scape"] = true,
-		["max"] = 6,
-		["economy"] = 28
-	},
-	["pizzamozzarella"] = {
-		["index"] = "pizzamozzarella",
-		["name"] = "Pizza de Muçarela",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 45
-	},
-	["cheetos"] = {
-		["index"] = "cheetos",
-		["name"] = "Cheetos Picante",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 18
-	},
-	["pizzamushroom"] = {
-		["index"] = "pizzamushroom",
-		["name"] = "Pizza de Cogumelo",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 45
-	},
-	["pizzabanana"] = {
-		["index"] = "pizzabanana",
-		["name"] = "Pizza de Banana",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 45
-	},
-	["pizzachocolate"] = {
-		["index"] = "pizzachocolate",
-		["name"] = "Pizza de Chocolate",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 45
-	},
-	["calzone"] = {
-		["index"] = "calzone",
-		["name"] = "Calzone",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.55,
-		["scape"] = true,
-		["max"] = 4,
-		["economy"] = 30
-	},
-	["hotdog"] = {
-		["index"] = "hotdog",
-		["name"] = "Cachorro-Quente",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.45,
-		["max"] = 4,
-		["economy"] = 15
-	},
-	["donut"] = {
-		["index"] = "donut",
-		["name"] = "Rosquinha",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.25,
-		["max"] = 4,
-		["economy"] = 15
-	},
-	["plate"] = {
-		["index"] = "plate",
-		["name"] = "Placa",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 525
-	},
-	["brokenpick"] = {
-		["index"] = "lockpick2",
-		["name"] = "Lockpick Quebrada",
-		["desc"] = "Utilizada antes para roubar veículos.",
-		["repair"] = "repairkit01",
-		["type"] = "Usável",
-		["durability"] = 3,
-		["weight"] = 1.25,
-		["economy"] = 575
-	},
-	["lockpick"] = {
-		["index"] = "lockpick",
-		["name"] = "Lockpick de Alumínio",
-		["desc"] = "Utilizada para roubar veículos.",
-		["repair"] = "repairkit01",
-		["type"] = "Usável",
-		["durability"] = 3,
-		["weight"] = 1.25,
-		["economy"] = 575
-	},
-	["lockpick2"] = {
-		["index"] = "lockpick2",
-		["name"] = "Lockpick de Cobre",
-		["desc"] = "Utilizada para roubar propriedades.",
-		["type"] = "Usável",
-		["durability"] = 3,
-		["weight"] = 1.25,
-		["economy"] = 1200
-	},
+		["Index"] = "repairkit04",
+		["Name"] = "Kit de Reparos",
+		["Description"] =
+		"Solucione problemas com facilidade, seja em casa, no carro ou em qualquer lugar, indispensável para manter tudo funcionando perfeitamente.",
+		["Rarity"] = "legendary",
+		["Type"] = "Comum",
+		["Weight"] = 3.75,
+		["Economy"] = 4275,
+		["Recycle"] = {
+			["sheetmetal"] = 1,
+			["roadsigns"] = 1,
+			["copper"] = 45,
+			["aluminum"] = 45
+		}
+	},
+	-- MECANICO
 	["toolbox"] = {
-		["index"] = "toolbox",
-		["name"] = "Ferramentas Básicas",
-		["type"] = "Usável",
-		["weight"] = 2.25,
-		["max"] = 2,
-		["economy"] = 625
+		["Index"] = "toolbox",
+		["Name"] = "Ferramentas Básicas",
+		["Description"] =
+		"Um arsenal versátil de ferramentas essenciais para todas as suas necessidades de reparo, com qualidade premium e variedade abrangente, este kit é seu parceiro e do seu veículos.",
+		["Type"] = "Consumível",
+		["Weight"] = 2.25,
+		["Max"] = 3,
+		["Economy"] = 925,
+		["Recycle"] = {
+			["rubber"] = 15,
+			["copper"] = 5,
+			["aluminum"] = 5
+		}
 	},
 	["advtoolbox"] = {
-		["index"] = "toolbox",
-		["name"] = "Ferramentas Avançadas",
-		["type"] = "Usável",
-		["weight"] = 3.25,
-		["charges"] = 3,
-		["max"] = 1,
-		["economy"] = 1525
+		["Index"] = "toolbox",
+		["Name"] = "Ferramentas Avançadas",
+		["Description"] =
+		"Um arsenal versátil de ferramentas essenciais para todas as suas necessidades de reparo, com qualidade premium e variedade abrangente, este kit é seu parceiro e do seu veículos.",
+		["Type"] = "Consumível",
+		["Weight"] = 4.75,
+		["Charges"] = 3,
+		["Max"] = 2,
+		["Economy"] = 2775,
+		["Recycle"] = {
+			["rubber"] = 35,
+			["copper"] = 25,
+			["aluminum"] = 15
+		}
 	},
-	["notepad"] = {
-		["index"] = "notepad",
-		["name"] = "Bloco de Notas",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 10
+	["plate"] = {
+		["Index"] = "plate",
+		["Name"] = "Placa Veícular",
+		["Description"] =
+		"Embora personalizada e distintiva, desconsidera as normas de trânsito e regulamentos legais, com um design único, destina-se a quem busca evadir-se das regras, mas não é recomendada para uso responsável e ético nas estradas.",
+		["Type"] = "Comum",
+		["Weight"] = 0.75,
+		["Economy"] = 975,
+		["Recycle"] = {
+			["copper"] = 15,
+			["aluminum"] = 15
+		}
+	},
+	["nitro"] = {
+		["Index"] = "nitro",
+		["Name"] = "Garrafa de Nitro",
+		["Type"] = "Consumível",
+		["Description"] =
+		"Uma adição emocionante para veículos motorizados, oferece um aumento instantâneo de potência e velocidade, projetado para os entusiastas da velocidade, proporciona uma aceleração surpreendente, elevando a adrenalina e a emoção das corridas e aventuras automobilísticas.",
+		["Weight"] = 7.25,
+		["Economy"] = 2775,
+		["Recycle"] = {
+			["glass"] = 50,
+			["copper"] = 15,
+			["aluminum"] = 15
+		}
 	},
 	["tyres"] = {
-		["index"] = "tyres",
-		["name"] = "Pneu",
-		["type"] = "Usável",
-		["weight"] = 2.75,
-		["max"] = 4,
-		["economy"] = 225
+		["Index"] = "tyres",
+		["Name"] = "Pneu",
+		["Type"] = "Consumível",
+		["Weight"] = 2.75,
+		["Max"] = 4,
+		["Economy"] = 375,
+		["Recycle"] = {
+			["rubber"] = 15
+		}
 	},
-	["cellphone"] = {
-		["index"] = "cellphone",
-		["name"] = "Celular",
-		["repair"] = "carregador",
-		["type"] = "Comum",
-		["durability"] = 14,
-		["weight"] = 0.75,
-		["economy"] = 575
+	-- CLONES
+	["tomato"] = {
+		["Index"] = "tomato",
+		["Name"] = "Tomate",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["LostWater"] = true,
+		["Market"] = true,
+		["Economy"] = 10,
+		["Fridge"] = true
 	},
-	["carregador"] = {
-		["index"] = "cellbattery",
-		["name"] = "Carregador de Celular",
-		["type"] = "Usável",
-		["durability"] = 14,
-		["weight"] = 0.75,
-		["economy"] = 575
+	["tomatoclone"] = {
+		["Index"] = "clone",
+		["Name"] = "Clonagem de Tomate",
+		["Type"] = "Consumível",
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["divingsuit"] = {
-		["index"] = "divingsuit",
-		["name"] = "Roupa de Mergulho",
-		["repair"] = "repairkit01",
-		["type"] = "Usável",
-		["durability"] = 14,
-		["weight"] = 4.75,
-		["economy"] = 975
+	["passion"] = {
+		["Index"] = "passion",
+		["Name"] = "Maracujá",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["LostWater"] = true,
+		["Market"] = true,
+		["Economy"] = 10,
+		["Fridge"] = true
 	},
-	["handcuff"] = {
-		["index"] = "handcuff",
-		["name"] = "Algemas",
-		["repair"] = "repairkit02",
-		["type"] = "Usável",
-		["durability"] = 7,
-		["weight"] = 1.25,
-		["economy"] = 2200
+	["passionclone"] = {
+		["Index"] = "clone",
+		["Name"] = "Clonagem de Maracujá",
+		["Type"] = "Consumível",
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["rope"] = {
-		["index"] = "rope",
-		["name"] = "Cordas",
-		["repair"] = "repairkit01",
-		["type"] = "Usável",
-		["durability"] = 7,
-		["weight"] = 1.75,
-		["economy"] = 875
+	["passionjuice"] = {
+		["Index"] = "passionjuice",
+		["Name"] = "Suco de Maracujá",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 175,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["hood"] = {
-		["index"] = "hood",
-		["name"] = "Capuz",
-		["repair"] = "repairkit02",
-		["type"] = "Usável",
-		["durability"] = 7,
-		["weight"] = 1.75,
-		["economy"] = 2200
+	["tange"] = {
+		["Index"] = "tange",
+		["Name"] = "Tangerina",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["LostWater"] = true,
+		["Market"] = true,
+		["Economy"] = 10,
+		["Fridge"] = true
 	},
-	["plastic"] = {
-		["index"] = "plastic",
-		["name"] = "Plástico",
-		["type"] = "Comum",
-		["weight"] = 0.065,
-		["economy"] = 20
+	["tangeclone"] = {
+		["Index"] = "clone",
+		["Name"] = "Clonagem de Tangerina",
+		["Type"] = "Consumível",
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["glass"] = {
-		["index"] = "glass",
-		["name"] = "Vidro",
-		["type"] = "Comum",
-		["weight"] = 0.065,
-		["economy"] = 20
+	["tangejuice"] = {
+		["Index"] = "tangejuice",
+		["Name"] = "Suco de Tangerina",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 125,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["rubber"] = {
-		["index"] = "rubber",
-		["name"] = "Borracha",
-		["type"] = "Comum",
-		["weight"] = 0.050,
-		["economy"] = 20
+	["orange"] = {
+		["Index"] = "orange",
+		["Name"] = "Laranja",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["LostWater"] = true,
+		["Market"] = true,
+		["Economy"] = 10,
+		["Fridge"] = true
 	},
-	["aluminum"] = {
-		["index"] = "aluminum",
-		["name"] = "Alumínio",
-		["type"] = "Comum",
-		["weight"] = 0.075,
-		["economy"] = 30
+	["orangeclone"] = {
+		["Index"] = "clone",
+		["Name"] = "Clonagem de Laranja",
+		["Type"] = "Consumível",
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["copper"] = {
-		["index"] = "copper",
-		["name"] = "Cobre",
-		["type"] = "Comum",
-		["weight"] = 0.05,
-		["economy"] = 30
+	["orangejuice"] = {
+		["Index"] = "orangejuice",
+		["Name"] = "Suco de Laranja",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 125,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["gunpowder"] = {
-		["index"] = "gunpowder",
-		["name"] = "Polvora",
-		["type"] = "Comum",
-		["weight"] = 0.030,
-		["economy"] = 30
+	["apple"] = {
+		["Index"] = "apple",
+		["Name"] = "Maça",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["LostWater"] = true,
+		["Market"] = true,
+		["Economy"] = 10,
+		["Fridge"] = true
 	},
-	["capsule"] = {
-		["index"] = "capsule",
-		["name"] = "Capsula",
-		["type"] = "Comum",
-		["weight"] = 0.030,
-		["economy"] = 30
+	["appleclone"] = {
+		["Index"] = "clone",
+		["Name"] = "Clonagem de Maça",
+		["Type"] = "Consumível",
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["newspaper"] = {
-		["index"] = "newspaper",
-		["name"] = "Jornal",
-		["type"] = "Comum",
-		["weight"] = 0.375,
-		["economy"] = 60
+	["applejuice"] = {
+		["Index"] = "applejuice",
+		["Name"] = "Suco de Maça",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 125,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["ritmoneury"] = {
-		["index"] = "ritmoneury",
-		["name"] = "Ritmoneury",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["max"] = 2,
-		["economy"] = 475
+	["grape"] = {
+		["Index"] = "grape",
+		["Name"] = "Uva",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["LostWater"] = true,
+		["Market"] = true,
+		["Economy"] = 10,
+		["Fridge"] = true
 	},
-	["sinkalmy"] = {
-		["index"] = "sinkalmy",
-		["name"] = "Sinkalmy",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["max"] = 2,
-		["economy"] = 375
+	["grapeclone"] = {
+		["Index"] = "clone",
+		["Name"] = "Clonagem de Uva",
+		["Type"] = "Consumível",
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["cigarette"] = {
-		["index"] = "cigarette",
-		["name"] = "Cigarro",
-		["type"] = "Usável",
-		["weight"] = 0.15,
-		["max"] = 10,
-		["economy"] = 12
+	["grapejuice"] = {
+		["Index"] = "grapejuice",
+		["Name"] = "Suco de Uva",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 125,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["lighter"] = {
-		["index"] = "lighter",
-		["name"] = "Isqueiro",
-		["repair"] = "repairkit01",
-		["durability"] = 7,
-		["type"] = "Comum",
-		["weight"] = 0.55,
-		["economy"] = 175
+	["lemon"] = {
+		["Index"] = "lemon",
+		["Name"] = "Limão",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["LostWater"] = true,
+		["Market"] = true,
+		["Economy"] = 10,
+		["Fridge"] = true
 	},
-	["vape"] = {
-		["index"] = "vape",
-		["name"] = "Vape",
-		["repair"] = "repairkit02",
-		["type"] = "Usável",
-		["durability"] = 4,
-		["weight"] = 0.75,
-		["economy"] = 1257
+	["lemonclone"] = {
+		["Index"] = "clone",
+		["Name"] = "Clonagem de Limão",
+		["Type"] = "Consumível",
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["dollars"] = {
-		["index"] = "dollars",
-		["name"] = "Dólares",
-		["type"] = "Comum",
-		["weight"] = 0.0,
-		["economy"] = 1
+	["lemonjuice"] = {
+		["Index"] = "lemonjuice",
+		["Name"] = "Suco de Limão",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 125,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["dollars100"] = {
-		["index"] = "packdollars",
-		["name"] = "Entrega Frágil",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 1000
+	["banana"] = {
+		["Index"] = "banana",
+		["Name"] = "Banana",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["LostWater"] = true,
+		["Market"] = true,
+		["Economy"] = 10,
+		["Fridge"] = true
 	},
-	["dollars500"] = {
-		["index"] = "packdollars",
-		["name"] = "Entrega Frágil",
-		["type"] = "Comum",
-		["weight"] = 0.50,
-		["economy"] = 5000
+	["bananaclone"] = {
+		["Index"] = "clone",
+		["Name"] = "Clonagem de Banana",
+		["Type"] = "Consumível",
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["dollars1000"] = {
-		["index"] = "packdollars",
-		["name"] = "Entrega Frágil",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 10000
+	["bananajuice"] = {
+		["Index"] = "bananajuice",
+		["Name"] = "Suco de Banana",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 125,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["dollarsroll"] = {
-		["index"] = "dollarsz",
-		["name"] = "Rolo de Dólares",
-		["type"] = "Comum",
-		["weight"] = 0.0,
-		["economy"] = 10
+	["acerola"] = {
+		["Index"] = "acerola",
+		["Name"] = "Acerola",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["LostWater"] = true,
+		["Market"] = true,
+		["Economy"] = 10,
+		["Fridge"] = true
 	},
-	["battery"] = {
-		["index"] = "battery",
-		["name"] = "Pilhas",
-		["type"] = "Comum",
-		["weight"] = 0.35,
-		["economy"] = 60
+	["acerolaclone"] = {
+		["Index"] = "clone",
+		["Name"] = "Clonagem de Acerola",
+		["Type"] = "Consumível",
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["elastic"] = {
-		["index"] = "elastic",
-		["name"] = "Elástico",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 50
+	["acerolajuice"] = {
+		["Index"] = "acerolajuice",
+		["Name"] = "Suco de Acerola",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 125,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["plasticbottle"] = {
-		["index"] = "plasticbottle",
-		["name"] = "Garrafa Plástica",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 15
+	["strawberry"] = {
+		["Index"] = "strawberry",
+		["Name"] = "Morango",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["LostWater"] = true,
+		["Market"] = true,
+		["Economy"] = 10,
+		["Fridge"] = true
 	},
-	["glassbottle"] = {
-		["index"] = "glassbottle",
-		["name"] = "Garrafa de Vidro",
-		["type"] = "Comum",
-		["weight"] = 0.45,
-		["economy"] = 15
+	["strawberryclone"] = {
+		["Index"] = "clone",
+		["Name"] = "Clonagem de Morango",
+		["Type"] = "Consumível",
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["metalcan"] = {
-		["index"] = "metalcan",
-		["name"] = "Lata de Metal",
-		["type"] = "Comum",
-		["weight"] = 0.55,
-		["economy"] = 15
+	["strawberryjuice"] = {
+		["Index"] = "strawberryjuice",
+		["Name"] = "Suco de Morango",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 125,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["chocolate"] = {
-		["index"] = "chocolate",
-		["name"] = "Chocolate",
-		["type"] = "Usável",
-		["weight"] = 0.15,
-		["scape"] = true,
-		["max"] = 7,
-		["economy"] = 15
+	["blueberry"] = {
+		["Index"] = "blueberry",
+		["Name"] = "Blueberry",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["LostWater"] = true,
+		["Market"] = true,
+		["Economy"] = 10,
+		["Fridge"] = true
 	},
-	["sandwich"] = {
-		["index"] = "sandwich",
-		["name"] = "Sanduiche",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.25,
-		["max"] = 4,
-		["economy"] = 20
+	["blueberryclone"] = {
+		["Index"] = "clone",
+		["Name"] = "Clonagem de Blueberry",
+		["Type"] = "Consumível",
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["rose"] = {
-		["index"] = "rose",
-		["name"] = "Rosa",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 25
+	["blueberryjuice"] = {
+		["Index"] = "blueberryjuice",
+		["Name"] = "Suco de Blueberry",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 125,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["teddy"] = {
-		["index"] = "teddy",
-		["name"] = "Teddy",
-		["type"] = "Usável",
-		["weight"] = 1.25,
-		["economy"] = 75
+	["coffee"] = {
+		["Index"] = "coffee",
+		["Name"] = "Café",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["LostWater"] = true,
+		["Market"] = true,
+		["Economy"] = 10,
+		["Fridge"] = true
 	},
-	["absolut"] = {
-		["index"] = "absolut",
-		["name"] = "Absolut",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.55,
-		["economy"] = 15
+	["coffeeclone"] = {
+		["Index"] = "clone",
+		["Name"] = "Clonagem de Café",
+		["Type"] = "Consumível",
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["chandon"] = {
-		["index"] = "chandon",
-		["name"] = "Chandon",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.55,
-		["economy"] = 15
+	["coffeemilk"] = {
+		["Index"] = "coffeemilk",
+		["Name"] = "Café com Leite",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 125,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["dewars"] = {
-		["index"] = "dewars",
-		["name"] = "Dewars",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.55,
-		["economy"] = 15
+	-- DROGAS
+	["fertilizer"] = {
+		["Index"] = "fertilizer",
+		["Name"] = "Fertilizante",
+		["Type"] = "Comum",
+		["Weight"] = 5.00,
+		["Economy"] = 285,
+		["Market"] = true
 	},
-	["hennessy"] = {
-		["index"] = "hennessy",
-		["name"] = "Hennessy",
-		["type"] = "Usável",
-		["durability"] = 1,
-		["weight"] = 0.55,
-		["economy"] = 15
+	["weedclone"] = {
+		["Index"] = "clone",
+		["Name"] = "Clonagem de Cannabis",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["goldbar"] = {
-		["index"] = "goldbar",
-		["name"] = "Barra de Ouro",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 725
+	["weed"] = {
+		["Index"] = "leaf",
+		["Name"] = "Folha de Cannabis",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["Economy"] = 5,
+		["LostWater"] = true
 	},
-	["binoculars"] = {
-		["index"] = "binoculars",
-		["name"] = "Binóculos",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 275
+	["joint"] = {
+		["Index"] = "joint",
+		["Name"] = "Cigarro de Cannabis",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 0.25,
+		["Market"] = true,
+		["Economy"] = 25,
+		["LostWater"] = true
 	},
-	["camera"] = {
-		["index"] = "camera",
-		["name"] = "Câmera",
-		["type"] = "Usável",
-		["weight"] = 2.25,
-		["economy"] = 275
+	["weedsack"] = {
+		["Index"] = "weedsack",
+		["Name"] = "Pacote de Cannabis",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 2.50,
+		["Market"] = true,
+		["Economy"] = 250
 	},
-	["WEAPON_HATCHET"] = {
-		["index"] = "hatchet",
-		["name"] = "Machado",
-		["type"] = "Armamento",
-		["repair"] = "repairkit01",
-		["durability"] = 7,
-		["weight"] = 1.75,
-		["economy"] = 999
+	["cokeclone"] = {
+		["Index"] = "clone",
+		["Name"] = "Clonagem de Cocaína",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["WEAPON_BAT"] = {
-		["index"] = "bat",
-		["name"] = "Bastão de Beisebol",
-		["repair"] = "repairkit01",
-		["type"] = "Armamento",
-		["durability"] = 7,
-		["weight"] = 1.75,
-		["economy"] = 1250
+	["coke"] = {
+		["Index"] = "leaf",
+		["Name"] = "Folha de Cocaína",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 0.05,
+		["Market"] = true,
+		["Economy"] = 5,
+		["LostWater"] = true
+	},
+	["cocaine"] = {
+		["Index"] = "cocaine",
+		["Name"] = "Carreira de Cocaína",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 0.25,
+		["Market"] = true,
+		["Economy"] = 25,
+		["LostWater"] = true
+	},
+	["cokesack"] = {
+		["Index"] = "cokesack",
+		["Name"] = "Pacote de Cocaína",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 2.50,
+		["Market"] = true,
+		["Economy"] = 250
+	},
+	["meth"] = {
+		["Index"] = "meth",
+		["Name"] = "Metanfetamina",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 0.25,
+		["Market"] = true,
+		["Economy"] = 25,
+		["LostWater"] = true
+	},
+	["methsack"] = {
+		["Index"] = "methsack",
+		["Name"] = "Pacote de Metanfetamina",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 2.50,
+		["Market"] = true,
+		["Economy"] = 250
+	},
+	["crack"] = {
+		["Index"] = "crack",
+		["Name"] = "Seringa de Crack",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 0.25,
+		["Market"] = true,
+		["Economy"] = 375
+	},
+	["heroin"] = {
+		["Index"] = "heroin",
+		["Name"] = "Seringa de Heroína",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 0.25,
+		["Market"] = true,
+		["Economy"] = 525
+	},
+	["metadone"] = {
+		["Index"] = "metadone",
+		["Name"] = "Seringa de Metadona",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 0.25,
+		["Market"] = true,
+		["Economy"] = 475
+	},
+	["codeine"] = {
+		["Index"] = "codeine",
+		["Name"] = "Seringa de Codeína",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 0.25,
+		["Market"] = true,
+		["Economy"] = 425
+	},
+	["amphetamine"] = {
+		["Index"] = "amphetamine",
+		["Name"] = "Seringa de Anfetamina",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 0.25,
+		["Market"] = true,
+		["Economy"] = 325
+	},
+	-- ATTACHS
+	["ATTACH_FLASHLIGHT"] = {
+		["Index"] = "attach_flashlight",
+		["Name"] = "Lanterna Tatica",
+		["Type"] = "Attachs",
+		["Arrest"] = true,
+		["Weight"] = 1.0,
+		["Market"] = true,
+		["Economy"] = 2125,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["batteryaa"] = 1,
+			["glass"] = 25,
+			["plastic"] = 15
+		}
+	},
+	["ATTACH_CROSSHAIR"] = {
+		["Index"] = "attach_crosshair",
+		["Name"] = "Mira Holográfica",
+		["Type"] = "Attachs",
+		["Arrest"] = true,
+		["Weight"] = 1.0,
+		["Market"] = true,
+		["Economy"] = 2725,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["batteryaaplus"] = 1,
+			["glass"] = 25,
+			["plastic"] = 25,
+			["copper"] = 5
+		}
+	},
+	["ATTACH_SILENCER"] = {
+		["Index"] = "attach_silencer",
+		["Name"] = "Silenciador",
+		["Type"] = "Attachs",
+		["Arrest"] = true,
+		["Weight"] = 1.0,
+		["Market"] = true,
+		["Economy"] = 4725,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["scotchtape"] = 1,
+			["insulatingtape"] = 1,
+			["plastic"] = 25,
+			["copper"] = 25
+		}
+	},
+	["ATTACH_MAGAZINE"] = {
+		["Index"] = "attach_magazine",
+		["Name"] = "Pente Estendido",
+		["Type"] = "Attachs",
+		["Arrest"] = true,
+		["Weight"] = 1.0,
+		["Market"] = true,
+		["Economy"] = 2225,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["rubber"] = 25,
+			["plastic"] = 25,
+			["aluminum"] = 5
+		}
+	},
+	["ATTACH_GRIP"] = {
+		["Index"] = "attach_grip",
+		["Name"] = "Empunhadura",
+		["Type"] = "Attachs",
+		["Arrest"] = true,
+		["Weight"] = 1.0,
+		["Market"] = true,
+		["Economy"] = 1725,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["rubber"] = 25,
+			["plastic"] = 25
+		}
+	},
+	-- DOAÇÕES
+	["backalohomorawhite"] = {
+		["Index"] = "backalohomorawhite",
+		["Name"] = "Mochilinha Branca",
+		["Description"] = "Aumenta sua mochila em <common>25Kg</common>.",
+		["Repair"] = "sewingkit",
+		["Type"] = "Comum",
+		["Durability"] = 720,
+		["Weight"] = 2.5,
+		["Delete"] = true,
+		["Chest"] = true,
+
+		["Economy"] = 15000,
+		["Rarity"] = "rare",
+		["Backpack"] = 25,
+		["Skinshop"] = {
+			["mp_m_freemode_01"] = {
+				["Model"] = 115,
+				["Texture"] = 0
+			},
+			["mp_f_freemode_01"] = {
+				["Model"] = 115,
+				["Texture"] = 0
+			}
+		}
+	},
+	["backalohomorared"] = {
+		["Index"] = "backalohomorared",
+		["Name"] = "Mochilinha Vermelha",
+		["Description"] = "Aumenta sua mochila em <common>25Kg</common>.",
+		["Repair"] = "sewingkit",
+		["Type"] = "Comum",
+		["Durability"] = 720,
+		["Weight"] = 2.5,
+		["Delete"] = true,
+		["Chest"] = true,
+
+		["Economy"] = 15000,
+		["Rarity"] = "rare",
+		["Backpack"] = 25,
+		["Skinshop"] = {
+			["mp_m_freemode_01"] = {
+				["Model"] = 115,
+				["Texture"] = 2
+			},
+			["mp_f_freemode_01"] = {
+				["Model"] = 115,
+				["Texture"] = 2
+			}
+		}
+	},
+	["backalohomorablack"] = {
+		["Index"] = "backalohomorablack",
+		["Name"] = "Mochilinha Preta",
+		["Description"] = "Aumenta sua mochila em <common>25Kg</common>.",
+		["Repair"] = "sewingkit",
+		["Type"] = "Comum",
+		["Durability"] = 720,
+		["Weight"] = 2.5,
+		["Delete"] = true,
+		["Chest"] = true,
+
+		["Economy"] = 15000,
+		["Rarity"] = "rare",
+		["Backpack"] = 25,
+		["Skinshop"] = {
+			["mp_m_freemode_01"] = {
+				["Model"] = 115,
+				["Texture"] = 1
+			},
+			["mp_f_freemode_01"] = {
+				["Model"] = 115,
+				["Texture"] = 1
+			}
+		}
+	},
+	["backrudolphpurple"] = {
+		["Index"] = "backrudolphpurple",
+		["Name"] = "Mochila Rudolph Roxa",
+		["Description"] = "Aumenta sua mochila em <common>35Kg</common>.",
+		["Repair"] = "sewingkit",
+		["Type"] = "Comum",
+		["Durability"] = 720,
+		["Weight"] = 2.5,
+		["Delete"] = true,
+		["Chest"] = true,
+
+		["Economy"] = 25000,
+		["Rarity"] = "rare",
+		["Backpack"] = 35,
+		["Skinshop"] = {
+			["mp_m_freemode_01"] = {
+				["Model"] = 116,
+				["Texture"] = 0
+			},
+			["mp_f_freemode_01"] = {
+				["Model"] = 116,
+				["Texture"] = 0
+			}
+		}
+	},
+	["backrudolphred"] = {
+		["Index"] = "backrudolphred",
+		["Name"] = "Mochila Rudolph Vermelha",
+		["Description"] = "Aumenta sua mochila em <common>35Kg</common>.",
+		["Repair"] = "sewingkit",
+		["Type"] = "Comum",
+		["Durability"] = 720,
+		["Weight"] = 2.5,
+		["Delete"] = true,
+		["Chest"] = true,
+
+		["Economy"] = 25000,
+		["Rarity"] = "rare",
+		["Backpack"] = 35,
+		["Skinshop"] = {
+			["mp_m_freemode_01"] = {
+				["Model"] = 116,
+				["Texture"] = 5
+			},
+			["mp_f_freemode_01"] = {
+				["Model"] = 116,
+				["Texture"] = 5
+			}
+		}
+	},
+	["backcyclist"] = {
+		["Index"] = "backcyclist",
+		["Name"] = "Mochila de Ciclista",
+		["Description"] = "Aumenta sua mochila em <common>45Kg</common>.",
+		["Repair"] = "sewingkit",
+		["Type"] = "Comum",
+		["Durability"] = 720,
+		["Weight"] = 5.5,
+		["Delete"] = true,
+		["Chest"] = true,
+
+		["Economy"] = 25000,
+		["Rarity"] = "rare",
+		["Backpack"] = 35,
+		["Skinshop"] = {
+			["mp_m_freemode_01"] = {
+				["Model"] = 114,
+				["Texture"] = 0
+			},
+			["mp_f_freemode_01"] = {
+				["Model"] = 114,
+				["Texture"] = 0
+			}
+		}
+	},
+	["backschool"] = {
+		["Index"] = "backschool",
+		["Name"] = "Mochila de Escola",
+		["Description"] = "Aumenta sua mochila em <common>35Kg</common>.",
+		["Repair"] = "sewingkit",
+		["Type"] = "Comum",
+		["Durability"] = 720,
+		["Weight"] = 5.5,
+		["Delete"] = true,
+		["Chest"] = true,
+
+		["Economy"] = 25000,
+		["Rarity"] = "rare",
+		["Backpack"] = 35,
+		["Skinshop"] = {
+			["mp_m_freemode_01"] = {
+				["Model"] = 112,
+				["Texture"] = 0
+			},
+			["mp_f_freemode_01"] = {
+				["Model"] = 112,
+				["Texture"] = 0
+			}
+		}
+	},
+	["backcamping"] = {
+		["Index"] = "backcamping",
+		["Name"] = "Mochila de Acampamento",
+		["Description"] = "Aumenta sua mochila em <common>75Kg</common>.",
+		["Repair"] = "sewingkit",
+		["Type"] = "Comum",
+		["Durability"] = 720,
+		["Weight"] = 5.5,
+		["Delete"] = true,
+		["Chest"] = true,
+
+		["Economy"] = 25000,
+		["Rarity"] = "epic",
+		["Backpack"] = 75,
+		["Skinshop"] = {
+			["mp_m_freemode_01"] = {
+				["Model"] = 113,
+				["Texture"] = 0
+			},
+			["mp_f_freemode_01"] = {
+				["Model"] = 113,
+				["Texture"] = 0
+			}
+		}
+	},
+	["backtwitch"] = {
+		["Index"] = "backtwitch",
+		["Name"] = "Mochila Twitch",
+		["Description"] = "Aumenta sua mochila em <common>100Kg</common>.",
+		["Repair"] = "sewingkit",
+		["Type"] = "Comum",
+		["Durability"] = 720,
+		["Weight"] = 5.5,
+		["Delete"] = true,
+		["Chest"] = true,
+		["Economy"] = 100000,
+		["Rarity"] = "legendary",
+		["Backpack"] = 100,
+		["Skinshop"] = {
+			["mp_m_freemode_01"] = {
+				["Model"] = 117,
+				["Texture"] = 0
+			},
+			["mp_f_freemode_01"] = {
+				["Model"] = 117,
+				["Texture"] = 0
+			}
+		}
 	},
 	["WEAPON_KATANA"] = {
-		["index"] = "katana",
-		["name"] = "Katana",
-		["type"] = "Armamento",
-		["repair"] = "repairkit01",
-		["durability"] = 3,
-		["weight"] = 1.75,
-		["economy"] = 1767
+		["Index"] = "katana",
+		["Name"] = "Katana",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Repair"] = "repairkit01",
+		["Durability"] = 240,
+		["Weight"] = 1.75,
+		["Delete"] = true,
+		["Economy"] = 5000,
+		["Market"] = true,
+		["Rarity"] = "legendary"
 	},
-	["WEAPON_KARAMBIT"] = {
-		["index"] = "karambit",
-		["name"] = "Karambit",
-		["type"] = "Armamento",
-		["repair"] = "repairkit01",
-		["durability"] = 3,
-		["weight"] = 1.25,
-		["economy"] = 1767
+	["adrenalineplus"] = {
+		["Index"] = "adrenaline",
+		["Name"] = "Adrenalina ++",
+		["Description"] = "Restaura o tempo ao ser ajudado com <common>Adrenalina</common>.",
+		["Type"] = "Comum",
+		["Weight"] = 0.25,
+		["Market"] = true,
+		["Delete"] = true,
+		["Economy"] = 10000,
+		["Rarity"] = "legendary"
+	},
+	["seatbelt"] = {
+		["Index"] = "seatbelt",
+		["Name"] = "Cinto de Corrida",
+		["Type"] = "Consumível",
+		["Weight"] = 5.75,
+		["Delete"] = true,
+		["Economy"] = 100000,
+		["Rarity"] = "legendary"
+	},
+	["sewingkit"] = {
+		["Index"] = "sewingkit",
+		["Name"] = "Kit de Costura",
+		["Description"] =
+		"Utilizado para reparar mochilas <common>Pequenas</common>, <common>Médias</common> e <common>Grandes</common>.",
+		["Type"] = "Comum",
+		["Weight"] = 0.55,
+		["Delete"] = true,
+		["Economy"] = 50000,
+		["Rarity"] = "legendary"
+	},
+	["diagram"] = {
+		["Index"] = "diagram",
+		["Name"] = "Diagrama",
+		["Description"] = "Aumenta <common>10Kg</common> no peso do compartimento.",
+		["Type"] = "Comum",
+		["Weight"] = 0.75,
+		["Delete"] = true,
+		["Economy"] = 10000,
+		["Rarity"] = "legendary"
+	},
+	["gemstone"] = {
+		["Index"] = "gemstone",
+		["Name"] = "Diamante",
+		["Type"] = "Consumível",
+		["Weight"] = 0.0,
+		["Delete"] = true,
+		["Economy"] = 20,
+		["Rarity"] = "legendary"
+	},
+	["pickaxeplus"] = {
+		["Index"] = "pickaxe",
+		["Name"] = "Picareta ++",
+		["Description"] =
+		"Ferramenta versátil e resistente, projetada para lidar com uma variedade de tarefas, com sua construção robusta e design ergonômico, oferece conforto e eficiência em cada movimento, seja para escavação no jardim, trabalhos de construção ou aventuras ao ar livre, essa picareta é a escolha confiável para enfrentar desafios com facilidade e precisão.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Comum",
+		["Durability"] = 720,
+		["Weight"] = 2.75,
+		["Delete"] = true,
+		["Economy"] = 50000,
+		["Rarity"] = "legendary"
+	},
+	["axeplus"] = {
+		["Index"] = "axe",
+		["Name"] = "Machadinha ++",
+		["Description"] =
+		"Ferramenta robusta e confiável para os desafios mais exigentes, construído com materiais de alta qualidade e design ergonômico, proporciona precisão e potência em cada golpe, ideal para cortar lenha, realizar trabalhos de construção ou aventuras ao ar livre, é o companheiro perfeito para qualquer tarefa que exija força e eficiência.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Comum",
+		["Durability"] = 720,
+		["Weight"] = 2.75,
+		["Delete"] = true,
+		["Economy"] = 50000,
+		["Rarity"] = "legendary"
+	},
+	["lockpickplus"] = {
+		["Index"] = "lockpick",
+		["Name"] = "Gazua ++",
+		["Description"] =
+		"Ferramenta fina e flexível, frequentemente feita de metal, usada para abrir fechaduras sem a chave correspondente, é uma ferramenta comum entre profissionais de segurança e em situações de emergência.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Comum",
+		["Durability"] = 720,
+		["Weight"] = 1.25,
+		["Delete"] = true,
+		["Economy"] = 50000,
+		["Rarity"] = "legendary"
+	},
+	["premium"] = {
+		["Index"] = "premium",
+		["Name"] = "Premium Ouro",
+		["Description"] =
+		"Uma escolha para quem busca qualidade superioridade, com materiais de primeira linha e design meticuloso, eleva a experiência do usuário a um novo patamar de excelência, uma verdadeira indulgência para os exigentes que valorizam o melhor.",
+		["Type"] = "Consumível",
+		["Weight"] = 0.0,
+		["Delete"] = true,
+		["Economy"] = 400000,
+		["Rarity"] = "legendary"
+	},
+	["premium2"] = {
+		["Index"] = "premium2",
+		["Name"] = "Premium Prata",
+		["Description"] =
+		"Uma escolha para quem busca qualidade superioridade, com materiais de primeira linha e design meticuloso, eleva a experiência do usuário a um novo patamar de excelência, uma verdadeira indulgência para os exigentes que valorizam o melhor.",
+		["Type"] = "Consumível",
+		["Weight"] = 0.0,
+		["Delete"] = true,
+		["Economy"] = 240000,
+		["Rarity"] = "legendary"
+	},
+	["premium3"] = {
+		["Index"] = "premium3",
+		["Name"] = "Premium Bronze",
+		["Description"] =
+		"Uma escolha para quem busca qualidade superioridade, com materiais de primeira linha e design meticuloso, eleva a experiência do usuário a um novo patamar de excelência, uma verdadeira indulgência para os exigentes que valorizam o melhor.",
+		["Type"] = "Consumível",
+		["Weight"] = 0.0,
+		["Delete"] = true,
+		["Economy"] = 120000,
+		["Rarity"] = "legendary"
+	},
+	["premiumplate"] = {
+		["Index"] = "platepremium",
+		["Name"] = "Placa Customizada",
+		["Type"] = "Consumível",
+		["Description"] =
+		"Uma escolha ideal para quem busca expressar sua individualidade enquanto trafega pelas estradas, feita com materiais de qualidade e design exclusivo, ela adiciona um toque único ao veículo de seu proprietário, sem comprometer a conformidade com as normas de trânsito.",
+		["Weight"] = 0.0,
+		["Delete"] = true,
+		["Economy"] = 100000,
+		["Rarity"] = "legendary"
+	},
+	["newchars"] = {
+		["Index"] = "newchars",
+		["Name"] = "Cartão de Personagem",
+		["Type"] = "Consumível",
+		["Description"] = "Aumenta 1 no limite de personagens.",
+		["Weight"] = 0.0,
+		["Delete"] = true,
+		["Economy"] = 80000,
+		["Rarity"] = "legendary"
+	},
+	["namechange"] = {
+		["Index"] = "namechange",
+		["Name"] = "Cartão de Nome",
+		["Type"] = "Consumível",
+		["Description"] = "Modifica o nome.",
+		["Weight"] = 0.0,
+		["Delete"] = true,
+		["Economy"] = 60000,
+		["Rarity"] = "legendary"
+	},
+	-- NAMEDS
+	["identity"] = {
+		["Index"] = "identity",
+		["Name"] = "Passaporte",
+		["Type"] = "Comum",
+		["Weight"] = 0.0,
+		["Named"] = true,
+		["Market"] = true
+	},
+	-- ALIANÇAS
+	["alliance"] = {
+		["Index"] = "alliance",
+		["Name"] = "Aliança",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["Economy"] = 525,
+		["Named"] = true,
+		["Recycle"] = {
+			["dollar"] = 125
+		}
+	},
+	-- COMPONENTES
+	["circuit"] = {
+		["Index"] = "circuit",
+		["Name"] = "Circuito Eletrônico",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Durability"] = 24,
+		["Weight"] = 0.75,
+		["LostWater"] = true,
+		["Economy"] = 4725,
+		["Blueprint"] = true,
+		["LostWater"] = true
+	},
+	["latex"] = {
+		["Index"] = "latex",
+		["Name"] = "Frasco de Látex",
+		["Type"] = "Comum",
+		["Weight"] = 1.25,
+		["Blueprint"] = true,
+		["Economy"] = 175
+	},
+	["sand"] = {
+		["Index"] = "sand",
+		["Name"] = "Areia",
+		["Type"] = "Comum",
+		["Weight"] = 0.225,
+		["Economy"] = 20
+	},
+	["bauxite"] = {
+		["Index"] = "bauxite",
+		["Name"] = "Minério de Bauxita",
+		["Type"] = "Comum",
+		["Weight"] = 0.225,
+		["Economy"] = 50
+	},
+	["chalcopyrite"] = {
+		["Index"] = "chalcopyrite",
+		["Name"] = "Calcopirita",
+		["Type"] = "Comum",
+		["Weight"] = 0.225,
+		["Economy"] = 50
+	},
+	["plastic"] = {
+		["Index"] = "plastic",
+		["Name"] = "Plástico",
+		["Type"] = "Comum",
+		["Weight"] = 0.045,
+		["Economy"] = 8,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["dollar"] = 8
+		}
+	},
+	["glass"] = {
+		["Index"] = "glass",
+		["Name"] = "Vidro",
+		["Type"] = "Comum",
+		["Weight"] = 0.045,
+		["Economy"] = 8,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["dollar"] = 8
+		}
+	},
+	["rubber"] = {
+		["Index"] = "rubber",
+		["Name"] = "Borracha",
+		["Type"] = "Comum",
+		["Weight"] = 0.045,
+		["Economy"] = 8,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["dollar"] = 8
+		}
+	},
+	["aluminum"] = {
+		["Index"] = "aluminum",
+		["Name"] = "Alumínio",
+		["Type"] = "Comum",
+		["Weight"] = 0.045,
+		["Economy"] = 10,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["dollar"] = 10
+		}
+	},
+	["copper"] = {
+		["Index"] = "copper",
+		["Name"] = "Cobre",
+		["Type"] = "Comum",
+		["Weight"] = 0.045,
+		["Economy"] = 10,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["dollar"] = 10
+		}
+	},
+	["sulfuric"] = {
+		["Index"] = "sulfuric",
+		["Name"] = "Ácido Sulfúrico",
+		["Type"] = "Consumível",
+		["Weight"] = 0.45,
+		["Economy"] = 75,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["dollar"] = 25
+		}
+	},
+	["acetone"] = {
+		["Index"] = "acetone",
+		["Name"] = "Acetona",
+		["Type"] = "Comum",
+		["Weight"] = 0.25,
+		["Economy"] = 55,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["dollar"] = 15
+		}
+	},
+	["saline"] = {
+		["Index"] = "saline",
+		["Name"] = "Soro Fisiológico",
+		["Type"] = "Comum",
+		["Weight"] = 0.35,
+		["Economy"] = 35,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["dollar"] = 10
+		}
+	},
+	["alcohol"] = {
+		["Index"] = "alcohol",
+		["Name"] = "Álcool",
+		["Type"] = "Comum",
+		["Weight"] = 0.55,
+		["Economy"] = 45,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["dollar"] = 15
+		}
+	},
+	["gunpowder"] = {
+		["Index"] = "gunpowder",
+		["Name"] = "Frasco de Pólvora",
+		["Type"] = "Comum",
+		["Weight"] = 0.10,
+		["Economy"] = 125,
+		["Blueprint"] = true,
+		["Arrest"] = true
+	},
+	["pistolbody"] = {
+		["Index"] = "pistolbody",
+		["Name"] = "Corpo de Pistola",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 0.75,
+		["Market"] = true,
+		["Economy"] = 275,
+		["Blueprint"] = true
+	},
+	["smgbody"] = {
+		["Index"] = "smgbody",
+		["Name"] = "Corpo de Sub",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 0.75,
+		["Market"] = true,
+		["Economy"] = 525,
+		["Blueprint"] = true
+	},
+	["riflebody"] = {
+		["Index"] = "riflebody",
+		["Name"] = "Corpo de Rifle",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 0.75,
+		["Market"] = true,
+		["Economy"] = 975,
+		["Blueprint"] = true
+	},
+	["scrapmetal"] = {
+		["Index"] = "scrapmetal",
+		["Name"] = "Sucata de Metal",
+		["Type"] = "Comum",
+		["Weight"] = 0.0,
+		["Economy"] = 1
+	},
+	["blueprint_fragment"] = {
+		["Index"] = "blueprint_fragment",
+		["Name"] = "Fragmento de Aprendizado",
+		["Type"] = "Comum",
+		["Weight"] = 0.0,
+		["Economy"] = 1
+	},
+	["techtrash"] = {
+		["Index"] = "techtrash",
+		["Name"] = "Lixo Eletrônico",
+		["Type"] = "Comum",
+		["Weight"] = 0.65,
+		["LostWater"] = true,
+		["Economy"] = 95,
+		["Blueprint"] = true,
+		["LostWater"] = true,
+		["Recycle"] = {
+			["dollar"] = 30
+		}
+	},
+	["tarp"] = {
+		["Index"] = "tarp",
+		["Name"] = "Lona",
+		["Type"] = "Comum",
+		["Weight"] = 0.60,
+		["Economy"] = 65,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["dollar"] = 20
+		}
+	},
+	["sheetmetal"] = {
+		["Index"] = "sheetmetal",
+		["Name"] = "Chapa de Metal",
+		["Type"] = "Comum",
+		["Weight"] = 0.65,
+		["Economy"] = 65,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["dollar"] = 20
+		}
+	},
+	["roadsigns"] = {
+		["Index"] = "roadsigns",
+		["Name"] = "Placas de Trânsito",
+		["Type"] = "Comum",
+		["Weight"] = 0.60,
+		["Economy"] = 65,
+		["Blueprint"] = true,
+		["Recycle"] = {
+			["dollar"] = 20
+		}
+	},
+	["explosives"] = {
+		["Index"] = "explosives",
+		["Name"] = "Explosivos",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 0.45,
+		["LostWater"] = true,
+		["Economy"] = 105,
+		["Blueprint"] = true
+	},
+	["scotchtape"] = {
+		["Index"] = "scotchtape",
+		["Name"] = "Fita Adesiva",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["Economy"] = 45,
+		["Blueprint"] = true
+	},
+	["insulatingtape"] = {
+		["Index"] = "insulatingtape",
+		["Name"] = "Fita Isolante",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["Economy"] = 55,
+		["Blueprint"] = true
+	},
+	["rammemory"] = {
+		["Index"] = "rammemory",
+		["Name"] = "Memória RAM",
+		["Type"] = "Comum",
+		["Weight"] = 0.45,
+		["Economy"] = 375,
+		["Blueprint"] = true,
+		["LostWater"] = true
+	},
+	["powersupply"] = {
+		["Index"] = "powersupply",
+		["Name"] = "Fonte de Alimentação",
+		["Type"] = "Comum",
+		["Weight"] = 2.25,
+		["Economy"] = 475,
+		["Blueprint"] = true,
+		["LostWater"] = true
+	},
+	["processorfan"] = {
+		["Index"] = "processorfan",
+		["Name"] = "Ventoinha do Processador",
+		["Type"] = "Comum",
+		["Weight"] = 0.95,
+		["Economy"] = 325,
+		["Blueprint"] = true,
+		["LostWater"] = true
+	},
+	["processor"] = {
+		["Index"] = "processor",
+		["Name"] = "Processador",
+		["Type"] = "Comum",
+		["Weight"] = 0.65,
+		["Economy"] = 725,
+		["Blueprint"] = true,
+		["LostWater"] = true
+	},
+	["screws"] = {
+		["Index"] = "screws",
+		["Name"] = "Parafusos",
+		["Type"] = "Comum",
+		["Weight"] = 0.45,
+		["Economy"] = 45,
+		["Blueprint"] = true
+	},
+	["screwnuts"] = {
+		["Index"] = "screwnuts",
+		["Name"] = "Porcas de Parafuso",
+		["Type"] = "Comum",
+		["Weight"] = 0.45,
+		["Economy"] = 45,
+		["Blueprint"] = true
+	},
+	["videocard"] = {
+		["Index"] = "videocard",
+		["Name"] = "Placa de Vídeo",
+		["Type"] = "Comum",
+		["Weight"] = 4.25,
+		["Economy"] = 4225,
+		["Blueprint"] = true,
+		["LostWater"] = true
+	},
+	["ssddrive"] = {
+		["Index"] = "ssddrive",
+		["Name"] = "Unidade SSD",
+		["Type"] = "Comum",
+		["Weight"] = 0.75,
+		["Economy"] = 525,
+		["Blueprint"] = true,
+		["LostWater"] = true
+	},
+	["safependrive"] = {
+		["Index"] = "safependrive",
+		["Name"] = "Pendrive Seguro",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["Economy"] = 3325,
+		["Blueprint"] = true,
+		["LostWater"] = true
+	},
+	["powercable"] = {
+		["Index"] = "powercable",
+		["Name"] = "Cabo de Alimentação",
+		["Type"] = "Comum",
+		["Weight"] = 0.35,
+		["Economy"] = 225,
+		["Blueprint"] = true
+	},
+	["weaponparts"] = {
+		["Index"] = "weaponparts",
+		["Name"] = "Peças de Armas",
+		["Type"] = "Comum",
+		["Weight"] = 1.25,
+		["Economy"] = 125,
+		["Blueprint"] = true,
+		["Market"] = true,
+		["Arrest"] = true
+	},
+	["electroniccomponents"] = {
+		["Index"] = "electroniccomponents",
+		["Name"] = "Componentes Eletrônicos",
+		["Type"] = "Comum",
+		["Weight"] = 0.35,
+		["Economy"] = 375,
+		["Blueprint"] = true,
+		["LostWater"] = true
+	},
+	["batteryaa"] = {
+		["Index"] = "batteryaa",
+		["Name"] = "Bateria AA",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["Economy"] = 225,
+		["Blueprint"] = true,
+		["LostWater"] = true
+	},
+	["batteryaaplus"] = {
+		["Index"] = "batteryaaplus",
+		["Name"] = "Bateria AA+",
+		["Type"] = "Comum",
+		["Weight"] = 0.25,
+		["Economy"] = 275,
+		["Blueprint"] = true,
+		["LostWater"] = true
+	},
+	["goldnecklace"] = {
+		["Index"] = "goldnecklace",
+		["Name"] = "Colar de Ouro",
+		["Type"] = "Comum",
+		["Weight"] = 0.45,
+		["Economy"] = 625,
+		["Blueprint"] = true
+	},
+	["silverchain"] = {
+		["Index"] = "silverchain",
+		["Name"] = "Corrente de Prata",
+		["Type"] = "Comum",
+		["Weight"] = 0.40,
+		["Economy"] = 425,
+		["Blueprint"] = true
+	},
+	["horsefigurine"] = {
+		["Index"] = "horsefigurine",
+		["Name"] = "Estatueta de Cavalo",
+		["Type"] = "Comum",
+		["Weight"] = 1.25,
+		["Economy"] = 2425,
+		["Blueprint"] = true
+	},
+	["toothpaste"] = {
+		["Index"] = "toothpaste",
+		["Name"] = "Pasta de Dente",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["Economy"] = 175,
+		["Blueprint"] = true
+	},
+	-- COMIDAS
+	["cola"] = {
+		["Index"] = "cola",
+		["Name"] = "Cola",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.25,
+		["Max"] = 2,
+		["Economy"] = 20,
+		["Market"] = true,
+		["Fridge"] = true
+	},
+	["tacos"] = {
+		["Index"] = "tacos",
+		["Name"] = "Tacos",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.25,
+		["Max"] = 2,
+		["Economy"] = 20,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["fries"] = {
+		["Index"] = "fries",
+		["Name"] = "Fritas",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.25,
+		["Max"] = 2,
+		["Economy"] = 20,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["water"] = {
+		["Index"] = "water",
+		["Name"] = "Garrafa de Água",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.25,
+		["Max"] = 2,
+		["Economy"] = 35,
+		["Market"] = true,
+		["Fridge"] = true
+	},
+	["soda"] = {
+		["Index"] = "soda",
+		["Name"] = "Sprunk",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.25,
+		["Max"] = 2,
+		["Economy"] = 20,
+		["Market"] = true,
+		["Fridge"] = true
+	},
+	["hotdog"] = {
+		["Index"] = "hotdog",
+		["Name"] = "Cachorro-Quente",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.45,
+		["Max"] = 2,
+		["Economy"] = 20,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["donut"] = {
+		["Index"] = "donut",
+		["Name"] = "Rosquinha",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.25,
+		["Max"] = 2,
+		["Economy"] = 15,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["hamburger"] = {
+		["Index"] = "hamburger",
+		["Name"] = "Hambúrguer",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.55,
+		["Max"] = 2,
+		["Economy"] = 25,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["chocolate"] = {
+		["Index"] = "chocolate",
+		["Name"] = "Chocolate",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.15,
+		["Max"] = 4,
+		["Economy"] = 20,
+		["Market"] = true,
+		["Fridge"] = true
+	},
+	["sandwich"] = {
+		["Index"] = "sandwich",
+		["Name"] = "Sanduiche",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.25,
+		["Max"] = 2,
+		["Economy"] = 20,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["coffeecup"] = {
+		["Index"] = "coffeecup",
+		["Name"] = "Copo de Café",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.25,
+		["Max"] = 2,
+		["Economy"] = 20,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	-- COMIDAS
+	["nigirizushi"] = {
+		["Index"] = "nigirizushi",
+		["Name"] = "Nigirizushi",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.65,
+		["Max"] = 3,
+		["Economy"] = 60,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["sushi"] = {
+		["Index"] = "sushi",
+		["Name"] = "Sushi",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.65,
+		["Max"] = 3,
+		["Economy"] = 60,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["cupcake"] = {
+		["Index"] = "cupcake",
+		["Name"] = "Cupcake",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.55,
+		["Max"] = 3,
+		["Economy"] = 45,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["milkshake"] = {
+		["Index"] = "milkshake",
+		["Name"] = "Milk-shake",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.85,
+		["Max"] = 3,
+		["Economy"] = 75,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["cappuccino"] = {
+		["Index"] = "cappuccino",
+		["Name"] = "Cappuccino",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.65,
+		["Max"] = 3,
+		["Economy"] = 100,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["applelove"] = {
+		["Index"] = "applelove",
+		["Name"] = "Maça do Amor",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.55,
+		["Max"] = 3,
+		["Economy"] = 35,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["cookies"] = {
+		["Index"] = "cookies",
+		["Name"] = "Cookies",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.25,
+		["Max"] = 3,
+		["Economy"] = 45,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["hamburger2"] = {
+		["Index"] = "hamburger2",
+		["Name"] = "Hambúrguer Artesanal",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 125,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["hamburger3"] = {
+		["Index"] = "hamburger3",
+		["Name"] = "Hambúrguer Vegetariano",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 125,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["pizzamozzarella"] = {
+		["Index"] = "pizzamozzarella",
+		["Name"] = "Pizza de Muçarela",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 175,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["pizzabanana"] = {
+		["Index"] = "pizzabanana",
+		["Name"] = "Pizza de Banana",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 175,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	["pizzachocolate"] = {
+		["Index"] = "pizzachocolate",
+		["Name"] = "Pizza de Chocolate",
+		["Type"] = "Consumível",
+		["Durability"] = 6,
+		["Weight"] = 0.75,
+		["Max"] = 3,
+		["Economy"] = 175,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Fridge"] = true
+	},
+	-- BOXES
+	["treasurebox"] = {
+		["Index"] = "treasurebox",
+		["Name"] = "Baú do Tesouro",
+		["Type"] = "Consumível",
+		["Weight"] = 0.0,
+		["Unique"] = true,
+		["Economy"] = 0,
+		["Market"] = true,
+		["Rarity"] = "legendary"
+	},
+	["notepad"] = {
+		["Index"] = "notepad",
+		["Name"] = "Bloco de Notas",
+		["Type"] = "Consumível",
+		["Weight"] = 0.0,
+		["Unique"] = true,
+		["Economy"] = 10,
+		["Market"] = true,
+		["Rarity"] = "common"
+	},
+	["suitcase"] = {
+		["Index"] = "suitcase",
+		["Name"] = "Maleta",
+		["Type"] = "Consumível",
+		["Weight"] = 1.0,
+		["Chest"] = true,
+		["Unique"] = true,
+		["Market"] = true,
+		["Economy"] = 275
+	},
+	["medicbag"] = {
+		["Index"] = "medicbag",
+		["Name"] = "Maleta Médica",
+		["Description"] = "Um compartimento para guardar medicamentos.",
+		["Repair"] = "repairkit01",
+		["Type"] = "Consumível",
+		["Durability"] = 168,
+		["Weight"] = 2.5,
+		["Chest"] = true,
+		["Unique"] = true,
+		["Market"] = true,
+		["Economy"] = 1275,
+		["Rarity"] = "rare"
+	},
+	-- OBJECTS
+	["pistol_bench"] = {
+		["Index"] = "pistol_bench",
+		["Name"] = "Mesa de Produção",
+		["Description"] = "Mesa para fabricação de <common>Pistolas</common>.",
+		["Type"] = "Consumível",
+		["Durability"] = 168,
+		["Weight"] = 8.75,
+		["Economy"] = 50000,
+		["Market"] = true,
+		["Rarity"] = "epic"
+	},
+	["smg_bench"] = {
+		["Index"] = "smg_bench",
+		["Name"] = "Mesa de Produção",
+		["Description"] = "Mesa para fabricação de <common>Submetralhadoras</common>.",
+		["Type"] = "Consumível",
+		["Durability"] = 168,
+		["Weight"] = 9.25,
+		["Economy"] = 75000,
+		["Market"] = true,
+		["Rarity"] = "epic"
+	},
+	["rifle_bench"] = {
+		["Index"] = "rifle_bench",
+		["Name"] = "Mesa de Produção",
+		["Description"] = "Mesa para fabricação de <common>Rifles</common>.",
+		["Type"] = "Consumível",
+		["Durability"] = 168,
+		["Weight"] = 9.75,
+		["Economy"] = 100000,
+		["Market"] = true,
+		["Rarity"] = "epic"
+	},
+	["drugs_bench"] = {
+		["Index"] = "drugs_bench",
+		["Name"] = "Mesa de Produção",
+		["Description"] = "Mesa para fabricação de <common>Drogas</common>.",
+		["Type"] = "Consumível",
+		["Durability"] = 168,
+		["Weight"] = 7.25,
+		["Economy"] = 50000,
+		["Market"] = true,
+		["Rarity"] = "epic"
+	},
+	["blueprint_bench"] = {
+		["Index"] = "blueprint_bench",
+		["Name"] = "Mesa de Aprendizado",
+		["Description"] = "Mesa para aprendizado de produção.",
+		["Type"] = "Consumível",
+		["Durability"] = 168,
+		["Weight"] = 7.25,
+		["Economy"] = 65000,
+		["Market"] = true,
+		["Rarity"] = "epic"
+	},
+	["barrier"] = {
+		["Index"] = "barrier",
+		["Name"] = "Barreira",
+		["Type"] = "Consumível",
+		["Durability"] = 168,
+		["Weight"] = 2.25,
+		["Max"] = 2,
+		["Economy"] = 25,
+		["Market"] = true
+	},
+	["storage25"] = {
+		["Index"] = "storage",
+		["Name"] = "Compartimento Militar",
+		["Repair"] = "repairkit02",
+		["Type"] = "Consumível",
+		["Durability"] = 168,
+		["Chest"] = true,
+		["Unique"] = true,
+		["Weight"] = 3.25,
+		["Economy"] = 40000,
+		["Market"] = true
+	},
+	["storage50"] = {
+		["Index"] = "storage",
+		["Name"] = "Compartimento Militar",
+		["Repair"] = "repairkit03",
+		["Type"] = "Consumível",
+		["Durability"] = 168,
+		["Chest"] = true,
+		["Unique"] = true,
+		["Weight"] = 3.25,
+		["Economy"] = 60000,
+		["Market"] = true
+	},
+	["storage75"] = {
+		["Index"] = "storage",
+		["Name"] = "Compartimento Militar",
+		["Repair"] = "repairkit04",
+		["Type"] = "Consumível",
+		["Durability"] = 168,
+		["Chest"] = true,
+		["Unique"] = true,
+		["Weight"] = 3.25,
+		["Economy"] = 80000,
+		["Market"] = true
+	},
+	["spikestrips"] = {
+		["Index"] = "spikestrips",
+		["Name"] = "Tiras de Espinhos",
+		["Type"] = "Consumível",
+		["Weight"] = 1.25,
+		["Max"] = 1,
+		["Economy"] = 275,
+		["Market"] = true
+	},
+	["moneywash"] = {
+		["Index"] = "moneywash",
+		["Name"] = "Máquina de Lavar",
+		["Description"] =
+		"Compacta e discreta que transforma dinheiro molhado em dinheiro limpo e pronto para uso, seja para jogos ou necessidades do dia a dia, esta máquina é a solução perfeita para lavagem de dinheiro de forma rápida e eficiente.",
+		["Type"] = "Consumível",
+		["Weight"] = 50.0,
+		["Market"] = true
+	},
+	-- MELEES
+	["WEAPON_HATCHET"] = {
+		["Index"] = "hatchet",
+		["Name"] = "Machado",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Repair"] = "repairkit01",
+		["Blueprint"] = true,
+		["Durability"] = 240,
+		["Weight"] = 1.75,
+		["Economy"] = 975,
+		["Market"] = true
+	},
+	["WEAPON_BAT"] = {
+		["Index"] = "bat",
+		["Name"] = "Bastão de Beisebol",
+		["Repair"] = "repairkit01",
+		["Blueprint"] = true,
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Durability"] = 240,
+		["Weight"] = 1.75,
+		["Economy"] = 975,
+		["Market"] = true
 	},
 	["WEAPON_BATTLEAXE"] = {
-		["index"] = "battleaxe",
-		["name"] = "Machado de Batalha",
-		["repair"] = "repairkit01",
-		["type"] = "Armamento",
-		["durability"] = 7,
-		["weight"] = 1.75,
-		["economy"] = 1767
+		["Index"] = "battleaxe",
+		["Name"] = "Machado de Batalha",
+		["Repair"] = "repairkit01",
+		["Type"] = "Armamento",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Durability"] = 240,
+		["Weight"] = 1.75,
+		["Economy"] = 975,
+		["Market"] = true
 	},
 	["WEAPON_CROWBAR"] = {
-		["index"] = "crowbar",
-		["name"] = "Pé de Cabra",
-		["repair"] = "repairkit01",
-		["type"] = "Armamento",
-		["durability"] = 7,
-		["weight"] = 1.35,
-		["economy"] = 1100
+		["Index"] = "crowbar",
+		["Name"] = "Pé de Cabra",
+		["Repair"] = "repairkit01",
+		["Type"] = "Armamento",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Durability"] = 240,
+		["Weight"] = 1.35,
+		["Economy"] = 975,
+		["Market"] = true
+	},
+	["WEAPON_SWITCHBLADE"] = {
+		["Index"] = "switchblade",
+		["Name"] = "Canivete",
+		["Repair"] = "repairkit01",
+		["Type"] = "Armamento",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Durability"] = 240,
+		["Weight"] = 0.75,
+		["Economy"] = 975,
+		["Market"] = true
 	},
 	["WEAPON_GOLFCLUB"] = {
-		["index"] = "golfclub",
-		["name"] = "Taco de Golf",
-		["repair"] = "repairkit01",
-		["type"] = "Armamento",
-		["durability"] = 7,
-		["weight"] = 1.65,
-		["economy"] = 975
+		["Index"] = "golfclub",
+		["Name"] = "Taco de Golf",
+		["Repair"] = "repairkit01",
+		["Type"] = "Armamento",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Durability"] = 240,
+		["Weight"] = 1.65,
+		["Economy"] = 975,
+		["Market"] = true
 	},
 	["WEAPON_HAMMER"] = {
-		["index"] = "hammer",
-		["name"] = "Martelo",
-		["repair"] = "repairkit01",
-		["type"] = "Armamento",
-		["durability"] = 7,
-		["weight"] = 1.45,
-		["economy"] = 975
+		["Index"] = "hammer",
+		["Name"] = "Martelo",
+		["Repair"] = "repairkit01",
+		["Type"] = "Armamento",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Durability"] = 240,
+		["Weight"] = 1.45,
+		["Economy"] = 975,
+		["Market"] = true
 	},
 	["WEAPON_MACHETE"] = {
-		["index"] = "machete",
-		["name"] = "Facão",
-		["repair"] = "repairkit01",
-		["type"] = "Armamento",
-		["durability"] = 7,
-		["weight"] = 1.35,
-		["economy"] = 975
+		["Index"] = "machete",
+		["Name"] = "Facão",
+		["Repair"] = "repairkit01",
+		["Type"] = "Armamento",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Durability"] = 240,
+		["Weight"] = 1.35,
+		["Economy"] = 975,
+		["Market"] = true
 	},
 	["WEAPON_POOLCUE"] = {
-		["index"] = "poolcue",
-		["name"] = "Taco de Sinuca",
-		["repair"] = "repairkit01",
-		["type"] = "Armamento",
-		["durability"] = 7,
-		["weight"] = 1.25,
-		["economy"] = 975
+		["Index"] = "poolcue",
+		["Name"] = "Taco de Sinuca",
+		["Repair"] = "repairkit01",
+		["Type"] = "Armamento",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Durability"] = 240,
+		["Weight"] = 1.25,
+		["Economy"] = 975,
+		["Market"] = true
 	},
 	["WEAPON_STONE_HATCHET"] = {
-		["index"] = "stonehatchet",
-		["name"] = "Machado de Pedra",
-		["repair"] = "repairkit01",
-		["type"] = "Armamento",
-		["durability"] = 7,
-		["weight"] = 1.55,
-		["economy"] = 1456
-	},
-	["WEAPON_PARAFAL"] = {
-		["index"] = "parafal",
-		["name"] = "PARAFAL",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 21,
-		["weight"] = 7.75,
-		["economy"] = 6700
-	},
-	["WEAPON_FNFAL"] = {
-		["index"] = "fnfal",
-		["name"] = "FN FAL",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 21,
-		["weight"] = 7.75,
-		["economy"] = 45000
-	},
-	["WEAPON_COLTXM177"] = {
-		["index"] = "coltxm177",
-		["name"] = "Colt XM177",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 21,
-		["weight"] = 7.75,
-		["economy"] = 45000
+		["Index"] = "stonehatchet",
+		["Name"] = "Machado de Pedra",
+		["Repair"] = "repairkit01",
+		["Type"] = "Armamento",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Durability"] = 240,
+		["Weight"] = 1.55,
+		["Economy"] = 975,
+		["Market"] = true
 	},
 	["WEAPON_WRENCH"] = {
-		["index"] = "wrench",
-		["name"] = "Chave Inglesa",
-		["repair"] = "repairkit01",
-		["type"] = "Armamento",
-		["durability"] = 7,
-		["weight"] = 1.45,
-		["economy"] = 725
+		["Index"] = "wrench",
+		["Name"] = "Chave Inglesa",
+		["Repair"] = "repairkit01",
+		["Type"] = "Armamento",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Durability"] = 240,
+		["Weight"] = 1.45,
+		["Economy"] = 975,
+		["Market"] = true
 	},
 	["WEAPON_KNUCKLE"] = {
-		["index"] = "knuckle",
-		["name"] = "Soco Inglês",
-		["repair"] = "repairkit01",
-		["type"] = "Armamento",
-		["durability"] = 7,
-		["weight"] = 1.15,
-		["economy"] = 975
+		["Index"] = "knuckle",
+		["Name"] = "Soco Inglês",
+		["Repair"] = "repairkit01",
+		["Type"] = "Armamento",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Durability"] = 240,
+		["Weight"] = 1.25,
+		["Economy"] = 975,
+		["Market"] = true
 	},
 	["WEAPON_FLASHLIGHT"] = {
-		["index"] = "flashlight",
-		["name"] = "Lanterna",
-		["repair"] = "repairkit01",
-		["type"] = "Armamento",
-		["durability"] = 7,
-		["weight"] = 1.15,
-		["economy"] = 975
+		["Index"] = "flashlight",
+		["Name"] = "Lanterna",
+		["Repair"] = "repairkit01",
+		["Type"] = "Armamento",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Durability"] = 240,
+		["Weight"] = 0.75,
+		["Economy"] = 525,
+		["Market"] = true
 	},
 	["WEAPON_NIGHTSTICK"] = {
-		["index"] = "nightstick",
-		["name"] = "Cassetete",
-		["repair"] = "repairkit01",
-		["type"] = "Armamento",
-		["durability"] = 7,
-		["weight"] = 1.15,
-		["economy"] = 125
-	},
-	["WEAPON_PISTOL"] = {
-		["index"] = "m1911",
-		["name"] = "M1911",
-		["repair"] = "repairkit02",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_PISTOL_AMMO",
-		["durability"] = 14,
-		["vehicle"] = true,
-		["weight"] = 2.25,
-		["economy"] = 15675
-	},
-	["WEAPON_PISTOL_MK2"] = {
-		["index"] = "fiveseven",
-		["name"] = "FN Five Seven",
-		["repair"] = "repairkit02",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_PISTOL_AMMO",
-		["durability"] = 14,
-		["vehicle"] = true,
-		["weight"] = 2.75,
-		["economy"] = 19547
-	},
-	["WEAPON_COMPACTRIFLE"] = {
-		["index"] = "akcompact",
-		["name"] = "AK Compact",
-		["repair"] = "repairkit03",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 14,
-		["weight"] = 4.25,
-		["economy"] = 31000
-	},
-	["WEAPON_APPISTOL"] = {
-		["index"] = "kochvp9",
-		["name"] = "Koch Vp9",
-		["repair"] = "repairkit03",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_PISTOL_AMMO",
-		["durability"] = 14,
-		["vehicle"] = true,
-		["weight"] = 2.75,
-		["economy"] = 22000
-	},
-	["WEAPON_HEAVYPISTOL"] = {
-		["index"] = "atifx45",
-		["name"] = "Ati FX45",
-		["repair"] = "repairkit02",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_PISTOL_AMMO",
-		["durability"] = 14,
-		["vehicle"] = true,
-		["weight"] = 2.75,
-		["economy"] = 3500
-	},
-	["WEAPON_MACHINEPISTOL"] = {
-		["index"] = "tec9",
-		["name"] = "Tec-9",
-		["type"] = "Armamento",
-		["repair"] = "repairkit03",
-		["ammo"] = "WEAPON_SMG_AMMO",
-		["durability"] = 14,
-		["vehicle"] = true,
-		["weight"] = 3.25,
-		["economy"] = 22300
-	},
-	["WEAPON_MICROSMG"] = {
-		["index"] = "uzi",
-		["name"] = "Uzi",
-		["type"] = "Armamento",
-		["repair"] = "repairkit03",
-		["ammo"] = "WEAPON_SMG_AMMO",
-		["durability"] = 14,
-		["vehicle"] = true,
-		["weight"] = 4.25,
-		["economy"] = 28775
-	},
-	["WEAPON_NAILGUN"] = {
-		["index"] = "nailgun",
-		["name"] = "Arma de Prego",
-		["repair"] = "repairkit01",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_NAIL_AMMO",
-		["durability"] = 7,
-		["vehicle"] = false,
-		["weight"] = 4.25,
-		["economy"] = 5500
-	},
-	["WEAPON_MINISMG"] = {
-		["index"] = "skorpionv61",
-		["name"] = "Skorpion V61",
-		["repair"] = "repairkit03",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_SMG_AMMO",
-		["durability"] = 14,
-		["vehicle"] = true,
-		["weight"] = 5.25,
-		["economy"] = 28775
-	},
-	["WEAPON_SNSPISTOL"] = {
-		["index"] = "amt380",
-		["name"] = "AMT 380",
-		["repair"] = "repairkit02",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_PISTOL_AMMO",
-		["durability"] = 14,
-		["vehicle"] = true,
-		["weight"] = 2.25,
-		["economy"] = 13250
-	},
-	["WEAPON_SNSPISTOL_MK2"] = {
-		["index"] = "hkp7m10",
-		["name"] = "HK P7M10",
-		["repair"] = "repairkit02",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_PISTOL_AMMO",
-		["durability"] = 14,
-		["vehicle"] = true,
-		["weight"] = 3.25,
-		["economy"] = 14575
-	},
-	["WEAPON_VINTAGEPISTOL"] = {
-		["index"] = "m1922",
-		["name"] = "M1922",
-		["repair"] = "repairkit02",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_PISTOL_AMMO",
-		["durability"] = 14,
-		["vehicle"] = true,
-		["weight"] = 3.25,
-		["economy"] = 16000
-	},
-	["WEAPON_PISTOL50"] = {
-		["index"] = "desert",
-		["name"] = "Desert Eagle",
-		["repair"] = "repairkit03",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_PISTOL_AMMO",
-		["durability"] = 14,
-		["vehicle"] = true,
-		["weight"] = 3.75,
-		["economy"] = 16000
-	},
-	["WEAPON_REVOLVER"] = {
-		["index"] = "magnum",
-		["name"] = "Magnum 44",
-		["repair"] = "repairkit03",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_PISTOL_AMMO",
-		["durability"] = 14,
-		["vehicle"] = true,
-		["weight"] = 4.25,
-		["economy"] = 16000
-	},
-	["WEAPON_COMBATPISTOL"] = {
-		["index"] = "glock",
-		["name"] = "Glock",
-		["repair"] = "repairkit02",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_PISTOL_AMMO",
-		["durability"] = 14,
-		["vehicle"] = true,
-		["weight"] = 3.25,
-		["economy"] = 3300
-	},
-	["WEAPON_CARBINERIFLE"] = {
-		["index"] = "m4a1",
-		["name"] = "M4A1",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 21,
-		["weight"] = 7.75,
-		["economy"] = 4500
-	},
-	["WEAPON_CARBINERIFLE_MK2"] = {
-		["index"] = "m4a4",
-		["name"] = "M4A4",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 21,
-		["weight"] = 8.75,
-		["economy"] = 4900
-	},
-	["WEAPON_ADVANCEDRIFLE"] = {
-		["index"] = "tar21",
-		["name"] = "Tar-21",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 21,
-		["weight"] = 7.75,
-		["economy"] = 25000
-	},
-	["WEAPON_BULLPUPRIFLE"] = {
-		["index"] = "qbz95",
-		["name"] = "QBZ-95",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 21,
-		["weight"] = 7.75,
-		["economy"] = 40000
-	},
-	["WEAPON_BULLPUPRIFLE_MK2"] = {
-		["index"] = "l85",
-		["name"] = "L85",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 21,
-		["weight"] = 7.75,
-		["economy"] = 40000
-	},
-	["WEAPON_SPECIALCARBINE"] = {
-		["index"] = "g36c",
-		["name"] = "G36C",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 21,
-		["weight"] = 8.75,
-		["economy"] = 35000
-	},
-	["WEAPON_SPECIALCARBINE_MK2"] = {
-		["index"] = "sigsauer556",
-		["name"] = "Sig Sauer 556",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 21,
-		["weight"] = 8.75,
-		["economy"] = 40000
-	},
-	["WEAPON_PUMPSHOTGUN"] = {
-		["index"] = "mossberg590",
-		["name"] = "Mossberg 590",
-		["repair"] = "repairkit03",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_SHOTGUN_AMMO",
-		["durability"] = 21,
-		["weight"] = 7.25,
-		["economy"] = 29000
-	},
-	["WEAPON_PUMPSHOTGUN_MK2"] = {
-		["index"] = "mossberg590a1",
-		["name"] = "Mossberg 590A1",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_SHOTGUN_AMMO",
-		["durability"] = 21,
-		["weight"] = 7.25,
-		["economy"] = 31000
-	},
-	["WEAPON_MUSKET"] = {
-		["index"] = "winchester",
-		["name"] = "Winchester 1892",
-		["repair"] = "repairkit02",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_MUSKET_AMMO",
-		["durability"] = 21,
-		["weight"] = 6.25,
-		["economy"] = 3250
-	},
-	["WEAPON_SAWNOFFSHOTGUN"] = {
-		["index"] = "mossberg500",
-		["name"] = "Mossberg 500",
-		["repair"] = "repairkit03",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_SHOTGUN_AMMO",
-		["durability"] = 21,
-		["weight"] = 5.75,
-		["economy"] = 13250
-	},
-	["WEAPON_SMG"] = {
-		["index"] = "mp5",
-		["name"] = "MP5",
-		["repair"] = "repairkit03",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_SMG_AMMO",
-		["durability"] = 21,
-		["weight"] = 5.25,
-		["economy"] = 3900
-	},
-	["WEAPON_SMG_MK2"] = {
-		["index"] = "evo3",
-		["name"] = "Evo-3",
-		["repair"] = "repairkit03",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_SMG_AMMO",
-		["durability"] = 21,
-		["vehicle"] = true,
-		["weight"] = 5.25,
-		["economy"] = 32000
-	},
-	["WEAPON_RPG"] = {
-		["index"] = "rpg",
-		["name"] = "Lança Foguete",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RPG_AMMO",
-		["durability"] = 21,
-		["vehicle"] = true,
-		["weight"] = 9.25,
-		["economy"] = 160000
-	},
-	["WEAPON_ASSAULTRIFLE"] = {
-		["index"] = "ak103",
-		["name"] = "AK-103",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 21,
-		["weight"] = 7.75,
-		["economy"] = 35000
-	},
-	["WEAPON_ASSAULTRIFLE_MK2"] = {
-		["index"] = "ak74",
-		["name"] = "AK-74",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 21,
-		["weight"] = 7.75,
-		["economy"] = 35000
-	},
-	["WEAPON_ASSAULTSMG"] = {
-		["index"] = "steyraug",
-		["name"] = "Steyr AUG",
-		["repair"] = "repairkit03",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 21,
-		["weight"] = 5.75,
-		["economy"] = 15250
-	},
-	["WEAPON_HEAVYSNIPER"] = {
-		["index"] = "heavy",
-		["name"] = "Heavy Sniper Elite",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_HEAVY_AMMO",
-		["durability"] = 480,
-		["weight"] = 7.75,
-		["economy"] = 25250
-	},
-	["WEAPON_FNSCAR"] = {
-		["index"] = "fnscar",
-		["name"] = "FN Scar",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 480,
-		["weight"] = 7.75,
-		["economy"] = 25250
-	},
-	["WEAPON_QBZ83"] = {
-		["index"] = "qbz95",
-		["name"] = "QBZ-83",
-		["repair"] = "repairkit04",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_RIFLE_AMMO",
-		["durability"] = 480,
-		["weight"] = 7.75,
-		["economy"] = 25250
-	},
-	["WEAPON_GUSENBERG"] = {
-		["index"] = "thompson",
-		["name"] = "Thompson",
-		["repair"] = "repairkit03",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_SMG_AMMO",
-		["durability"] = 21,
-		["weight"] = 6.25,
-		["economy"] = 15250
+		["Index"] = "nightstick",
+		["Name"] = "Cassetete",
+		["Repair"] = "repairkit01",
+		["Type"] = "Armamento",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Durability"] = 240,
+		["Weight"] = 1.15,
+		["Economy"] = 975,
+		["Market"] = true
 	},
 	["WEAPON_PETROLCAN"] = {
-		["index"] = "gallon",
-		["name"] = "Galão",
-		["type"] = "Armamento",
-		["ammo"] = "WEAPON_PETROLCAN_AMMO",
-		["weight"] = 1.25,
-		["economy"] = 50
+		["Index"] = "gallon",
+		["Name"] = "Galão",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Ammo"] = "WEAPON_PETROLCAN_AMMO",
+		["Market"] = true,
+		["Weight"] = 1.25,
+		["Economy"] = 325
 	},
 	["GADGET_PARACHUTE"] = {
-		["index"] = "parachute",
-		["name"] = "Paraquedas",
-		["type"] = "Usável",
-		["weight"] = 2.25,
-		["economy"] = 475
+		["Index"] = "parachute",
+		["Name"] = "Paraquedas",
+		["Description"] = "Lembrando que após <common>desconectar</common> da cidade o mesmo é removido.",
+		["Type"] = "Consumível",
+		["Weight"] = 2.25,
+		["Max"] = 2,
+		["Economy"] = 225,
+		["Market"] = true
 	},
-	["WEAPON_STUNGUN"] = {
-		["index"] = "stungun",
-		["name"] = "Tazer",
-		["repair"] = "repairkit02",
-		["type"] = "Armamento",
-		["durability"] = 21,
-		["weight"] = 0.75,
-		["economy"] = 575
-	},
-	["WEAPON_NAIL_AMMO"] = {
-		["index"] = "nails",
-		["name"] = "Pregos",
-		["type"] = "Munição",
-		["weight"] = 0.05,
-		["economy"] = 50
+	-- MUNIÇÕES
+	["WEAPON_RPG_AMMO"] = {
+		["Index"] = "rocket",
+		["Name"] = "Munição de Foguete",
+		["Type"] = "Munição",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Market"] = true,
+		["Weight"] = 2.25
 	},
 	["WEAPON_PISTOL_AMMO"] = {
-		["index"] = "pistolammo",
-		["name"] = "Munição de Pistola",
-		["type"] = "Munição",
-		["weight"] = 0.035,
-		["economy"] = 30
+		["Index"] = "pistolammo",
+		["Name"] = "Munição de Pistola",
+		["Type"] = "Munição",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Market"] = true,
+		["Weight"] = 0.025,
+		["Economy"] = 15
 	},
 	["WEAPON_SMG_AMMO"] = {
-		["index"] = "smgammo",
-		["name"] = "Munição de Sub",
-		["type"] = "Munição",
-		["weight"] = 0.045,
-		["economy"] = 35
+		["Index"] = "smgammo",
+		["Name"] = "Munição de Sub",
+		["Type"] = "Munição",
+		["Blueprint"] = true,
+		["Market"] = true,
+		["Weight"] = 0.025,
+		["Economy"] = 20
 	},
 	["WEAPON_RIFLE_AMMO"] = {
-		["index"] = "rifleammo",
-		["name"] = "Munição de Rifle",
-		["type"] = "Munição",
-		["weight"] = 0.055,
-		["economy"] = 40
-	},
-	["WEAPON_HEAVY_AMMO"] = {
-		["index"] = "rifleammo",
-		["name"] = "Munição de Sniper",
-		["type"] = "Munição",
-		["weight"] = 0.055,
-		["economy"] = 120
+		["Index"] = "rifleammo",
+		["Name"] = "Munição de Rifle",
+		["Type"] = "Munição",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Market"] = true,
+		["Weight"] = 0.025,
+		["Economy"] = 25
 	},
 	["WEAPON_SHOTGUN_AMMO"] = {
-		["index"] = "shotgunammo",
-		["name"] = "Munição de Escopeta",
-		["type"] = "Munição",
-		["weight"] = 0.075,
-		["economy"] = 30
-	},
-	["WEAPON_RPG_AMMO"] = {
-		["index"] = "rocket",
-		["name"] = "Munição de Lança Foguete",
-		["type"] = "Munição",
-		["weight"] = 1.075,
-		["economy"] = 1900
+		["Index"] = "shotgunammo",
+		["Name"] = "Munição de Espingarga",
+		["Type"] = "Munição",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Market"] = true,
+		["Weight"] = 0.050,
+		["Economy"] = 50
 	},
 	["WEAPON_MUSKET_AMMO"] = {
-		["index"] = "musketammo",
-		["name"] = "Munição de Mosquete",
-		["type"] = "Munição",
-		["weight"] = 0.075,
-		["economy"] = 7
+		["Index"] = "musketammo",
+		["Name"] = "Munição de Mosquete",
+		["Type"] = "Munição",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Market"] = true,
+		["Weight"] = 0.075,
+		["Economy"] = 10
 	},
 	["WEAPON_PETROLCAN_AMMO"] = {
-		["index"] = "fuel",
-		["name"] = "Combustível",
-		["type"] = "Munição",
-		["weight"] = 0.001,
-		["economy"] = 0
+		["Index"] = "fuel",
+		["Name"] = "Combustível",
+		["Type"] = "Munição",
+		["Arrest"] = true,
+		["Market"] = true,
+		["Weight"] = 0.001,
+		["Economy"] = 0
 	},
+	-- ARREMESSO
 	["WEAPON_BRICK"] = {
-		["index"] = "brick",
-		["name"] = "Tijolo",
-		["type"] = "Throwing",
-		["vehicle"] = true,
-		["weight"] = 0.75,
-		["economy"] = 25
+		["Index"] = "brick",
+		["Name"] = "Tijolo",
+		["Type"] = "Arremesso",
+		["Arrest"] = true,
+		["Vehicle"] = true,
+		["Weight"] = 0.75,
+		["Economy"] = 25,
+		["Market"] = true
 	},
 	["WEAPON_SNOWBALL"] = {
-		["index"] = "snowball",
-		["name"] = "Bola de Neve",
-		["type"] = "Throwing",
-		["vehicle"] = true,
-		["weight"] = 0.55,
-		["economy"] = 6
+		["Index"] = "snowball",
+		["Name"] = "Bola de Neve",
+		["Type"] = "Arremesso",
+		["Arrest"] = true,
+		["Vehicle"] = true,
+		["Weight"] = 0.55,
+		["Economy"] = 25,
+		["Market"] = true
 	},
 	["WEAPON_SHOES"] = {
-		["index"] = "shoes",
-		["name"] = "Tênis",
-		["type"] = "Throwing",
-		["vehicle"] = true,
-		["weight"] = 0.755,
-		["economy"] = 25
+		["Index"] = "shoes",
+		["Name"] = "Tênis",
+		["Type"] = "Arremesso",
+		["Arrest"] = true,
+		["Vehicle"] = true,
+		["Weight"] = 0.755,
+		["Economy"] = 25,
+		["Market"] = true
 	},
 	["WEAPON_MOLOTOV"] = {
-		["index"] = "molotov",
-		["name"] = "Coquetel Molotov",
-		["type"] = "Throwing",
-		["vehicle"] = true,
-		["weight"] = 0.95,
-		["economy"] = 225,
-		["max"] = 3
+		["Index"] = "molotov",
+		["Name"] = "Coquetel Molotov",
+		["Type"] = "Arremesso",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Vehicle"] = true,
+		["Market"] = true,
+		["Weight"] = 0.95,
+		["Max"] = 2,
+		["Economy"] = 1225
 	},
 	["WEAPON_SMOKEGRENADE"] = {
-		["index"] = "smokegrenade",
-		["name"] = "Granada de Fumaça",
-		["type"] = "Throwing",
-		["vehicle"] = true,
-		["weight"] = 0.95,
-		["economy"] = 225,
-		["max"] = 3
+		["Index"] = "smokegrenade",
+		["Name"] = "Granada de Fumaça",
+		["Type"] = "Arremesso",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Vehicle"] = true,
+		["Market"] = true,
+		["Weight"] = 0.95,
+		["Max"] = 2,
+		["Economy"] = 1225
 	},
-	["pager"] = {
-		["index"] = "pager",
-		["name"] = "Pager",
-		["type"] = "Usável",
-		["weight"] = 2.25,
-		["economy"] = 725
+	-- ARMAMENTOS
+	["WEAPON_STUNGUN"] = {
+		["Index"] = "stungun",
+		["Name"] = "Tazer",
+		["Repair"] = "repairkit02",
+		["Type"] = "Armamento",
+		["Blueprint"] = true,
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Durability"] = 480,
+		["Market"] = true,
+		["Weight"] = 0.75,
+		["Economy"] = 725,
+		["Recycle"] = {
+			["scrapmetal"] = 65
+		}
 	},
-	["firecracker"] = {
-		["index"] = "firecracker",
-		["name"] = "Fogos de Artificio",
-		["type"] = "Usável",
-		["weight"] = 2.25,
-		["economy"] = 87
+	["WEAPON_PISTOL"] = {
+		["Index"] = "m1911",
+		["Name"] = "M1911",
+		["Description"] = "Armamento que utiliza <common>Munição de Pistola</common>.",
+		["Repair"] = "repairkit02",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_PISTOL_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 240,
+		["Vehicle"] = true,
+		["Market"] = true,
+		["Weight"] = 2.25,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_PI_FLSH",
+			["ATTACH_MAGAZINE"] = "COMPONENT_PISTOL_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_PI_SUPP_02"
+		},
+		["Economy"] = 5725,
+		["Recycle"] = {
+			["scrapmetal"] = 525
+		}
+	},
+	["WEAPON_PISTOL_MK2"] = {
+		["Index"] = "fiveseven",
+		["Name"] = "FN Five Seven",
+		["Description"] = "Armamento que utiliza <common>Munição de Pistola</common>.",
+		["Repair"] = "repairkit02",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_PISTOL_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 240,
+		["Vehicle"] = true,
+		["Market"] = true,
+		["Weight"] = 2.75,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_PI_FLSH_02",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_PI_RAIL",
+			["ATTACH_MAGAZINE"] = "COMPONENT_PISTOL_MK2_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_PI_SUPP_02"
+		},
+		["Economy"] = 6225,
+		["Recycle"] = {
+			["scrapmetal"] = 575
+		}
+	},
+	["WEAPON_COMPACTRIFLE"] = {
+		["Index"] = "akcompact",
+		["Name"] = "AK Compact",
+		["Description"] = "Armamento que utiliza <common>Munição de Rifle</common>.",
+		["Repair"] = "repairkit03",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_RIFLE_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 4.25,
+		["Attachs"] = {
+			["ATTACH_MAGAZINE"] = "COMPONENT_COMPACTRIFLE_CLIP_02"
+		},
+		["Economy"] = 13225,
+		["Recycle"] = {
+			["scrapmetal"] = 1275
+		}
+	},
+	["WEAPON_APPISTOL"] = {
+		["Index"] = "kochvp9",
+		["Name"] = "Koch Vp9",
+		["Description"] = "Armamento que utiliza <common>Munição de Sub</common>.",
+		["Repair"] = "repairkit03",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_SMG_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 240,
+		["Vehicle"] = true,
+		["Market"] = true,
+		["Weight"] = 2.75,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_PI_FLSH",
+			["ATTACH_MAGAZINE"] = "COMPONENT_APPISTOL_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_PI_SUPP"
+		},
+		["Economy"] = 6225,
+		["Recycle"] = {
+			["scrapmetal"] = 575
+		}
+	},
+	["WEAPON_HEAVYPISTOL"] = {
+		["Index"] = "atifx45",
+		["Name"] = "Ati FX45",
+		["Description"] = "Armamento que utiliza <common>Munição de Pistola</common>.",
+		["Repair"] = "repairkit02",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_PISTOL_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 240,
+		["Vehicle"] = true,
+		["Market"] = true,
+		["Weight"] = 2.75,
+		["Economy"] = 7225,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_PI_FLSH",
+			["ATTACH_MAGAZINE"] = "COMPONENT_HEAVYPISTOL_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_PI_SUPP"
+		},
+		["Recycle"] = {
+			["scrapmetal"] = 675
+		}
+	},
+	["WEAPON_MACHINEPISTOL"] = {
+		["Index"] = "tec9",
+		["Name"] = "Tec-9",
+		["Description"] = "Armamento que utiliza <common>Munição de Sub</common>.",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Repair"] = "repairkit03",
+		["Ammo"] = "WEAPON_SMG_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 240,
+		["Vehicle"] = true,
+		["Market"] = true,
+		["Weight"] = 3.25,
+		["Attachs"] = {
+			["ATTACH_MAGAZINE"] = "COMPONENT_MACHINEPISTOL_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_PI_SUPP"
+		},
+		["Economy"] = 8225,
+		["Recycle"] = {
+			["scrapmetal"] = 775
+		}
+	},
+	["WEAPON_MICROSMG"] = {
+		["Index"] = "uzi",
+		["Name"] = "Uzi",
+		["Description"] = "Armamento que utiliza <common>Munição de Sub</common>.",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Repair"] = "repairkit03",
+		["Ammo"] = "WEAPON_SMG_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 240,
+		["Vehicle"] = true,
+		["Market"] = true,
+		["Weight"] = 4.25,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_PI_FLSH",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_MACRO",
+			["ATTACH_MAGAZINE"] = "COMPONENT_MICROSMG_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_AR_SUPP_02"
+		},
+		["Economy"] = 13225,
+		["Recycle"] = {
+			["scrapmetal"] = 1275
+		}
+	},
+	["WEAPON_RPG"] = {
+		["Index"] = "rpg",
+		["Name"] = "Lança Foguete",
+		["Description"] = "Armamento que utiliza <common>Munição de Foguete</common>.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_RPG_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 720,
+		["Vehicle"] = false,
+		["Market"] = true,
+		["Weight"] = 12.25
+	},
+	["WEAPON_MINISMG"] = {
+		["Index"] = "skorpionv61",
+		["Name"] = "Skorpion V61",
+		["Description"] = "Armamento que utiliza <common>Munição de Sub</common>.",
+		["Repair"] = "repairkit03",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_SMG_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 240,
+		["Vehicle"] = true,
+		["Market"] = true,
+		["Weight"] = 5.25,
+		["Attachs"] = {
+			["ATTACH_MAGAZINE"] = "COMPONENT_MINISMG_CLIP_02"
+		},
+		["Economy"] = 13225,
+		["Recycle"] = {
+			["scrapmetal"] = 1275
+		}
+	},
+	["WEAPON_SNSPISTOL"] = {
+		["Index"] = "amt380",
+		["Name"] = "AMT 380",
+		["Description"] = "Armamento que utiliza <common>Munição de Pistola</common>.",
+		["Repair"] = "repairkit02",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_PISTOL_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 240,
+		["Vehicle"] = true,
+		["Market"] = true,
+		["Weight"] = 2.25,
+		["Attachs"] = {
+			["ATTACH_MAGAZINE"] = "COMPONENT_SNSPISTOL_CLIP_02"
+		},
+		["Economy"] = 4725,
+		["Recycle"] = {
+			["scrapmetal"] = 375
+		}
+	},
+	["WEAPON_SNSPISTOL_MK2"] = {
+		["Index"] = "hkp7m10",
+		["Name"] = "HK P7M10",
+		["Description"] = "Armamento que utiliza <common>Munição de Pistola</common>.",
+		["Repair"] = "repairkit02",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_PISTOL_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 240,
+		["Vehicle"] = true,
+		["Market"] = true,
+		["Weight"] = 3.25,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_PI_FLSH_03",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_PI_RAIL_02",
+			["ATTACH_MAGAZINE"] = "COMPONENT_SNSPISTOL_MK2_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_PI_SUPP_02"
+		},
+		["Economy"] = 5225,
+		["Recycle"] = {
+			["scrapmetal"] = 475
+		}
+	},
+	["WEAPON_VINTAGEPISTOL"] = {
+		["Index"] = "m1922",
+		["Name"] = "M1922",
+		["Description"] = "Armamento que utiliza <common>Munição de Pistola</common>.",
+		["Repair"] = "repairkit02",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_PISTOL_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 240,
+		["Vehicle"] = true,
+		["Market"] = true,
+		["Weight"] = 3.25,
+		["Attachs"] = {
+			["ATTACH_MAGAZINE"] = "COMPONENT_VINTAGEPISTOL_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_PI_SUPP"
+		},
+		["Economy"] = 4725,
+		["Recycle"] = {
+			["scrapmetal"] = 375
+		}
+	},
+	["WEAPON_PISTOL50"] = {
+		["Index"] = "desert",
+		["Name"] = "Desert Eagle",
+		["Description"] = "Armamento que utiliza <common>Munição de Pistola</common>.",
+		["Repair"] = "repairkit03",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_PISTOL_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 240,
+		["Vehicle"] = true,
+		["Market"] = true,
+		["Weight"] = 3.75,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_PI_FLSH",
+			["ATTACH_MAGAZINE"] = "COMPONENT_PISTOL50_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_AR_SUPP_02"
+		},
+		["Economy"] = 8225,
+		["Recycle"] = {
+			["scrapmetal"] = 725
+		}
+	},
+	["WEAPON_COMBATPISTOL"] = {
+		["Index"] = "glock",
+		["Name"] = "Glock",
+		["Description"] = "Armamento que utiliza <common>Munição de Pistola</common>.",
+		["Repair"] = "repairkit02",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_PISTOL_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 240,
+		["Vehicle"] = true,
+		["Market"] = true,
+		["Weight"] = 3.25,
+		["Economy"] = 6225,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_PI_FLSH",
+			["ATTACH_MAGAZINE"] = "COMPONENT_COMBATPISTOL_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_PI_SUPP"
+		},
+		["Recycle"] = {
+			["scrapmetal"] = 575
+		}
+	},
+	["WEAPON_CARBINERIFLE"] = {
+		["Index"] = "m4a1",
+		["Name"] = "M4A1",
+		["Description"] = "Armamento que utiliza <common>Munição de Rifle</common>.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_RIFLE_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 7.75,
+		["Economy"] = 22725,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_MAGAZINE"] = "COMPONENT_CARBINERIFLE_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_AR_SUPP",
+			["ATTACH_GRIP"] = "COMPONENT_AT_AR_AFGRIP",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_MEDIUM"
+		},
+		["Recycle"] = {
+			["scrapmetal"] = 2175
+		}
+	},
+	["WEAPON_CARBINERIFLE_MK2"] = {
+		["Index"] = "m4a4",
+		["Name"] = "M4A4",
+		["Description"] = "Armamento que utiliza <common>Munição de Rifle</common>.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_RIFLE_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 8.75,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_MEDIUM_MK2",
+			["ATTACH_MAGAZINE"] = "COMPONENT_CARBINERIFLE_MK2_CLIP_02",
+			["ATTACH_GRIP"] = "COMPONENT_AT_AR_AFGRIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_AR_SUPP"
+		},
+		["Economy"] = 24225,
+		["Recycle"] = {
+			["scrapmetal"] = 2375
+		}
+	},
+	["WEAPON_ADVANCEDRIFLE"] = {
+		["Index"] = "tar21",
+		["Name"] = "Tar-21",
+		["Description"] = "Armamento que utiliza <common>Munição de Rifle</common>.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_RIFLE_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 7.75,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_SMALL",
+			["ATTACH_MAGAZINE"] = "COMPONENT_ADVANCEDRIFLE_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_AR_SUPP"
+		},
+		["Economy"] = 22725,
+		["Recycle"] = {
+			["scrapmetal"] = 2175
+		}
+	},
+	["WEAPON_BULLPUPRIFLE"] = {
+		["Index"] = "qbz95",
+		["Name"] = "QBZ-95",
+		["Description"] = "Armamento que utiliza <common>Munição de Rifle</common>.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_RIFLE_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 7.75,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_SMALL",
+			["ATTACH_MAGAZINE"] = "COMPONENT_BULLPUPRIFLE_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_AR_SUPP",
+			["ATTACH_GRIP"] = "COMPONENT_AT_AR_AFGRIP"
+		},
+		["Economy"] = 22725,
+		["Recycle"] = {
+			["scrapmetal"] = 2175
+		}
+	},
+	["WEAPON_BULLPUPRIFLE_MK2"] = {
+		["Index"] = "l85",
+		["Name"] = "L85",
+		["Description"] = "Armamento que utiliza <common>Munição de Rifle</common>.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_RIFLE_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 7.75,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_MACRO_02_MK2",
+			["ATTACH_MAGAZINE"] = "COMPONENT_BULLPUPRIFLE_MK2_CLIP_02",
+			["ATTACH_GRIP"] = "COMPONENT_AT_MUZZLE_01",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_AR_SUPP"
+		},
+		["Economy"] = 24225,
+		["Recycle"] = {
+			["scrapmetal"] = 2375
+		}
+	},
+	["WEAPON_SPECIALCARBINE"] = {
+		["Index"] = "g36c",
+		["Name"] = "G36C",
+		["Description"] = "Armamento que utiliza <common>Munição de Rifle</common>.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_RIFLE_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 8.75,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_MEDIUM",
+			["ATTACH_MAGAZINE"] = "COMPONENT_SPECIALCARBINE_CLIP_02",
+			["ATTACH_GRIP"] = "COMPONENT_AT_AR_AFGRIP",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_AR_SUPP_02"
+		},
+		["Economy"] = 22725,
+		["Recycle"] = {
+			["scrapmetal"] = 2175
+		}
+	},
+	["WEAPON_SPECIALCARBINE_MK2"] = {
+		["Index"] = "sigsauer556",
+		["Name"] = "Sig Sauer 556",
+		["Description"] = "Armamento que utiliza <common>Munição de Rifle</common>.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_RIFLE_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 8.75,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_MACRO_MK2",
+			["ATTACH_GRIP"] = "COMPONENT_AT_AR_AFGRIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_AR_SUPP_02"
+		},
+		["Economy"] = 24225,
+		["Recycle"] = {
+			["scrapmetal"] = 2375
+		}
+	},
+	["WEAPON_PUMPSHOTGUN"] = {
+		["Index"] = "mossberg590",
+		["Name"] = "Mossberg 590",
+		["Description"] = "Armamento que utiliza <common>Munição de Espingarga</common>.",
+		["Repair"] = "repairkit03",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_SHOTGUN_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 7.25,
+		["Economy"] = 13225,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_SR_SUPP"
+		},
+		["Recycle"] = {
+			["scrapmetal"] = 1275
+		}
+	},
+	["WEAPON_PUMPSHOTGUN_MK2"] = {
+		["Index"] = "mossberg590a1",
+		["Name"] = "Mossberg 590A1",
+		["Description"] = "Armamento que utiliza <common>Munição de Espingarga</common>.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_SHOTGUN_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 7.25,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_SMALL_MK2",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_SR_SUPP_03",
+			["ATTACH_GRIP"] = "COMPONENT_AT_MUZZLE_08"
+		},
+		["Economy"] = 15275,
+		["Recycle"] = {
+			["scrapmetal"] = 1475
+		}
+	},
+	["WEAPON_MUSKET"] = {
+		["Index"] = "winchester",
+		["Name"] = "Winchester 1892",
+		["Description"] = "Armamento que utiliza <common>Munição de Mosquete</common>.",
+		["Repair"] = "repairkit02",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_MUSKET_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 6.25,
+		["Economy"] = 3225,
+		["Recycle"] = {
+			["scrapmetal"] = 75
+		}
+	},
+	["WEAPON_SAWNOFFSHOTGUN"] = {
+		["Index"] = "mossberg500",
+		["Name"] = "Mossberg 500",
+		["Description"] = "Armamento que utiliza <common>Munição de Espingarga</common>.",
+		["Repair"] = "repairkit03",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_SHOTGUN_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 5.75,
+		["Economy"] = 13225,
+		["Recycle"] = {
+			["scrapmetal"] = 1275
+		}
+	},
+	["WEAPON_SMG"] = {
+		["Index"] = "mp5",
+		["Name"] = "MP5",
+		["Description"] = "Armamento que utiliza <common>Munição de Sub</common>.",
+		["Repair"] = "repairkit03",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_SMG_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 5.25,
+		["Economy"] = 12725,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_MAGAZINE"] = "COMPONENT_SMG_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_PI_SUPP",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_MACRO_02"
+		},
+		["Recycle"] = {
+			["scrapmetal"] = 1125
+		}
+	},
+	["WEAPON_SMG_MK2"] = {
+		["Index"] = "evo3",
+		["Name"] = "Evo-3",
+		["Description"] = "Armamento que utiliza <common>Munição de Sub</common>.",
+		["Repair"] = "repairkit03",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_SMG_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Vehicle"] = true,
+		["Market"] = true,
+		["Weight"] = 5.25,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_MACRO_02_SMG_MK2",
+			["ATTACH_MAGAZINE"] = "COMPONENT_SMG_MK2_CLIP_02",
+			["ATTACH_GRIP"] = "COMPONENT_AT_SB_BARREL_01",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_PI_SUPP"
+		},
+		["Economy"] = 15225,
+		["Recycle"] = {
+			["scrapmetal"] = 1375
+		}
+	},
+	["WEAPON_TACTICALRIFLE"] = {
+		["Index"] = "m16",
+		["Name"] = "M16",
+		["Description"] = "Armamento que utiliza <common>Munição de Rifle</common>.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_RIFLE_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 7.75,
+		["Economy"] = 24225,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_MAGAZINE"] = "COMPONENT_SMG_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_PI_SUPP",
+			["ATTACH_GRIP"] = "COMPONENT_AT_AR_AFGRIP",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_MACRO_02"
+		},
+		["Recycle"] = {
+			["scrapmetal"] = 2375
+		}
+	},
+	["WEAPON_HEAVYRIFLE"] = {
+		["Index"] = "scarh",
+		["Name"] = "Scar-H",
+		["Description"] = "Armamento que utiliza <common>Munição de Rifle</common>.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_RIFLE_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 7.75,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_MEDIUM",
+			["ATTACH_MAGAZINE"] = "COMPONENT_HEAVYRIFLE_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_AR_SUPP",
+			["ATTACH_GRIP"] = "COMPONENT_AT_AR_AFGRIP"
+		},
+		["Economy"] = 24225,
+		["Recycle"] = {
+			["scrapmetal"] = 2375
+		}
+	},
+	["WEAPON_ASSAULTRIFLE"] = {
+		["Index"] = "ak103",
+		["Name"] = "AK-103",
+		["Description"] = "Armamento que utiliza <common>Munição de Rifle</common>.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_RIFLE_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 7.75,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_MACRO",
+			["ATTACH_MAGAZINE"] = "COMPONENT_ASSAULTRIFLE_CLIP_02",
+			["ATTACH_GRIP"] = "COMPONENT_AT_AR_AFGRIP",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_AR_SUPP_02"
+		},
+		["Economy"] = 22725,
+		["Recycle"] = {
+			["scrapmetal"] = 2175
+		}
+	},
+	["WEAPON_ASSAULTRIFLE_MK2"] = {
+		["Index"] = "ak74",
+		["Name"] = "AK-74",
+		["Description"] = "Armamento que utiliza <common>Munição de Rifle</common>.",
+		["Repair"] = "repairkit04",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_RIFLE_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 7.75,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_MEDIUM_MK2",
+			["ATTACH_MAGAZINE"] = "COMPONENT_ASSAULTRIFLE_MK2_CLIP_02",
+			["ATTACH_GRIP"] = "COMPONENT_AT_AR_AFGRIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_AR_SUPP_02"
+		},
+		["Economy"] = 24225,
+		["Recycle"] = {
+			["scrapmetal"] = 2375
+		}
+	},
+	["WEAPON_ASSAULTSMG"] = {
+		["Index"] = "steyraug",
+		["Name"] = "Steyr AUG",
+		["Description"] = "Armamento que utiliza <common>Munição de Rifle</common>.",
+		["Repair"] = "repairkit03",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_RIFLE_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 5.75,
+		["Attachs"] = {
+			["ATTACH_FLASHLIGHT"] = "COMPONENT_AT_AR_FLSH",
+			["ATTACH_CROSSHAIR"] = "COMPONENT_AT_SCOPE_MACRO",
+			["ATTACH_MAGAZINE"] = "COMPONENT_ASSAULTSMG_CLIP_02",
+			["ATTACH_SILENCER"] = "COMPONENT_AT_AR_SUPP_02"
+		},
+		["Economy"] = 15225,
+		["Recycle"] = {
+			["scrapmetal"] = 1475
+		}
+	},
+	["WEAPON_GUSENBERG"] = {
+		["Index"] = "thompson",
+		["Name"] = "Thompson",
+		["Description"] = "Armamento que utiliza <common>Munição de Sub</common>.",
+		["Repair"] = "repairkit03",
+		["Type"] = "Armamento",
+		["Arrest"] = true,
+		["Serial"] = true,
+		["Ammo"] = "WEAPON_SMG_AMMO",
+		["Blueprint"] = true,
+		["Durability"] = 360,
+		["Market"] = true,
+		["Weight"] = 6.25,
+		["Attachs"] = {
+			["ATTACH_MAGAZINE"] = "COMPONENT_GUSENBERG_CLIP_02"
+		},
+		["Economy"] = 15225,
+		["Recycle"] = {
+			["scrapmetal"] = 1475
+		}
+	},
+	-- MEDICINAL
+	["syringe01"] = {
+		["Index"] = "syringe",
+		["Name"] = "Seringa A+",
+		["Type"] = "Comum",
+		["Weight"] = 0.25,
+		["Economy"] = 45,
+		["Market"] = true,
+		["Recycle"] = {
+			["plastic"] = 3
+		}
+	},
+	["syringe02"] = {
+		["Index"] = "syringe",
+		["Name"] = "Seringa B+",
+		["Type"] = "Comum",
+		["Weight"] = 0.25,
+		["Economy"] = 45,
+		["Market"] = true,
+		["Recycle"] = {
+			["plastic"] = 3
+		}
+	},
+	["syringe03"] = {
+		["Index"] = "syringe",
+		["Name"] = "Seringa A-",
+		["Type"] = "Comum",
+		["Weight"] = 0.25,
+		["Economy"] = 45,
+		["Market"] = true,
+		["Recycle"] = {
+			["plastic"] = 3
+		}
+	},
+	["syringe04"] = {
+		["Index"] = "syringe",
+		["Name"] = "Seringa B-",
+		["Type"] = "Comum",
+		["Weight"] = 0.25,
+		["Economy"] = 45,
+		["Market"] = true,
+		["Recycle"] = {
+			["plastic"] = 3
+		}
+	},
+	["bandage"] = {
+		["Index"] = "bandage",
+		["Name"] = "Bandagem Asséptica",
+		["Type"] = "Consumível",
+		["Weight"] = 0.25,
+		["Max"] = 3,
+		["Economy"] = 275,
+		["Blueprint"] = true,
+		["Market"] = true
+	},
+	["medkit"] = {
+		["Index"] = "medkit",
+		["Name"] = "Kit de Primeiros Socorros",
+		["Type"] = "Consumível",
+		["Weight"] = 0.75,
+		["Max"] = 1,
+		["Economy"] = 575,
+		["Blueprint"] = true,
+		["Market"] = true
+	},
+	["ritmoneury"] = {
+		["Index"] = "ritmoneury",
+		["Name"] = "Ritmoneury",
+		["Type"] = "Consumível",
+		["Weight"] = 0.75,
+		["Max"] = 2,
+		["Economy"] = 325,
+		["Blueprint"] = true,
+		["Market"] = true
+	},
+	["sinkalmy"] = {
+		["Index"] = "sinkalmy",
+		["Name"] = "Sinkalmy",
+		["Type"] = "Consumível",
+		["Weight"] = 0.75,
+		["Max"] = 2,
+		["Economy"] = 425,
+		["Blueprint"] = true,
+		["Market"] = true
 	},
 	["analgesic"] = {
-		["index"] = "analgesic",
-		["name"] = "Analgésico",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["max"] = 5,
-		["economy"] = 225
-	},
-	["oxy"] = {
-		["index"] = "analgesic",
-		["name"] = "Oxy",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["max"] = 150,
-		["economy"] = 150
-	},
-	["lean"] = {
-		["index"] = "lean",
-		["name"] = "lean",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["max"] = 150,
-		["economy"] = 150
+		["Index"] = "analgesic",
+		["Name"] = "Analgésicos",
+		["Type"] = "Consumível",
+		["Weight"] = 0.25,
+		["Economy"] = 175,
+		["Blueprint"] = true,
+		["Market"] = true
 	},
 	["gauze"] = {
-		["index"] = "gauze",
-		["name"] = "Ataduras",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["max"] = 5,
-		["economy"] = 100
+		["Index"] = "gauze",
+		["Name"] = "Ataduras",
+		["Type"] = "Consumível",
+		["Weight"] = 0.25,
+		["Economy"] = 125,
+		["Blueprint"] = true,
+		["Market"] = true,
+		["LostWater"] = true
 	},
 	["gsrkit"] = {
-		["index"] = "gsrkit",
-		["name"] = "Kit Residual",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 20
+		["Index"] = "gsrkit",
+		["Name"] = "Kit Residual",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 0.75,
+		["Economy"] = 25,
+		["Market"] = true
 	},
 	["gdtkit"] = {
-		["index"] = "gdtkit",
-		["name"] = "Kit Químico",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 20
+		["Index"] = "gdtkit",
+		["Name"] = "Kit Químico",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 0.75,
+		["Economy"] = 25,
+		["Market"] = true
 	},
-	["emerald"] = {
-		["index"] = "emerald",
-		["name"] = "Esmeralda",
-		["type"] = "Comum",
-		["weight"] = 0.95,
-		["economy"] = 100
+	-- EMPREGOS
+	["worm"] = {
+		["Index"] = "worm",
+		["Name"] = "Minhoca",
+		["Type"] = "Comum",
+		["Weight"] = 0.25,
+		["Economy"] = 5,
+		["Market"] = true
 	},
-	["diamond"] = {
-		["index"] = "diamond",
-		["name"] = "Diamante",
-		["type"] = "Comum",
-		["weight"] = 0.95,
-		["economy"] = 85
+	["fishfillet"] = {
+		["Index"] = "fishfillet",
+		["Name"] = "Filé de Peixe",
+		["Type"] = "Comum",
+		["Weight"] = 0.05,
+		["Economy"] = 10,
+		["Market"] = true
 	},
-	["ruby"] = {
-		["index"] = "ruby",
-		["name"] = "Rubi",
-		["type"] = "Comum",
-		["weight"] = 0.85,
-		["economy"] = 65
+	["meatfillet"] = {
+		["Index"] = "meatfillet",
+		["Name"] = "Filé de Carne",
+		["Type"] = "Comum",
+		["Weight"] = 0.05,
+		["Economy"] = 10,
+		["Market"] = true
 	},
-	["sapphire"] = {
-		["index"] = "sapphire",
-		["name"] = "Safira",
-		["type"] = "Comum",
-		["weight"] = 0.85,
-		["economy"] = 55
+	["anchovy"] = {
+		["Index"] = "anchovy",
+		["Name"] = "Anchova",
+		["Type"] = "Comum",
+		["Weight"] = 0.50,
+		["LostWater"] = true,
+		["Economy"] = 50,
+		["Market"] = true,
+		["Fridge"] = true,
+		["Fishing"] = 5
 	},
-	["amethyst"] = {
-		["index"] = "amethyst",
-		["name"] = "Ametista",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 45
+	["catfish"] = {
+		["Index"] = "catfish",
+		["Name"] = "Peixe-Gato",
+		["Type"] = "Comum",
+		["Weight"] = 0.50,
+		["LostWater"] = true,
+		["Economy"] = 70,
+		["Market"] = true,
+		["Fridge"] = true,
+		["Fishing"] = 7
 	},
-	["amber"] = {
-		["index"] = "amber",
-		["name"] = "Âmbar",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 35
+	["herring"] = {
+		["Index"] = "herring",
+		["Name"] = "Arenque",
+		["Type"] = "Comum",
+		["Weight"] = 0.50,
+		["LostWater"] = true,
+		["Economy"] = 80,
+		["Market"] = true,
+		["Fridge"] = true,
+		["Fishing"] = 8
 	},
-	["turquoise"] = {
-		["index"] = "turquoise",
-		["name"] = "Turquesa",
-		["type"] = "Comum",
-		["weight"] = 0.65,
-		["economy"] = 30
+	["orangeroughy"] = {
+		["Index"] = "orangeroughy",
+		["Name"] = "Peixe Relógio",
+		["Type"] = "Comum",
+		["Weight"] = 0.50,
+		["LostWater"] = true,
+		["Economy"] = 60,
+		["Market"] = true,
+		["Fridge"] = true,
+		["Fishing"] = 6
 	},
-	["keyboard"] = {
-		["index"] = "keyboard",
-		["name"] = "Teclado",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 75
+	["salmon"] = {
+		["Index"] = "salmon",
+		["Name"] = "Salmão",
+		["Type"] = "Comum",
+		["Weight"] = 0.50,
+		["LostWater"] = true,
+		["Economy"] = 150,
+		["Market"] = true,
+		["Fridge"] = true,
+		["Fishing"] = 15
 	},
-	["mouse"] = {
-		["index"] = "mouse",
-		["name"] = "Mouse",
-		["type"] = "Comum",
-		["weight"] = 0.55,
-		["economy"] = 75
+	["sardine"] = {
+		["Index"] = "sardine",
+		["Name"] = "Sardinha",
+		["Type"] = "Comum",
+		["Weight"] = 0.50,
+		["LostWater"] = true,
+		["Economy"] = 60,
+		["Market"] = true,
+		["Fridge"] = true,
+		["Fishing"] = 6
 	},
-	["silverring"] = {
-		["index"] = "silverring",
-		["name"] = "Anel de Prata",
-		["type"] = "Comum",
-		["weight"] = 0.35,
-		["economy"] = 75
+	["smallshark"] = {
+		["Index"] = "smallshark",
+		["Name"] = "Tubarão Pequeno",
+		["Type"] = "Comum",
+		["Weight"] = 0.50,
+		["LostWater"] = true,
+		["Economy"] = 250,
+		["Market"] = true,
+		["Fridge"] = true,
+		["Fishing"] = 25
 	},
-	["goldring"] = {
-		["index"] = "goldring",
-		["name"] = "Anel de Ouro",
-		["type"] = "Comum",
-		["weight"] = 0.45,
-		["economy"] = 100
+	["smalltrout"] = {
+		["Index"] = "smalltrout",
+		["Name"] = "Truta Pequena",
+		["Type"] = "Comum",
+		["Weight"] = 0.50,
+		["LostWater"] = true,
+		["Economy"] = 70,
+		["Market"] = true,
+		["Fridge"] = true,
+		["Fishing"] = 7
 	},
-	["silvercoin"] = {
-		["index"] = "silvercoin",
-		["name"] = "Moeda de Prata",
-		["type"] = "Usável",
-		["weight"] = 0.05,
-		["economy"] = 20
+	["yellowperch"] = {
+		["Index"] = "yellowperch",
+		["Name"] = "Poleiro Amarelo",
+		["Type"] = "Comum",
+		["Weight"] = 0.50,
+		["LostWater"] = true,
+		["Economy"] = 80,
+		["Market"] = true,
+		["Fridge"] = true,
+		["Fishing"] = 8
 	},
-	["goldcoin"] = {
-		["index"] = "goldcoin",
-		["name"] = "Moeda de Ouro",
-		["type"] = "Usável",
-		["weight"] = 0.05,
-		["economy"] = 40
+	["package"] = {
+		["Index"] = "package",
+		["Name"] = "Encomenda",
+		["Type"] = "Comum",
+		["Weight"] = 20.0,
+		["Anim"] = "caixa",
+		["LostWater"] = true,
+		["Economy"] = 0,
+		["Market"] = true
 	},
-	["watch"] = {
-		["index"] = "watch",
-		["name"] = "Relógio",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 75
+	["milkbottle"] = {
+		["Index"] = "milkbottle",
+		["Name"] = "Garrafa de Leite",
+		["Type"] = "Comum",
+		["Weight"] = 0.35,
+		["Economy"] = 35,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["playstation"] = {
-		["index"] = "playstation",
-		["name"] = "Playstation",
-		["type"] = "Comum",
-		["weight"] = 2.25,
-		["economy"] = 75
+	["pouch"] = {
+		["Index"] = "pouch",
+		["Name"] = "Malote",
+		["Type"] = "Comum",
+		["Weight"] = 1.25,
+		["Economy"] = 0,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["xbox"] = {
-		["index"] = "xbox",
-		["name"] = "Xbox",
-		["type"] = "Comum",
-		["weight"] = 2.25,
-		["economy"] = 75
+	["woodlog"] = {
+		["Index"] = "woodlog",
+		["Name"] = "Tora de Madeira",
+		["Type"] = "Comum",
+		["Weight"] = 1.0,
+		["Economy"] = 0,
+		["Market"] = true,
+		["LostWater"] = true
 	},
-	["legos"] = {
-		["index"] = "legos",
-		["name"] = "Legos",
-		["type"] = "Comum",
-		["weight"] = 0.45,
-		["economy"] = 75
+	["sapphire_pure"] = {
+		["Index"] = "sapphire_pure",
+		["Name"] = "Safira Lapidada",
+		["Type"] = "Comum",
+		["Weight"] = 0.5,
+		["LostWater"] = true,
+		["Economy"] = 60,
+		["Market"] = true
 	},
-	["ominitrix"] = {
-		["index"] = "ominitrix",
-		["name"] = "Ominitrix",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 75
+	["emerald_pure"] = {
+		["Index"] = "emerald_pure",
+		["Name"] = "Esmeralda Lapidada",
+		["Type"] = "Comum",
+		["Weight"] = 0.5,
+		["LostWater"] = true,
+		["Economy"] = 75,
+		["Market"] = true
 	},
-	["bracelet"] = {
-		["index"] = "bracelet",
-		["name"] = "Bracelete",
-		["type"] = "Comum",
-		["weight"] = 0.55,
-		["economy"] = 75
+	["ruby_pure"] = {
+		["Index"] = "ruby_pure",
+		["Name"] = "Ruby Lapidado",
+		["Type"] = "Comum",
+		["Weight"] = 0.5,
+		["LostWater"] = true,
+		["Economy"] = 60,
+		["Market"] = true
 	},
-	["dildo"] = {
-		["index"] = "dildo",
-		["name"] = "Vibrador",
-		["type"] = "Comum",
-		["weight"] = 0.45,
-		["economy"] = 75
+	["gold_pure"] = {
+		["Index"] = "gold_pure",
+		["Name"] = "Barra de Ouro",
+		["Type"] = "Comum",
+		["Weight"] = 0.5,
+		["LostWater"] = true,
+		["Economy"] = 50,
+		["Market"] = true
 	},
-	["spray01"] = {
-		["index"] = "spray01",
-		["name"] = "Desodorante 24hrs",
-		["type"] = "Comum",
-		["weight"] = 0.35,
-		["economy"] = 75
+	["iron_pure"] = {
+		["Index"] = "iron_pure",
+		["Name"] = "Barra de Ferro",
+		["Type"] = "Comum",
+		["Weight"] = 0.5,
+		["LostWater"] = true,
+		["Economy"] = 45,
+		["Market"] = true
 	},
-	["spray02"] = {
-		["index"] = "spray02",
-		["name"] = "Antisséptico",
-		["type"] = "Comum",
-		["weight"] = 0.35,
-		["economy"] = 75
+	["lead_pure"] = {
+		["Index"] = "lead_pure",
+		["Name"] = "Barra de Chumbo",
+		["Type"] = "Comum",
+		["Weight"] = 0.5,
+		["LostWater"] = true,
+		["Economy"] = 40,
+		["Market"] = true
 	},
-	["spray03"] = {
-		["index"] = "spray03",
-		["name"] = "Desodorante 48hrs",
-		["type"] = "Comum",
-		["weight"] = 0.35,
-		["economy"] = 75
+	["tin_pure"] = {
+		["Index"] = "tin_pure",
+		["Name"] = "Barra de Estanho",
+		["Type"] = "Comum",
+		["Weight"] = 0.5,
+		["LostWater"] = true,
+		["Economy"] = 40,
+		["Market"] = true
 	},
-	["spray04"] = {
-		["index"] = "spray04",
-		["name"] = "Desodorante 72hrs",
-		["type"] = "Comum",
-		["weight"] = 0.35,
-		["economy"] = 75
+	["diamond_pure"] = {
+		["Index"] = "diamond_pure",
+		["Name"] = "Diamante Lapidado",
+		["Type"] = "Comum",
+		["Weight"] = 0.5,
+		["LostWater"] = true,
+		["Economy"] = 50,
+		["Market"] = true
 	},
-	["dices"] = {
-		["index"] = "dices",
-		["name"] = "Dados",
-		["type"] = "Usável",
-		["weight"] = 0.35,
-		["economy"] = 45
+	["copper_pure"] = {
+		["Index"] = "copper_pure",
+		["Name"] = "Barra de Cobre",
+		["Type"] = "Comum",
+		["Weight"] = 0.5,
+		["LostWater"] = true,
+		["Economy"] = 42,
+		["Market"] = true
 	},
-	["dish"] = {
-		["index"] = "dish",
-		["name"] = "Prato",
-		["type"] = "Comum",
-		["weight"] = 0.55,
-		["economy"] = 75
+	["ration"] = {
+		["Index"] = "ration",
+		["Name"] = "Ração Animal",
+		["Type"] = "Consumível",
+		["Weight"] = 0.75,
+		["LostWater"] = true,
+		["Economy"] = 125,
+		["Market"] = true
 	},
-	["pan"] = {
-		["index"] = "pan",
-		["name"] = "Panela",
-		["type"] = "Usável",
-		["weight"] = 0.55,
-		["economy"] = 100
+	["coyote1star"] = {
+		["Index"] = "box1star",
+		["Name"] = "Coyote",
+		["Type"] = "Comum",
+		["Weight"] = 2.25,
+		["Economy"] = 275,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["fan"] = {
-		["index"] = "fan",
-		["name"] = "Ventilador",
-		["type"] = "Comum",
-		["weight"] = 1.15,
-		["economy"] = 75
+	["coyote2star"] = {
+		["Index"] = "box2star",
+		["Name"] = "Coyote",
+		["Type"] = "Comum",
+		["Weight"] = 2.25,
+		["Economy"] = 300,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["rimel"] = {
-		["index"] = "rimel",
-		["name"] = "Rímel",
-		["type"] = "Comum",
-		["weight"] = 0.35,
-		["economy"] = 100
+	["coyote3star"] = {
+		["Index"] = "box3star",
+		["Name"] = "Coyote",
+		["Type"] = "Comum",
+		["Weight"] = 2.25,
+		["Economy"] = 325,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["blender"] = {
-		["index"] = "blender",
-		["name"] = "Liquidificador",
-		["type"] = "Usável",
-		["weight"] = 0.75,
-		["economy"] = 75
+	["mtlion1star"] = {
+		["Index"] = "box1star",
+		["Name"] = "Puma",
+		["Type"] = "Comum",
+		["Weight"] = 2.25,
+		["Economy"] = 275,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["switch"] = {
-		["index"] = "switch",
-		["name"] = "Interruptor",
-		["type"] = "Comum",
-		["weight"] = 0.35,
-		["economy"] = 45
+	["mtlion2star"] = {
+		["Index"] = "box2star",
+		["Name"] = "Puma",
+		["Type"] = "Comum",
+		["Weight"] = 2.25,
+		["Economy"] = 300,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["horseshoe"] = {
-		["index"] = "horseshoe",
-		["name"] = "Ferradura",
-		["type"] = "Comum",
-		["weight"] = 0.45,
-		["economy"] = 75
+	["mtlion3star"] = {
+		["Index"] = "box3star",
+		["Name"] = "Puma",
+		["Type"] = "Comum",
+		["Weight"] = 2.25,
+		["Economy"] = 325,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["brush"] = {
-		["index"] = "brush",
-		["name"] = "Escova",
-		["type"] = "Comum",
-		["weight"] = 0.25,
-		["economy"] = 75
+	["boar1star"] = {
+		["Index"] = "box1star",
+		["Name"] = "Javali",
+		["Type"] = "Comum",
+		["Weight"] = 2.25,
+		["Economy"] = 275,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["domino"] = {
-		["index"] = "domino",
-		["name"] = "Dominó",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["economy"] = 45
+	["boar2star"] = {
+		["Index"] = "box2star",
+		["Name"] = "Javali",
+		["Type"] = "Comum",
+		["Weight"] = 2.25,
+		["Economy"] = 300,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["floppy"] = {
-		["index"] = "floppy",
-		["name"] = "Disquete",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["economy"] = 45
+	["boar3star"] = {
+		["Index"] = "box3star",
+		["Name"] = "Javali",
+		["Type"] = "Comum",
+		["Weight"] = 2.25,
+		["Economy"] = 325,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["cup"] = {
-		["index"] = "cup",
-		["name"] = "Cálice",
-		["type"] = "Comum",
-		["weight"] = 0.45,
-		["economy"] = 100
+	["deer1star"] = {
+		["Index"] = "box1star",
+		["Name"] = "Cervo",
+		["Type"] = "Comum",
+		["Weight"] = 2.25,
+		["Economy"] = 275,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["deck"] = {
-		["index"] = "deck",
-		["name"] = "Baralho",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 60
+	["deer2star"] = {
+		["Index"] = "box2star",
+		["Name"] = "Cervo",
+		["Type"] = "Comum",
+		["Weight"] = 2.25,
+		["Economy"] = 300,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["eraser"] = {
-		["index"] = "eraser",
-		["name"] = "Apagador",
-		["type"] = "Comum",
-		["weight"] = 0.15,
-		["economy"] = 75
+	["deer3star"] = {
+		["Index"] = "box3star",
+		["Name"] = "Cervo",
+		["Type"] = "Comum",
+		["Weight"] = 2.25,
+		["Economy"] = 325,
+		["Market"] = true,
+		["Fridge"] = true
 	},
-	["chips"] = {
-		["index"] = "chips",
-		["name"] = "Fichas",
-		["type"] = "Raro",
-		["weight"] = 0.015,
-		["economy"] = 1000
+	-- OUTROS
+	["legendarykey"] = {
+		["Index"] = "legendarykey",
+		["Name"] = "Chave do Depósito",
+		["Type"] = "Comum",
+		["Charges"] = 3,
+		["Weight"] = 0.25,
+		["Economy"] = 4225,
+		["Market"] = true,
+		["Rarity"] = "legendary"
 	},
-	["pliers"] = {
-		["index"] = "pliers",
-		["name"] = "Alicate",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 95
+	["sugarbox"] = {
+		["Index"] = "sugarbox",
+		["Name"] = "Caixa de Açucar",
+		["Type"] = "Comum",
+		["Weight"] = 0.25,
+		["Economy"] = 35,
+		["Market"] = true
 	},
-	["lampshade"] = {
-		["index"] = "lampshade",
-		["name"] = "Abajur",
-		["type"] = "Comum",
-		["weight"] = 0.75,
-		["economy"] = 75
+	["condensedmilk"] = {
+		["Index"] = "condensedmilk",
+		["Name"] = "Leite Condensado",
+		["Type"] = "Comum",
+		["Weight"] = 0.25,
+		["Economy"] = 25,
+		["Market"] = true
+	},
+	["mayonnaise"] = {
+		["Index"] = "mayonnaise",
+		["Name"] = "Pote de Maionese",
+		["Type"] = "Comum",
+		["Weight"] = 0.45,
+		["Economy"] = 20,
+		["Market"] = true
+	},
+	["ryebread"] = {
+		["Index"] = "ryebread",
+		["Name"] = "Pão de Centeio",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["Economy"] = 20,
+		["Market"] = true
+	},
+	["ricebag"] = {
+		["Index"] = "ricebag",
+		["Name"] = "Saco de Arroz",
+		["Type"] = "Comum",
+		["Weight"] = 1.25,
+		["Economy"] = 105,
+		["Market"] = true
+	},
+	["dogtag"] = {
+		["Index"] = "dogtag",
+		["Name"] = "Plaqueta de Identificação",
+		["Type"] = "Comum",
+		["Weight"] = 0.025,
+		["Market"] = true,
+		["Named"] = true,
+		["Economy"] = 0,
+		["Arrest"] = true
+	},
+	["adrenaline"] = {
+		["Index"] = "adrenaline",
+		["Name"] = "Adrenalina",
+		["Type"] = "Comum",
+		["Weight"] = 0.25,
+		["Market"] = true,
+		["Economy"] = 4225
+	},
+	["dismantle"] = {
+		["Index"] = "dismantle",
+		["Name"] = "Cartão Ilegível",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 0.0,
+		["Economy"] = 1225,
+		["Market"] = true
+	},
+	["platinum"] = {
+		["Index"] = "platinum",
+		["Name"] = "Platina",
+		["Type"] = "Comum",
+		["Weight"] = 0.0,
+		["Economy"] = 20
+	},
+	["binoculars"] = {
+		["Index"] = "binoculars",
+		["Name"] = "Binóculos",
+		["Type"] = "Consumível",
+		["Durability"] = 240,
+		["Weight"] = 1.0,
+		["Economy"] = 425,
+		["Recycle"] = {
+			["glass"] = 15,
+			["plastic"] = 15
+		}
+	},
+	["camera"] = {
+		["Index"] = "camera",
+		["Name"] = "Câmera",
+		["Type"] = "Consumível",
+		["Durability"] = 240,
+		["Weight"] = 1.0,
+		["LostWater"] = true,
+		["Economy"] = 425,
+		["Recycle"] = {
+			["glass"] = 15,
+			["plastic"] = 15
+		}
+	},
+	["creditcard"] = {
+		["Index"] = "creditcard",
+		["Name"] = "Cartão de Crédito",
+		["Type"] = "Comum",
+		["Weight"] = 0.25,
+		["Delete"] = true,
+		["Economy"] = 0,
+		["Market"] = true,
+		["LostWater"] = true
+	},
+	["propertys"] = {
+		["Index"] = "propertys",
+		["Name"] = "Cartão de Propriedade",
+		["Type"] = "Comum",
+		["Weight"] = 0.35,
+		["Delete"] = true,
+		["Economy"] = 0,
+		["Market"] = true,
+		["LostWater"] = true
+	},
+	["races"] = {
+		["Index"] = "races",
+		["Name"] = "Cartão Magnético",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 0.25,
+		["LostWater"] = true,
+		["Economy"] = 425,
+		["Market"] = true
+	},
+	["postit"] = {
+		["Index"] = "postit",
+		["Name"] = "Post-It",
+		["Type"] = "Consumível",
+		["Weight"] = 0.25,
+		["LostWater"] = true,
+		["Economy"] = 20
+	},
+	["blocksignal"] = {
+		["Index"] = "blocksignal",
+		["Name"] = "Bloqueador de Sinal",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 0.75,
+		["Market"] = true,
+		["LostWater"] = true,
+		["Economy"] = 825,
+		["Recycle"] = {
+			["plastic"] = 35
+		}
+	},
+	["odb2"] = {
+		["Index"] = "odb2",
+		["Name"] = "Scanner Automotivo",
+		["Type"] = "Consumível",
+		["Weight"] = 0.75,
+		["Durability"] = 72,
+		["LostWater"] = true,
+		["Economy"] = 8275,
+		["Market"] = true
+	},
+	["vehkey"] = {
+		["Index"] = "vehkey",
+		["Name"] = "Chave Veícular",
+		["Type"] = "Consumível",
+		["Weight"] = 0.25,
+		["LostWater"] = true,
+		["Economy"] = 0,
+		["Market"] = true
+	},
+	["radio"] = {
+		["Index"] = "radio",
+		["Name"] = "Rádio",
+		["Type"] = "Consumível",
+		["Repair"] = "repairkit01",
+		["Durability"] = 168,
+		["Weight"] = 0.75,
+		["Execute"] = {
+			["Type"] = "Client",
+			["Event"] = "radio:RadioClean"
+		},
+		["LostWater"] = true,
+		["Economy"] = 975,
+		["Recycle"] = {
+			["glass"] = 10,
+			["plastic"] = 25
+		}
+	},
+	["vest"] = {
+		["Index"] = "vest",
+		["Name"] = "Colete Balístico",
+		["Repair"] = "repairkit01",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Durability"] = 96,
+		["Weight"] = 3.75,
+		["Market"] = true,
+		["Economy"] = 925
+	},
+	["fishingrod"] = {
+		["Index"] = "fishingrod",
+		["Name"] = "Vara de Madeira",
+		["Description"] =
+		"Companheira ideal para os amantes da pesca, seja em água doce ou salgada, com sua construção leve e resistente, proporciona equilíbrio perfeito e sensibilidade para detectar até os mais sutis movimentos dos peixes, seja para pescadores iniciantes ou experientes, esta vara é a escolha confiável para horas de diversão e sucesso nas pescarias.",
+		["Repair"] = "repairkit01",
+		["Type"] = "Consumível",
+		["Durability"] = 72,
+		["Weight"] = 2.75,
+		["Economy"] = 575,
+		["Market"] = true
+	},
+	["fishingrod2"] = {
+		["Index"] = "fishingrod2",
+		["Name"] = "Vara de Grafite",
+		["Description"] =
+		"Companheira ideal para os amantes da pesca, seja em água doce ou salgada, com sua construção leve e resistente, proporciona equilíbrio perfeito e sensibilidade para detectar até os mais sutis movimentos dos peixes, seja para pescadores iniciantes ou experientes, esta vara é a escolha confiável para horas de diversão e sucesso nas pescarias.",
+		["Repair"] = "repairkit01",
+		["Type"] = "Consumível",
+		["Durability"] = 72,
+		["Weight"] = 2.75,
+		["Economy"] = 875,
+		["Market"] = true
+	},
+	["fishingrod3"] = {
+		["Index"] = "fishingrod3",
+		["Name"] = "Vara de Fibra",
+		["Description"] =
+		"Companheira ideal para os amantes da pesca, seja em água doce ou salgada, com sua construção leve e resistente, proporciona equilíbrio perfeito e sensibilidade para detectar até os mais sutis movimentos dos peixes, seja para pescadores iniciantes ou experientes, esta vara é a escolha confiável para horas de diversão e sucesso nas pescarias.",
+		["Repair"] = "repairkit01",
+		["Type"] = "Consumível",
+		["Durability"] = 72,
+		["Weight"] = 2.75,
+		["Economy"] = 1275,
+		["Market"] = true
+	},
+	["fishingrod4"] = {
+		["Index"] = "fishingrod4",
+		["Name"] = "Vara de Carbono",
+		["Description"] =
+		"Companheira ideal para os amantes da pesca, seja em água doce ou salgada, com sua construção leve e resistente, proporciona equilíbrio perfeito e sensibilidade para detectar até os mais sutis movimentos dos peixes, seja para pescadores iniciantes ou experientes, esta vara é a escolha confiável para horas de diversão e sucesso nas pescarias.",
+		["Repair"] = "repairkit01",
+		["Type"] = "Consumível",
+		["Durability"] = 72,
+		["Weight"] = 2.75,
+		["Economy"] = 1925,
+		["Market"] = true
+	},
+	["pickaxe"] = {
+		["Index"] = "pickaxe",
+		["Name"] = "Picareta",
+		["Description"] =
+		"Ferramenta versátil e resistente, projetada para lidar com uma variedade de tarefas, com sua construção robusta e design ergonômico, oferece conforto e eficiência em cada movimento, seja para escavação no jardim, trabalhos de construção ou aventuras ao ar livre, essa picareta é a escolha confiável para enfrentar desafios com facilidade e precisão.",
+		["Repair"] = "repairkit01",
+		["Type"] = "Comum",
+		["Durability"] = 240,
+		["Weight"] = 2.75,
+		["Economy"] = 1225,
+		["Market"] = true
+	},
+	["axe"] = {
+		["Index"] = "axe",
+		["Name"] = "Machadinha",
+		["Description"] =
+		"Ferramenta robusta e confiável para os desafios mais exigentes, construído com materiais de alta qualidade e design ergonômico, proporciona precisão e potência em cada golpe, ideal para cortar lenha, realizar trabalhos de construção ou aventuras ao ar livre, é o companheiro perfeito para qualquer tarefa que exija força e eficiência.",
+		["Repair"] = "repairkit01",
+		["Type"] = "Comum",
+		["Durability"] = 240,
+		["Weight"] = 2.75,
+		["Economy"] = 1225,
+		["Market"] = true
+	},
+	["lockpick"] = {
+		["Index"] = "lockpick",
+		["Name"] = "Gazua",
+		["Description"] =
+		"Ferramenta fina e flexível, frequentemente feita de metal, usada para abrir fechaduras sem a chave correspondente, é uma ferramenta comum entre profissionais de segurança e em situações de emergência.",
+		["Repair"] = "repairkit01",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Durability"] = 72,
+		["Weight"] = 1.25,
+		["Economy"] = 725,
+		["Market"] = true
+	},
+	["cellphone"] = {
+		["Index"] = "cellphone",
+		["Name"] = "Celular",
+		["Repair"] = "repairkit01",
+		["Type"] = "Comum",
+		["Durability"] = 240,
+		["Weight"] = 0.75,
+		["LostWater"] = true,
+		["Economy"] = 725,
+		["Recycle"] = {
+			["glass"] = 10,
+			["plastic"] = 15
+		}
+	},
+	["scuba"] = {
+		["Index"] = "scuba",
+		["Name"] = "Roupa de Mergulho",
+		["Repair"] = "repairkit01",
+		["Type"] = "Consumível",
+		["Durability"] = 72,
+		["Weight"] = 2.25,
+		["Execute"] = {
+			["Type"] = "Client",
+			["Event"] = "inventory:ScubaRemove"
+		},
+		["Economy"] = 975
+	},
+	["handcuff"] = {
+		["Index"] = "handcuff",
+		["Name"] = "Algemas",
+		["Repair"] = "repairkit02",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Durability"] = 240,
+		["Weight"] = 1.25,
+		["Economy"] = 1225,
+		["Market"] = true,
+		["Recycle"] = {
+			["copper"] = 20,
+			["aluminum"] = 15
+		}
+	},
+	["rope"] = {
+		["Index"] = "rope",
+		["Name"] = "Cordas",
+		["Repair"] = "repairkit01",
+		["Type"] = "Consumível",
+		["Durability"] = 240,
+		["Weight"] = 1.75,
+		["Economy"] = 925,
+		["Market"] = true
+	},
+	["hood"] = {
+		["Index"] = "hood",
+		["Name"] = "Capuz",
+		["Repair"] = "repairkit02",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Durability"] = 240,
+		["Weight"] = 1.75,
+		["Economy"] = 1225,
+		["Market"] = true,
+		["Recycle"] = {
+			["tarp"] = 1,
+			["rubber"] = 15
+		}
+	},
+	["cigarette"] = {
+		["Index"] = "cigarette",
+		["Name"] = "Maço de Cigarros",
+		["Type"] = "Consumível",
+		["Weight"] = 0.15,
+		["Max"] = 5,
+		["LostWater"] = true,
+		["Economy"] = 15
+	},
+	["lighter"] = {
+		["Index"] = "lighter",
+		["Name"] = "Isqueiro",
+		["Repair"] = "repairkit01",
+		["Durability"] = 168,
+		["Type"] = "Comum",
+		["Weight"] = 0.55,
+		["LostWater"] = true,
+		["Economy"] = 225
+	},
+	["vape"] = {
+		["Index"] = "vape",
+		["Name"] = "Vape",
+		["Repair"] = "repairkit02",
+		["Type"] = "Consumível",
+		["Durability"] = 240,
+		["Weight"] = 0.75,
+		["LostWater"] = true,
+		["Economy"] = 4750
+	},
+	["dollar"] = {
+		["Index"] = "dollar",
+		["Name"] = "Dólar",
+		["Type"] = "Comum",
+		["Weight"] = 0.0,
+		["Market"] = true,
+		["Economy"] = 1,
+		["Arrest"] = true
+	},
+	["dirtydollar"] = {
+		["Index"] = "dirtydollar",
+		["Name"] = "Dólar Sujo",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 0.0,
+		["Market"] = true,
+		["LostWater"] = "wetdollar",
+		["Economy"] = 1
+	},
+	["wetdollar"] = {
+		["Index"] = "wetdollar",
+		["Name"] = "Dólar Molhado",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 0.0,
+		["Market"] = true,
+		["Economy"] = 1
+	},
+	["promissory1000"] = {
+		["Index"] = "promissory",
+		["Name"] = "Nota Promissória",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 0.0,
+		["Market"] = true,
+		["Economy"] = 1000
+	},
+	["promissory2000"] = {
+		["Index"] = "promissory",
+		["Name"] = "Nota Promissória",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 0.0,
+		["Market"] = true,
+		["Economy"] = 2000
+	},
+	["promissory3000"] = {
+		["Index"] = "promissory",
+		["Name"] = "Nota Promissória",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 0.0,
+		["Market"] = true,
+		["Economy"] = 3000
+	},
+	["promissory4000"] = {
+		["Index"] = "promissory",
+		["Name"] = "Nota Promissória",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 0.0,
+		["Market"] = true,
+		["Economy"] = 4000
+	},
+	["promissory5000"] = {
+		["Index"] = "promissory",
+		["Name"] = "Nota Promissória",
+		["Type"] = "Comum",
+		["Arrest"] = true,
+		["Weight"] = 0.0,
+		["Market"] = true,
+		["Economy"] = 5000
+	},
+	["pager"] = {
+		["Index"] = "pager",
+		["Name"] = "Pager",
+		["Type"] = "Consumível",
+		["Arrest"] = true,
+		["Weight"] = 2.25,
+		["LostWater"] = true,
+		["Economy"] = 425,
+		["Recycle"] = {
+			["glass"] = 5,
+			["plastic"] = 10
+		}
 	},
 	["soap"] = {
-		["index"] = "soap",
-		["name"] = "Sabonete",
-		["type"] = "Usável",
-		["weight"] = 0.25,
-		["economy"] = 42
+		["Index"] = "soap",
+		["Name"] = "Sabonete",
+		["Type"] = "Consumível",
+		["Weight"] = 0.25,
+		["Water"] = "In",
+		["Economy"] = 125,
+		["Market"] = true
 	},
-	["slipper"] = {
-		["index"] = "slipper",
-		["name"] = "Chinelo",
-		["type"] = "Comum",
-		["weight"] = 0.35,
-		["economy"] = 51
+	["emptybottle"] = {
+		["Index"] = "emptybottle",
+		["Name"] = "Garrafa Vazia",
+		["Type"] = "Comum",
+		["Weight"] = 0.15,
+		["Economy"] = 15,
+		["Recycle"] = {
+			["plastic"] = 1
+		}
 	},
-	["pendrive"] = {
-		["index"] = "pendrive",
-		["name"] = "Pendrive",
-		["repair"] = "repairkit01",
-		["type"] = "Comum",
-		["durability"] = 7,
-		["weight"] = 0.75,
-		["economy"] = 527
+	-- BLUEPRINTS
+	["blueprint_WEAPON_ADVANCEDRIFLE"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Tar-21",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Tar-21</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 11325
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_COMPACTRIFLE"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: AK Compact",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>AK Compact</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 6625
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_batteryaaplus"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Bateria AA+",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Bateria AA+</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 135
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_rubber"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Borracha",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Borracha</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 125
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_silverchain"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Corrente de Prata",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Corrente de Prata</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 375
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_CROWBAR"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Pé de Cabra",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Pé de Cabra</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_ATTACH_GRIP"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Empunhadura",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Empunhadura</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 875
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_SAWNOFFSHOTGUN"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Mossberg 500",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Mossberg 500</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 6625
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_saline"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Soro Fisiológico",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Soro Fisiológico</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 325
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_glass"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Vidro",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Vidro</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 125
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_MICROSMG"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Uzi",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Uzi</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 6625
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_FLASHLIGHT"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Lanterna",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Lanterna</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 275
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_HEAVYRIFLE"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Scar-H",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Scar-H</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 12125
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_PISTOL_AMMO"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Munição de Pistola",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Munição de Pistola</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 275
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_acetone"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Acetona",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Acetona</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 275
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_ASSAULTRIFLE"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: AK-103",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>AK-103</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 11375
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_alcohol"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Álcool",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Álcool</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 275
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_electroniccomponents"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Componentes Eletrônicos",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Componentes Eletrônicos</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 325
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_gauze"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Ataduras",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Ataduras</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 425
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_MUSKET"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Winchester 1892",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Winchester 1892</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 1625
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_WRENCH"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Chave Inglesa",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Chave Inglesa</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_BULLPUPRIFLE"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: QBZ-95",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>QBZ-95</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 11375
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_GOLFCLUB"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Taco de Golf",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Taco de Golf</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_toothpaste"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Pasta de Dente",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Pasta de Dente</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 275
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_BAT"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Bastão de Beisebol",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Bastão de Beisebol</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_ATTACH_MAGAZINE"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Pente Estendido",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Pente Estendido</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 1125
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_videocard"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Placa de Vídeo",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Placa de Vídeo</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 2115
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_screws"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Parafusos",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Parafusos</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 275
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_MACHETE"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Facão",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Facão</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_ASSAULTRIFLE_MK2"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: AK-74",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>AK-74</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 12115
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_roadsigns"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Placas de Trânsito",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Placas de Trânsito</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 275
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_processorfan"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Ventoinha do Processador",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Ventoinha do Processador</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 475
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_rammemory"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Memória RAM",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Memória RAM</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_weaponparts"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Peças de Armas",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Peças de Armas</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 625
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_MUSKET_AMMO"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Munição de Mosquete",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Munição de Mosquete</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 125
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_copper"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Cobre",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Cobre</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 125
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_smgbody"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Corpo de Sub",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Corpo de Sub</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 375
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_HEAVYPISTOL"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Ati FX45",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Ati FX45</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 3615
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_medkit"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Kit de Primeiros Socorros",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Kit de Primeiros Socorros</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 425
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_powercable"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Cabo de Alimentação",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Cabo de Alimentação</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 325
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_batteryaa"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Bateria AA",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Bateria AA</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 325
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_CARBINERIFLE_MK2"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: M4A4",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>M4A4</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 12115
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_KNUCKLE"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Soco Inglês",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Soco Inglês</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_ATTACH_FLASHLIGHT"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Lanterna Tatica",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Lanterna Tatica</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 1075
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_processor"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Processador",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Processador</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 475
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_STONE_HATCHET"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Machado de Pedra",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Machado de Pedra</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_insulatingtape"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Fita Isolante",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Fita Isolante</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 275
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_SWITCHBLADE"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Canivete",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Canivete</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_safependrive"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Pendrive Seguro",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Pendrive Seguro</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 1275
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_riflebody"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Corpo de Rifle",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Corpo de Rifle</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_HATCHET"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Machado",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Machado</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_PISTOL"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: M1911",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>M1911</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 2875
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_aluminum"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Alumínio",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Alumínio</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 124
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_SNSPISTOL_MK2"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: HK P7M10",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>HK P7M10</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 2625
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_ATTACH_SILENCER"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Silenciador",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Silenciador</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 2375
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_SPECIALCARBINE_MK2"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Sig Sauer 556",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Sig Sauer 556</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 12115
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_latex"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Látex",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Látex</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 125
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_plastic"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Plástico",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Plástico</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 125
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_PISTOL50"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Desert Eagle",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Desert Eagle</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 4115
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_MINISMG"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Skorpion V61",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Skorpion V61</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 6625
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_TACTICALRIFLE"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: M16",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>M16</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 12115
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_techtrash"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Lixo Eletrônico",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Lixo Eletrônico</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 225
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_scotchtape"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Fita Adesiva",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Fita Adesiva</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 125
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_STUNGUN"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Tazer",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Tazer</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 425
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_screwnuts"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Porcas de Parafuso",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Porcas de Parafuso</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 125
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_SNSPISTOL"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: AMT 380",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>AMT 380</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 2375
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_analgesic"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Analgésicos",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Analgésicos</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 325
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_sinkalmy"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Sinkalmy",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Sinkalmy</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 475
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_gunpowder"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Frasco de Pólvora",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Frasco de Pólvora</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 475
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_bandage"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Bandagem Asséptica",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Bandagem Asséptica</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_GUSENBERG"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Thompson",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Thompson</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 7625
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_ASSAULTSMG"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Steyr AUG",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Steyr AUG</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 7625
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_SMG_MK2"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Evo-3",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Evo-3</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 7625
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_pistolbody"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Corpo de Pistola",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Corpo de Pistola</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_sheetmetal"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Chapa de Metal",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Chapa de Metal</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 145
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_SMG"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: MP5",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>MP5</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 6375
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_powersupply"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Fonte de Alimentação",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Fonte de Alimentação</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_PUMPSHOTGUN_MK2"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Mossberg 590A1",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Mossberg 590A1</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 7625
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_PUMPSHOTGUN"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Mossberg 590",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Mossberg 590</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 6625
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_SPECIALCARBINE"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: G36C",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>G36C</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 11365
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_BULLPUPRIFLE_MK2"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: L85",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>L85</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 12115
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_CARBINERIFLE"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: M4A1",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>M4A1</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 11375
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_ATTACH_CROSSHAIR"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Mira Holográfica",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Mira Holográfica</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 1375
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_MACHINEPISTOL"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Tec-9",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Tec-9</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 4125
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_APPISTOL"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Koch Vp9",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Koch Vp9</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 3125
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_PISTOL_MK2"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: FN Five Seven",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>FN Five Seven</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 3125
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_SMOKEGRENADE"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Granada de Fumaça",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Granada de Fumaça</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 1225
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_MOLOTOV"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Coquetel Molotov",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Coquetel Molotov</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 1225
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_SHOTGUN_AMMO"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Munição de Espingarga",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Munição de Espingarga</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 275
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_RIFLE_AMMO"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Munição de Rifle",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Munição de Rifle</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 275
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_SMG_AMMO"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Munição de Sub",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Munição de Sub</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 275
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_HAMMER"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Martelo",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Martelo</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_COMBATPISTOL"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Glock",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Glock</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 3125
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_NIGHTSTICK"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Cassetete",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Cassetete</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_BATTLEAXE"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Machado de Batalha",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Machado de Batalha</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_POOLCUE"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Taco de Sinuca",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Taco de Sinuca</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_ssddrive"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Unidade SSD",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Unidade SSD</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 475
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_goldnecklace"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Colar de Ouro",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Colar de Ouro</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 525
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_WEAPON_VINTAGEPISTOL"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: M1922",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>M1922</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 2375
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_explosives"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Explosivos",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Explosivos</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 425
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_tarp"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Lona",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Lona</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 175
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_ritmoneury"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Ritmoneury",
+		["Description"] = "Após a utilização deste fragmento você se especializa na produção de <epic>Ritmoneury</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 475
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_sulfuric"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Ácido Sulfúrico",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Ácido Sulfúrico</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 325
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_circuit"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Circuito Eletrônico",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Circuito Eletrônico</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 2375
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
+	},
+	["blueprint_horsefigurine"] = {
+		["Index"] = "blueprint",
+		["Name"] = "Aprendizado: Estatueta de Cavalo",
+		["Description"] =
+		"Após a utilização deste fragmento você se especializa na produção de <epic>Estatueta de Cavalo</epic>.",
+		["Recycle"] = {
+			["blueprint_fragment"] = 1215
+		},
+		["Type"] = "Consumível",
+		["Rarity"] = "epic",
+		["Weight"] = 0.0,
+		["Economy"] = 0
 	}
 }
 -----------------------------------------------------------------------------------------------------------------------------------------
--- ITEMBODY
+-- THEMEITEMS
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemBody(Item)
-	local Split = splitString(Item, "-")
-	local Item = Split[1]
-
-	if itemlist[Item] then
-		return itemlist[Item]
+local function SyncThemeItem(Name, Data)
+	if type(Theme) ~= "table" then
+		return
 	end
+
+	Theme["items"] = Theme["items"] or {}
+	Theme["items"][Name] = {
+		["Name"] = Data["Name"] or "Deletado",
+		["Description"] = Data["Description"] or "",
+		["Weight"] = Data["Weight"] or 0.0,
+		["Index"] = Data["Index"] or Name,
+		["Economy"] = Data["Economy"] or 0,
+		["Rarity"] = Data["Rarity"] or "normal"
+	}
+end
+
+for Name, Data in pairs(List) do
+	SyncThemeItem(Name, Data)
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ADDITEM
+-----------------------------------------------------------------------------------------------------------------------------------------
+AddEventHandler("AddItem", function(Name, Table)
+	List[Name] = Table
+	SyncThemeItem(Name, Table)
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMLIST
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemList()
+	return List
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMEXIST
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemExist(Item)
+	return List[SplitOne(Item)]
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMINDEX
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemIndex(Item)
-	local Split = splitString(Item, "-")
-	local Item = Split[1]
-
-	if itemlist[Item] then
-		return itemlist[Item]["index"]
-	end
+function ItemIndex(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Index"] or false
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMNAME
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemName(Item)
-	local Split = splitString(Item, "-")
-	local Item = Split[1]
-
-	if itemlist[Item] then
-		return itemlist[Item]["name"]
-	end
-
-	return "Deletado"
+function ItemName(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Name"] or "Deletado"
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMTYPE
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemType(Item)
-	local Split = splitString(Item, "-")
-	local Item = Split[1]
-
-	if itemlist[Item] then
-		return itemlist[Item]["type"]
-	end
+function ItemType(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Type"] or "Comum"
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
--- ITEMAMMO
+-- ITEMTYPECHECK
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemAmmo(Item)
-	local Split = splitString(Item, "-")
-	local Item = Split[1]
-
-	if itemlist[Item] then
-		return itemlist[Item]["ammo"]
-	end
+function ItemTypeCheck(Item, Mode)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Type"] and List[Item]["Type"] == Mode and true or false
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMVEHICLE
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemVehicle(Item)
-	local Split = splitString(Item, "-")
-	local Item = Split[1]
-
-	if itemlist[Item] then
-		return itemlist[Item]["vehicle"] or false
-	end
-
-	return false
+function ItemVehicle(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Vehicle"] or false
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMWEIGHT
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemWeight(Item)
-	local Split = splitString(Item, "-")
-	local Item = Split[1]
+function ItemWeight(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Weight"] or 0.0
+end
 
-	if itemlist[Item] then
-		return itemlist[Item]["weight"] or 0.0
-	end
-
-	return 0.0
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMBACKPACK
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemBackpack(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Backpack"] or 0
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMMAXAMOUNT
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemMaxAmount(Item)
-	local Split = splitString(Item, "-")
-	local Item = Split[1]
-
-	if itemlist[Item] then
-		return itemlist[Item]["max"] or nil
-	end
-
-	return nil
+function ItemMaxAmount(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Max"] or false
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
--- ITEMSCAPE
+-- ITEMLOSTWATER
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemScape(Item)
-	local Split = splitString(Item, "-")
-	local Item = Split[1]
+function ItemLostWater(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["LostWater"] or false
+end
 
-	if itemlist[Item] then
-		return itemlist[Item]["scape"] or nil
-	end
-
-	return nil
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMWATER
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemWater(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Water"] or false
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMDESCRIPTION
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemDescription(Item)
-	local Split = splitString(Item, "-")
-	local Item = Split[1]
-
-	if itemlist[Item] then
-		return itemlist[Item]["desc"] or nil
-	end
-
-	return nil
+function ItemDescription(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Description"] or false
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMDURABILITY
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemDurability(Item)
-	local Split = splitString(Item, "-")
-	local Item = Split[1]
-
-	if itemlist[Item] then
-		return itemlist[Item]["durability"] or false
-	end
-
-	return false
+function ItemDurability(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Durability"] or false
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
--- ITEMCHARGES
+-- ITEMLOADS
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemCharges(Item)
-	local Split = splitString(Item, "-")
-	local Item = Split[1]
-
-	if itemlist[Item] then
-		return itemlist[Item]["charges"] or nil
-	end
-
-	return nil
-end
-
------------------------------------------------------------------------------------------------------------------------------------------
--- ITEMECONOMY
------------------------------------------------------------------------------------------------------------------------------------------
-function itemEconomy(Item)
-	local Split = splitString(Item, "-")
-	local Item = Split[1]
-
-	if itemlist[Item] then
-		return itemlist[Item]["economy"] or "S/V"
-	end
-
-	return "S/V"
-end
-
------------------------------------------------------------------------------------------------------------------------------------------
--- ITEMBLOCK
------------------------------------------------------------------------------------------------------------------------------------------
-function itemBlock(Item)
-	local Split = splitString(Item, "-")
-	local Item = Split[1]
-
-	if itemlist[Item] then
-		return itemlist[Item]["block"] or nil
-	end
-
-	return nil
+function ItemLoads(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Charges"] or false
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ITEMREPAIR
 -----------------------------------------------------------------------------------------------------------------------------------------
-function itemRepair(Item)
-	local splitName = splitString(Item, "-")
-	local nameItem = splitName[1]
+function ItemRepair(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Repair"] or false
+end
 
-	if itemlist[nameItem] then
-		return itemlist[nameItem]["repair"] or false
-	end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMUNIQUE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemUnique(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Unique"] or false
+end
 
-	return false
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMCHEST
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemChest(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Chest"] or false
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMANIM
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemAnim(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Anim"] or false
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMEXECUTE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemExecute(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Execute"] or false
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMBLUEPRINT
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemBlueprint(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Blueprint"] or false
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMARREST
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemArrest(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Arrest"] or false
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMSERIAL
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemSerial(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Serial"] or false
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMECONOMY
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemEconomy(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Economy"] or 0
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMRARITY
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemRarity(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Rarity"] or "normal"
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMRECYCLE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemRecycle(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Recycle"] or {}
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMFRIDGE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemFridge(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Fridge"] or false
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMFISHING
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemFishing(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Fishing"] or false
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMNAMED
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemNamed(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Named"] or false
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMSKINSHOP
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ItemSkinshop(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Skinshop"] or false
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BLOCKDELETE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function BlockDelete(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Delete"] or false
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BLOCKMARKET
+-----------------------------------------------------------------------------------------------------------------------------------------
+function BlockMarket(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Market"] or false
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ITEMAMMO
+-----------------------------------------------------------------------------------------------------------------------------------------
+function WeaponAmmo(Item)
+	local Item = SplitOne(Item)
+	return List[Item] and List[Item]["Ammo"] or false
+end
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- WEAPONATTACH
+-----------------------------------------------------------------------------------------------------------------------------------------
+function WeaponAttach(Item, Weapon)
+	local Item = SplitOne(Item)
+	return List[Weapon] and List[Weapon]["Attachs"] and List[Weapon]["Attachs"][Item] or false
 end

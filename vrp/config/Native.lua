@@ -2,8 +2,12 @@
 -- LOADMODEL
 -----------------------------------------------------------------------------------------------------------------------------------------
 function LoadModel(Hash)
+	if type(Hash) == "string" then
+		Hash = GetHashKey(Hash)
+	end
+
+	RequestModel(Hash)
 	if IsModelInCdimage(Hash) and IsModelValid(Hash) then
-		RequestModel(Hash)
 		while not HasModelLoaded(Hash) do
 			RequestModel(Hash)
 			Wait(1)
@@ -30,9 +34,9 @@ end
 -- LOADTEXTURE
 -----------------------------------------------------------------------------------------------------------------------------------------
 function LoadTexture(Library)
-	RequestStreamedTextureDict(Library,false)
+	RequestStreamedTextureDict(Library, false)
 	while not HasStreamedTextureDictLoaded(Library) do
-		RequestStreamedTextureDict(Library,false)
+		RequestStreamedTextureDict(Library, false)
 		Wait(1)
 	end
 
@@ -66,28 +70,31 @@ end
 -- LOADNETWORK
 -----------------------------------------------------------------------------------------------------------------------------------------
 function LoadNetwork(Network)
-	local Cooldown = 100
-	local Object = NetworkGetEntityFromNetworkId(Network)
-	while not DoesEntityExist(Object) and Cooldown > 0 do
-		Cooldown = Cooldown - 1
-		Object = NetworkGetEntityFromNetworkId(Network)
+	Wait(100)
 
-		Wait(1)
-	end
+	if NetworkDoesNetworkIdExist(Network) then
+		local Object = NetToEnt(Network)
 
-	if DoesEntityExist(Object) then
-		NetworkRequestControlOfEntity(Object)
-		while not NetworkHasControlOfEntity(Object) do
-			Wait(1)
+		if DoesEntityExist(Object) then
+			NetworkRequestControlOfEntity(Object)
+			while not NetworkHasControlOfEntity(Object) do
+				Wait(1)
+			end
+
+			SetEntityAsMissionEntity(Object, true, true)
+			while not IsEntityAMissionEntity(Object) do
+				Wait(1)
+			end
+
+			return Object
 		end
-
-		SetEntityAsMissionEntity(Object,true,true)
-		while not IsEntityAMissionEntity(Object) do
-			Wait(1)
-		end
-
-		return Object
 	end
 
 	return false
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- CHECKPOLICE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function CheckPolice()
+	return LocalPlayer["state"]["Policia"]
 end

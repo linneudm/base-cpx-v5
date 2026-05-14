@@ -1,75 +1,96 @@
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- VARIABLES
+-----------------------------------------------------------------------------------------------------------------------------------------
 SERVER = IsDuplicityVersion()
 -----------------------------------------------------------------------------------------------------------------------------------------
--- DISCATEGORY
+-- LEVELS
 -----------------------------------------------------------------------------------------------------------------------------------------
-function ClassCategory(Number)
-	local Category = "B"
+local Levels = { 0,250,500,1000,2000,3500,5000,7500,10000,15000 }
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- CLASSCATEGORY
+-----------------------------------------------------------------------------------------------------------------------------------------
+function ClassCategory(Experience)
+	local Return = 1
 
-	if Number >= 100 and Number <= 200 then
-		Category = "B+"
-	elseif Number >= 201 and Number <= 350 then
-		Category = "A"
-	elseif Number >= 351 and Number <= 500 then
-		Category = "A+"
-	elseif Number >= 501 and Number <= 1000 then
-		Category = "S"
-	elseif Number >= 1001 then
-		Category = "S+"
+	for Table = 1,#Levels do
+		if Experience >= Levels[Table] then
+			Return = Table
+		end
 	end
 
-	return Category
+	return Return
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
--- BLOODTYPES
+-- TABLELEVEL
 -----------------------------------------------------------------------------------------------------------------------------------------
-function bloodTypes(Number)
-	local Types = {
-		[1] = "A+",
-		[2] = "B+",
-		[3] = "A-",
-		[4] = "B-"
-	}
+function TableLevel()
+	return Levels
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- EMPTYSPACE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function EmptySpace(Message)
+	return Message:gsub("%s+","")
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- SANGUINE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function Sanguine(Number)
+	local Types = { "A+","B+","A-","B-" }
 
 	return Types[Number]
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TABLE.MAXN
 -----------------------------------------------------------------------------------------------------------------------------------------
-function table.maxn(t)
-	local max = 0
+function table.maxn(Table)
+	local Number = 0
 
-	for k,v in pairs(t) do
-		local n = tonumber(k)
-		if n and n > max then
-			max = n
+	for Index,_ in pairs(Table) do
+		local Next = tonumber(Index)
+		if Next and Next > Number then
+			Number = Next
 		end
 	end
 
-	return max
+	return Number
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- COUNTTALBE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function CountTable(Table)
+	local Number = 0
+
+	for _ in pairs(Table) do
+		Number = Number + 1
+	end
+
+	return Number
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- MODULE
 -----------------------------------------------------------------------------------------------------------------------------------------
 local modules = {}
-function module(resource,patchs)
-	if patchs == nil or not patchs then
-		patchs = resource
-		resource = "vrp"
+function module(Resource,Patch)
+	if not Patch then
+		Patch = Resource
+		Resource = "vrp"
 	end
 
-	local key = resource..patchs
-	local checkModule = modules[key]
-	if checkModule then
-		return checkModule
+	local Key = Resource..Patch
+	local Module = modules[Key]
+	if Module then
+		return Module
 	else
-		local code = LoadResourceFile(resource,patchs..".lua")
-		if code then
-			local floats = load(code,resource.."/"..patchs..".lua")
-			if floats then
-				local resAccept,resUlts = xpcall(floats,debug.traceback)
-				if resAccept then
-					modules[key] = resUlts
-					return resUlts
+		local File = LoadResourceFile(Resource,Patch..".lua")
+		if File then
+			local Float = load(File,Resource.."/"..Patch..".lua")
+			if Float then
+				local Accept,Result = xpcall(Float,debug["traceback"])
+				if Accept then
+					modules[Key] = Result
+
+					return Result
 				end
 			end
 		end
@@ -80,10 +101,8 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 local function wait(self)
 	local rets = Citizen.Await(self.p)
-	if not rets then
-		if self.r then
-			rets = self.r
-		end
+	if not rets and self.r then
+		rets = self.r
 	end
 
 	return table.unpack(rets,1,table.maxn(rets))
@@ -108,116 +127,125 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PARSEINT
 -----------------------------------------------------------------------------------------------------------------------------------------
-function parseInt(Value)
-	local Result = 0
-	local Number = tonumber(Value)
-
-	if Number ~= nil then
-		if Number > 0 then
-			Result = math.floor(Number)
-		end
+function parseInt(Number,Force)
+	Number = tonumber(Number) or 0
+	if Force and Number <= 0 then
+		Number = 1
 	end
 
-	return Result
+	return math.floor(Number)
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- WHOLE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function Whole(Value,Force)
+	return parseInt(Value,Force)
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SANITIZESTRING
 -----------------------------------------------------------------------------------------------------------------------------------------
-local sanitize_tmp = {}
-function sanitizeString(str,strchars,allow_policy)
-	local r = ""
-	local chars = sanitize_tmp[strchars]
-	if chars == nil then
-		chars = {}
-		local size = string.len(strchars)
-		for i = 1,size do
-			local char = string.sub(strchars,i,i)
-			chars[char] = true
-		end
-
-		sanitize_tmp[strchars] = chars
-	end
-
-	size = string.len(str)
-	for i = 1,size do
-		local char = string.sub(str,i,i)
-		if (allow_policy and chars[char]) or (not allow_policy and not chars[char]) then
-			r = r..char
-		end
-	end
-
-	return r
+function sanitizeString(String,Characteres)
+	return String:gsub("[^"..Characteres.."]","")
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SPLITSTRING
 -----------------------------------------------------------------------------------------------------------------------------------------
-function splitString(str,symbol)
-	local number = 1
-	local tableResult = {}
+function splitString(Full,Symbol)
+	local Table = {}
 
-	if symbol == nil then
-		symbol = "-"
+	if not Symbol then
+		Symbol = "-"
 	end
 
-	for str in string.gmatch(str,"([^"..symbol.."]+)") do
-		tableResult[number] = str
-		number = number + 1
+	for Full in string.gmatch(Full,"([^"..Symbol.."]+)") do
+		Table[#Table + 1] = Full
 	end
 
-	return tableResult
+	return Table
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
--- MATHLEGTH
+-- SPLITONE
 -----------------------------------------------------------------------------------------------------------------------------------------
-function mathLegth(n)
-	return math.ceil(n * 100) / 100
+function SplitOne(Name,Symbol)
+	if not Symbol then
+		Symbol = "-"
+	end
+
+	return splitString(Name,Symbol)[1]
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
--- PARSEFORMAT
+-- SPLITBOOLEAN
 -----------------------------------------------------------------------------------------------------------------------------------------
-function parseFormat(number)
-	local left,num,right = string.match(parseInt(number),"^([^%d]*%d)(%d*)(.-)$")
-	return left..(num:reverse():gsub("(%d%d%d)","%1."):reverse())..right
+function SplitBoolean(Name,String,Symbol)
+	if not Symbol then
+		Symbol = "-"
+	end
+
+	return splitString(Name,Symbol)[1] == String and true or false
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- SPLITTWO
+-----------------------------------------------------------------------------------------------------------------------------------------
+function SplitTwo(Name,Symbol)
+	if not Symbol then
+		Symbol = "-"
+	end
+
+	return splitString(Name,Symbol)[2]
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- SPLITUNIQUE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function SplitUnique(Item)
+	local Name = splitString(Item,"-")
+
+	return Name[1]..":"..Name[3]
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- OPTIMIZE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function Optimize(Number)
+	return math.ceil(Number * 100) / 100
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- DOTTED
+-----------------------------------------------------------------------------------------------------------------------------------------
+function Dotted(Value)
+	local Value = parseInt(Value)
+	local Left,Number,Right = string.match(Value,"^([^%d]*%d)(%d*)(.-)$")
+	return Left..(Number:reverse():gsub("(%d%d%d)","%1."):reverse())..Right
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- COMPLETETIMERS
 -----------------------------------------------------------------------------------------------------------------------------------------
-function completeTimers(Seconds)
+function CompleteTimers(Seconds)
+	local Seconds = parseInt(Seconds)
 	local Days = math.floor(Seconds / 86400)
-	Seconds = Seconds - Days * 86400
+	Seconds = Seconds % 86400
 	local Hours = math.floor(Seconds / 3600)
-	Seconds = Seconds - Hours * 3600
+	Seconds = Seconds % 3600
 	local Minutes = math.floor(Seconds / 60)
-	Seconds = Seconds - Minutes * 60
+	Seconds = Seconds % 60
 
 	if Days > 0 then
-		return string.format("<b>%d Dias</b>, <b>%d Horas</b>, <b>%d Minutos</b>",Days,Hours,Minutes)
+		if Hours > 0 then
+			return string.format("%d Dias e %d Horas",Days,Hours)
+		else
+			return string.format("%d Dias",Days)
+		end
 	elseif Hours > 0 then
-		return string.format("<b>%d Horas</b>, <b>%d Minutos</b> e <b>%d Segundos</b>",Hours,Minutes,Seconds)
+		if Minutes > 0 then
+			return string.format("%d Horas e %d Minutos",Hours,Minutes)
+		else
+			return string.format("%d Horas",Hours)
+		end
 	elseif Minutes > 0 then
-		return string.format("<b>%d Minutos</b> e <b>%d Segundos</b>",Minutes,Seconds)
-	elseif Seconds > 0 then
-		return string.format("<b>%d Segundos</b>",Seconds)
-	end
-end
------------------------------------------------------------------------------------------------------------------------------------------
--- MINIMALTIMERS
------------------------------------------------------------------------------------------------------------------------------------------
-function minimalTimers(Seconds)
-	local Days = math.floor(Seconds / 86400)
-	Seconds = Seconds - Days * 86400
-	local Hours = math.floor(Seconds / 3600)
-	Seconds = Seconds - Hours * 3600
-	local Minutes = math.floor(Seconds / 60)
-	Seconds = Seconds - Minutes * 60
-
-	if Days > 0 then
-		return string.format("%d Dias, %d Horas",Days,Hours)
-	elseif Hours > 0 then
-		return string.format("%d Horas, %d Minutos",Hours,Minutes)
-	elseif Minutes > 0 then
-		return string.format("%d Minutos",Minutes)
-	elseif Seconds > 0 then
+		if Seconds > 0 then
+			return string.format("%d Minutos e %d Segundos",Minutes,Seconds)
+		else
+			return string.format("%d Minutos",Minutes)
+		end
+	else
 		return string.format("%d Segundos",Seconds)
 	end
 end
@@ -305,5 +333,81 @@ local Bones = {
 -- BONE
 -----------------------------------------------------------------------------------------------------------------------------------------
 function Bone(Number)
-	return Bones[Number]
+	return Bones[Number] or false
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- RANDPERCENTAGE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function RandPercentage(Table)
+	local PoolSize = 0
+	for Number = 1,#Table do
+		PoolSize = PoolSize + Table[Number]["Chance"]
+	end
+
+	local Selected = math.random(1,PoolSize)
+	for Index,v in pairs(Table) do
+		Selected = Selected - v["Chance"]
+		if v["Min"] and v["Max"] then
+			Table[Index]["Valuation"] = math.random(v["Min"],v["Max"])
+		end
+
+		if (Selected <= 0) then
+			return Table[Index]
+		end
+	end
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- GENERATESTRING
+-----------------------------------------------------------------------------------------------------------------------------------------
+function GenerateString(Format)
+	local Message = ""
+	local LenByte = string.byte("A")
+	local NumByte = string.byte("0")
+
+	for Number = 1,#Format do
+		local Lenght = string.sub(Format,Number,Number)
+    	if Lenght == "D" then
+    		Message = Message..string.char(NumByte + math.random(0,9))
+		elseif Lenght == "L" then
+			Message = Message..string.char(LenByte + math.random(0,25))
+		else
+			Message = Message..Lenght
+		end
+	end
+
+	return Message
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- HEXTORGB
+-----------------------------------------------------------------------------------------------------------------------------------------
+function HexToRGB(hex)
+	hex = hex:gsub("#","")
+
+	local r = tonumber(hex:sub(1,2), 16)
+	local g = tonumber(hex:sub(3,4), 16)
+	local b = tonumber(hex:sub(5,6), 16)
+
+	return r, g, b
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BASE64
+-----------------------------------------------------------------------------------------------------------------------------------------
+local b = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+function Base64(data)
+	return ((data:gsub(".",function(x)
+		local r, b = "", x:byte()
+		for i = 8,1,-1 do
+			r = r..(b % 2 ^ i - b % 2 ^ (i - 1) > 0 and "1" or "0")
+		end
+
+		return r
+	end).."0000"):gsub("%d%d%d?%d?%d?%d?",function(x)
+		if (#x < 6) then return "" end
+		local c = 0
+			for i = 1, 6 do
+			c = c + (x:sub(i,i) == "1" and 2 ^ (6 - i) or 0)
+		end
+
+		return b:sub(c + 1,c + 1)
+	end)..({ "","==","=" })[#data % 3 + 1])
 end

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>tksDoors</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="back" style="display: none;"></div>
+    <div id="container" style="display: none;">
+        <div class="header">
+            <div>
+                <h1><i class="fas fa-dungeon"></i> Gerenciador de Portas</h1>
+                <span style="font-size: 11px; color: #888; font-weight: bold; margin-left: 5px;">Created by
+                    discord.gg/fivecommunity</span>
+            </div>
+            <button class="close-btn" onclick="closeUI()"><i class="fas fa-times"></i></button>
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Filtrar por ID ou Permissão..." onkeyup="filterDoors()">
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Dist</th>
+                        <th>Tipo</th>
+                        <th>Permissão (Editável)</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="doorList">
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- Modal Deletar Isolado -->
+    <div id="deleteModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2><i class="fas fa-exclamation-triangle"></i> Atenção</h2>
+            <p>Tem certeza que deseja deletar a porta ID <strong id="deleteDoorId"></strong>?</p>
+            <div class="modal-buttons">
+                <button class="btn btn-tp" onclick="closeDeleteModal()">Cancelar</button>
+                <button class="btn btn-del" onclick="confirmDeleteDoor()">Deletar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Criar Isolado -->
+    <div id="createModal" class="modal" style="display: none; z-index: 9999;">
+        <div class="modal-content">
+            <h2><i class="fas fa-plus-circle"></i> Criar Nova Porta</h2>
+            <p>A porta foi identificada na sua mira.</p>
+
+            <label style="color: white; margin-top: 10px; display: block; font-size: 14px;">Tipo de Porta:</label>
+            <select id="newDoorType"
+                style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; outline: none; border: 1px solid #3d3d3d; background: #2a2a2a; color: white;">
+                <option value="normal">Normal (1 Porta)</option>
+                <option value="dupla">Dupla (2 Portas próximas)</option>
+                <option value="portao">Portão</option>
+            </select>
+
+            <label style="color: white; margin-top: 10px; display: block; font-size: 14px;">Permissão (ex:
+                admin.permissao):</label>
+            <input type="text" id="newDoorPerm" placeholder="Permissão..."
+                style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; outline: none; border: 1px solid #3d3d3d; background: #2a2a2a; color: white;">
+
+            <div class="modal-buttons">
+                <button class="btn btn-del" onclick="closeCreateModal()">Cancelar</button>
+                <button class="btn btn-save" onclick="confirmCreateDoor()">Criar</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -6,9 +6,9 @@ local hostReleaseCallbacks = {}
 
 AddEventHandler("hostingSession",function()
 	if currentHosting then
-		TriggerClientEvent("sessionHostResult", source,"wait")
+		TriggerClientEvent("sessionHostResult",source,"wait")
 		table.insert(hostReleaseCallbacks,function()
-            TriggerClientEvent("sessionHostResult", source,"free")
+            TriggerClientEvent("sessionHostResult",source,"free")
 		end)
 
 		return

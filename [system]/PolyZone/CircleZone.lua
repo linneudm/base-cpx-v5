@@ -21,11 +21,11 @@ local function _initDebug(zone, options)
   if not options.debugPoly then
     return
   end
-  
+
   CreateThread(function()
     while not zone.destroyed do
       zone:draw()
-      Wait(0)
+      Citizen.Wait(0)
     end
   end)
 end

@@ -1,321 +1,232 @@
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VRP
 -----------------------------------------------------------------------------------------------------------------------------------------
-local Tunnel = module("vrp", "lib/Tunnel")
-local Proxy = module("vrp", "lib/Proxy")
+local Tunnel = module("vrp","lib/Tunnel")
+local Proxy = module("vrp","lib/Proxy")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CONNECTION
 -----------------------------------------------------------------------------------------------------------------------------------------
 tvRP = {}
-Tunnel.bindInterface("vRP", tvRP)
+Proxy.addInterface("vRP",tvRP)
+Tunnel.bindInterface("vRP",tvRP)
 vRPS = Tunnel.getInterface("vRP")
-Proxy.addInterface("vRP", tvRP)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- CONFIGTEXTURES
+-----------------------------------------------------------------------------------------------------------------------------------------
+local ConfigTextures = {
+	["Drop"] = true,
+	["E"] = true,
+	["H"] = true,
+	["Normal"] = true,
+	["Selected"] = true,
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- LOADTEXTURES
+-----------------------------------------------------------------------------------------------------------------------------------------
+CreateThread(function()
+	local YTD = CreateRuntimeTxd("Textures")
+	for Name,_ in pairs(ConfigTextures) do
+		local TEXTURE = CreateRuntimeTexture(YTD,Name,512,512)
+		local PNG = LoadResourceFile("vrp","config/textures/target/"..Name..".png")
+		local DICT = "data:image/png;base64,"..Base64(PNG)
+
+		SetRuntimeTextureImage(TEXTURE,DICT)
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- THEME
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterNUICallback("Theme",function(Data,Callback)
+	Callback(Theme)
+end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VARIABLES
 -----------------------------------------------------------------------------------------------------------------------------------------
-local animFlags = 0
-local animDict = nil
-local animName = nil
-local blipsPlayers = {}
-local blipsAdmin = false
-local animActived = false
-local showPassports = false
------------------------------------------------------------------------------------------------------------------------------------------
--- BLIPSADMIN
------------------------------------------------------------------------------------------------------------------------------------------
-function tvRP.blipsAdmin()
-	blipsAdmin = not blipsAdmin
-
-	while blipsAdmin do
-		blipsPlayers = vRPS.userPlayers()
-		Wait(10000)
-	end
-end
-
------------------------------------------------------------------------------------------------------------------------------------------
--- THREADBLIPS
------------------------------------------------------------------------------------------------------------------------------------------
-CreateThread(function()
-	while true do
-		local timeDistance = 999
-		if blipsAdmin then
-			timeDistance = 1
-
-			local Ped = PlayerPedId()
-			local userList = GetPlayers()
-			local Coords = GetEntityCoords(Ped)
-
-			for k, v in pairs(userList) do
-				local uPlayer = GetPlayerFromServerId(k)
-				if uPlayer ~= PlayerId() and NetworkIsPlayerConnected(uPlayer) then
-					local uPed = GetPlayerPed(uPlayer)
-					local uCoords = GetEntityCoords(uPed)
-					local Distance = #(Coords - uCoords)
-					if Distance <= 1000 and blipsPlayers[k] ~= nil then
-						DrawText3D(uCoords["x"], uCoords["y"], uCoords["z"] + 1.10,
-							"~o~ID:~w~ " ..
-							blipsPlayers[k] .. "     ~g~H:~w~ " .. GetEntityHealth(uPed) .. "     ~y~A:~w~ " .. GetPedArmour(uPed),
-							0.275)
-					end
-				end
-			end
-		end
-
-		Wait(timeDistance)
-	end
-end)
+local Blipmin = false
+local Information = false
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CLOSESTPEDS
 -----------------------------------------------------------------------------------------------------------------------------------------
 function tvRP.ClosestPeds(Radius)
-	local List = {}
+	local Selected = {}
 	local Ped = PlayerPedId()
-	local Players = GetPlayers()
+	local Radius = Radius + 0.0001
 	local Coords = GetEntityCoords(Ped)
+	local GamePool = GetGamePool("CPed")
 
-	for Source, v in pairs(Players) do
-		local uPlayer = GetPlayerFromServerId(Source)
-		if uPlayer ~= PlayerId() and NetworkIsPlayerConnected(uPlayer) then
-			local uPed = GetPlayerPed(uPlayer)
-			local uCoords = GetEntityCoords(uPed)
-			local Distance = #(Coords - uCoords)
-			if Distance <= Radius then
-				List[uPlayer] = { Distance, Source }
+	for _, Entity in pairs(GamePool) do
+		local Index = NetworkGetPlayerIndexFromPed(Entity)
+
+		if Index and IsPedAPlayer(Entity) and NetworkIsPlayerConnected(Index) then
+			if #(Coords - GetEntityCoords(Entity)) <= Radius then
+				Selected[#Selected + 1] = GetPlayerServerId(Index)
 			end
-		end
-	end
-
-	return List
-end
-
------------------------------------------------------------------------------------------------------------------------------------------
--- PLAYERS
------------------------------------------------------------------------------------------------------------------------------------------
-function tvRP.Players()
-	local Players = {}
-	for _, v in ipairs(GetActivePlayers()) do
-		Players[#Players + 1] = GetPlayerServerId(v)
-	end
-
-	return Players
-end
-
------------------------------------------------------------------------------------------------------------------------------------------
--- CLOSESTPED
------------------------------------------------------------------------------------------------------------------------------------------
-function tvRP.ClosestPed(Radius)
-	local Selected = false
-	local Min = Radius + 0.0001
-	local List = tvRP.ClosestPeds(Radius)
-
-	for _, v in pairs(List) do
-		if v[1] <= Min then
-			Selected = v[2]
-			Min = v[1]
 		end
 	end
 
 	return Selected
 end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- CLOSESTPED
+-----------------------------------------------------------------------------------------------------------------------------------------
+function tvRP.ClosestPed(Radius)
+	if not Radius then
+		Radius = 2.0
+	end
 
+	local Selected = false
+	local Ped = PlayerPedId()
+	local Radius = Radius + 0.0001
+	local Coords = GetEntityCoords(Ped)
+	local GamePool = GetGamePool("CPed")
+
+	for _, Entity in pairs(GamePool) do
+		local Index = NetworkGetPlayerIndexFromPed(Entity)
+
+		if Index and Entity ~= PlayerPedId() and IsPedAPlayer(Entity) and NetworkIsPlayerConnected(Index) then
+			local EntityCoords = GetEntityCoords(Entity)
+			local EntityDistance = #(Coords - EntityCoords)
+
+			if EntityDistance < Radius then
+				Selected = GetPlayerServerId(Index)
+				Radius = EntityDistance
+			end
+		end
+	end
+
+	return Selected
+end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- GETPLAYERS
 -----------------------------------------------------------------------------------------------------------------------------------------
 function GetPlayers()
-	local Players = {}
+	local Selected,Voip = {},{}
+	local GamePool = GetGamePool("CPed")
 
-	for _, v in ipairs(GetActivePlayers()) do
-		Players[GetPlayerServerId(v)] = true
+	for _,Entity in pairs(GamePool) do
+		local Index = NetworkGetPlayerIndexFromPed(Entity)
+
+		if Index and IsPedAPlayer(Entity) and NetworkIsPlayerConnected(Index) then
+			Selected[Entity] = GetPlayerServerId(Index)
+			Voip[Entity] = Index
+		end
 	end
 
-	return Players
+	return Selected,Voip
 end
-
 -----------------------------------------------------------------------------------------------------------------------------------------
--- PLAYANIM
+-- PLAYERS
 -----------------------------------------------------------------------------------------------------------------------------------------
-function tvRP.playAnim(animUpper, animSequency, animLoop)
-	local playFlags = 0
-	local ped = PlayerPedId()
-	if animSequency["task"] then
-		tvRP.stopAnim(true)
-
-		if animSequency["task"] == "PROP_HUMAN_SEAT_CHAIR_MP_PLAYER" then
-			local coords = GetEntityCoords(ped)
-			TaskStartScenarioAtPosition(ped, animSequency["task"], coords["x"], coords["y"], coords["z"] - 1,
-				GetEntityHeading(ped), 0, 0, false)
-		else
-			TaskStartScenarioInPlace(ped, animSequency["task"], 0, false)
-		end
-	else
-		tvRP.stopAnim(animUpper)
-
-		if animUpper then
-			playFlags = playFlags + 48
-		end
-
-		if animLoop then
-			playFlags = playFlags + 1
-		end
-
-		CreateThread(function()
-			RequestAnimDict(animSequency[1])
-			while not HasAnimDictLoaded(animSequency[1]) do
-				Wait(1)
-			end
-
-			if HasAnimDictLoaded(animSequency[1]) then
-				animDict = animSequency[1]
-				animName = animSequency[2]
-				animFlags = playFlags
-
-				if playFlags == 49 then
-					animActived = true
-				end
-
-				TaskPlayAnim(ped, animSequency[1], animSequency[2], 8.0, 8.0, -1, playFlags, 0, 0, 0, 0)
-			end
-		end)
-	end
+function tvRP.Players()
+	return GetPlayers()
 end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BLIPADMIN
+-----------------------------------------------------------------------------------------------------------------------------------------
+function tvRP.BlipAdmin()
+	Blipmin = not Blipmin
 
------------------------------------------------------------------------------------------------------------------------------------------
--- THREADANIM
------------------------------------------------------------------------------------------------------------------------------------------
-Citizen.CreateThread(function()
-	while true do
-		local timeDistance = 999
-		local ped = PlayerPedId()
-		if animActived then
-			if not IsEntityPlayingAnim(ped, animDict, animName, 3) then
-				TaskPlayAnim(ped, animDict, animName, 3.0, 3.0, -1, animFlags, 0, 0, 0, 0)
-				timeDistance = 1
-			end
-		end
+	while Blipmin do
+		local Players,Voip = GetPlayers()
+		for Entitys,v in pairs(Players) do
+			if Entitys ~= PlayerPedId() and Player(v)["state"]["Passport"] then
+				local Armour = GetPedArmour(Entitys)
+				local Coords = GetEntityCoords(Entitys)
+				local Healths = GetEntityHealth(Entitys) - 100
+				local Passport = Player(v)["state"]["Passport"]
+				local Talking = MumbleIsPlayerTalking(Voip[Entitys])
+				local Name = Player(v)["state"]["Name"] or "Carregando"
 
-		Citizen.Wait(timeDistance)
-	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- THREADBLOCK
------------------------------------------------------------------------------------------------------------------------------------------
-CreateThread(function()
-	while true do
-		local timeDistance = 999
-		if animActived then
-			timeDistance = 1
-			DisableControlAction(1, 18, true)
-			DisableControlAction(1, 24, true)
-			DisableControlAction(1, 25, true)
-			DisableControlAction(1, 257, true)
-			DisableControlAction(1, 263, true)
-			DisableControlAction(1, 140, true)
-			DisableControlAction(1, 142, true)
-			DisableControlAction(1, 143, true)
-			DisablePlayerFiring(PlayerPedId(), true)
-		end
+				local One = GetOffsetFromEntityInWorldCoords(Entitys,0.3,0.3,0.8)
+				local Two = GetOffsetFromEntityInWorldCoords(Entitys,-0.3,0.3,0.8)
+				local Three = GetOffsetFromEntityInWorldCoords(Entitys,0.3,-0.3,0.8)
+				local Four = GetOffsetFromEntityInWorldCoords(Entitys,-0.3,-0.3,0.8)
+				local Five = GetOffsetFromEntityInWorldCoords(Entitys,-0.3,0.3,-0.9)
+				local Six = GetOffsetFromEntityInWorldCoords(Entitys,0.3,0.3,-0.9)
+				local Seven = GetOffsetFromEntityInWorldCoords(Entitys,0.3,-0.3,-0.9)
+				local Eight = GetOffsetFromEntityInWorldCoords(Entitys,-0.3,-0.3,-0.9)
 
-		Wait(timeDistance)
-	end
-end)
------------------------------------------------------------------------------------------------------------------------------------------
--- STOPANIM
------------------------------------------------------------------------------------------------------------------------------------------
-function tvRP.stopAnim(animUpper)
-	animActived = false
-	local Ped = PlayerPedId()
+				DrawLine(Two["x"],Two["y"],Two["z"],Five["x"],Five["y"],Five["z"],255,255,255,255)
+				DrawLine(One["x"],One["y"],One["z"],Six["x"],Six["y"],Six["z"],255,255,255,255)
+				DrawLine(Four["x"],Four["y"],Four["z"],Eight["x"],Eight["y"],Eight["z"],255,255,255,255)
+				DrawLine(Three["x"],Three["y"],Three["z"],Seven["x"],Seven["y"],Seven["z"],255,255,255,255)
+				DrawLine(Eight["x"],Eight["y"],Eight["z"],Seven["x"],Seven["y"],Seven["z"],255,255,255,255)
+				DrawLine(Seven["x"],Seven["y"],Seven["z"],Six["x"],Six["y"],Six["z"],255,255,255,255)
+				DrawLine(Six["x"],Six["y"],Six["z"],Five["x"],Five["y"],Five["z"],255,255,255,255)
+				DrawLine(Five["x"],Five["y"],Five["z"],Eight["x"],Eight["y"],Eight["z"],255,255,255,255)
+				DrawLine(Four["x"],Four["y"],Four["z"],Three["x"],Three["y"],Three["z"],255,255,255,255)
+				DrawLine(Three["x"],Three["y"],Three["z"],One["x"],One["y"],One["z"],255,255,255,255)
+				DrawLine(One["x"],One["y"],One["z"],Two["x"],Two["y"],Two["z"],255,255,255,255)
+				DrawLine(Two["x"],Two["y"],Two["z"],Four["x"],Four["y"],Four["z"],255,255,255,255)
 
-	if animUpper then
-		ClearPedSecondaryTask(Ped)
-	else
-		ClearPedTasks(Ped)
-	end
-end
-
------------------------------------------------------------------------------------------------------------------------------------------
--- STOPACTIVED
------------------------------------------------------------------------------------------------------------------------------------------
-function tvRP.stopActived()
-	animActived = false
-end
-
------------------------------------------------------------------------------------------------------------------------------------------
--- PLAYSOUND
------------------------------------------------------------------------------------------------------------------------------------------
-function tvRP.playSound(dict, name)
-	PlaySoundFrontend(-1, dict, name, false)
-end
-
------------------------------------------------------------------------------------------------------------------------------------------
--- PASSPORTENALBLE
------------------------------------------------------------------------------------------------------------------------------------------
-function passportEnable()
-	if showPassports or not MumbleIsConnected() then return end
-
-	showPassports = true
-	local playerList = vRPS.userPlayers()
-
-	while showPassports do
-		local Ped = PlayerPedId()
-		local userList = GetPlayers()
-		local Coords = GetEntityCoords(Ped)
-
-		for k, v in pairs(userList) do
-			local uPlayer = GetPlayerFromServerId(k)
-			if NetworkIsPlayerConnected(uPlayer) then
-				local uPed = GetPlayerPed(uPlayer)
-				local uCoords = GetEntityCoords(uPed)
-				local Distance = #(Coords - uCoords)
-				if Distance <= 5 then
-					DrawText3D(uCoords["x"], uCoords["y"], uCoords["z"] + 1.10, playerList[k], 0.45)
-				end
+				DrawText3D(Coords,"~w~[ "..(Talking and "~q~" or "")..Name.."~w~ ] [ ~y~"..Passport.."~w~ ] [ ~g~"..(Healths <= 0 and "Morto" or Healths).."~w~ ] [ ~b~"..Armour.."~w~ ]",0.275)
 			end
 		end
 
 		Wait(0)
 	end
 end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- PLAYSOUND
+-----------------------------------------------------------------------------------------------------------------------------------------
+function tvRP.PlaySound(Dict, Name)
+	PlaySoundFrontend(-1, Dict, Name, false)
+end
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- PASSPORTENALBLE
+-----------------------------------------------------------------------------------------------------------------------------------------
+function PassportEnable()
+	if UsableF7 then
+		if not Information and not IsPauseMenuActive() then
+			Information = true
 
+			while Information do
+				local Ped = PlayerPedId()
+				local Coords = GetEntityCoords(Ped)
+
+				for Entitys, _ in pairs(GetPlayers()) do
+					local OtherCoords = GetEntityCoords(Entitys)
+					if Entitys ~= PlayerPedId() and Entity(Entitys)["state"]["Passport"] and not UseF7[Entity(Entitys)["state"]["Passport"]] and HasEntityClearLosToEntity(Ped, Entitys, 17) and #(Coords - OtherCoords) <= 5 then
+						DrawText3D(OtherCoords, "~w~" .. Entity(Entitys)["state"]["Passport"], 0.45)
+					end
+				end
+
+				Wait(0)
+			end
+		end
+	end
+end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PASSPORTDISABLE
 -----------------------------------------------------------------------------------------------------------------------------------------
-function passportDisable()
-	showPassports = false
+function PassportDisable()
+	Information = false
 end
-
 -----------------------------------------------------------------------------------------------------------------------------------------
--- PASSPORTCOMMANDS
+-- REGISTERCOMMAND
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand("+showPassports", passportEnable)
-RegisterCommand("-showPassports", passportDisable)
-RegisterKeyMapping("+showPassports", "Visualizar passaportes.", "keyboard", "F7")
+RegisterCommand("+Information", PassportEnable)
+RegisterCommand("-Information", PassportDisable)
+RegisterKeyMapping("+Information", "Visualizar passaportes.", "keyboard", "F7")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- DRAWTEXT3D
 -----------------------------------------------------------------------------------------------------------------------------------------
-function DrawText3D(x, y, z, text, weight)
-	local onScreen, _x, _y = GetScreenCoordFromWorldCoord(x, y, z)
+function DrawText3D(Coords, Text, Weight)
+	local onScreen, x, y = World3dToScreen2d(Coords["x"], Coords["y"], Coords["z"] + 1.10)
 
 	if onScreen then
-		BeginTextCommandDisplayText("STRING")
-		AddTextComponentSubstringKeyboardDisplay(text)
-		SetTextColour(255, 255, 255, 150)
-		SetTextScale(0.35, 0.35)
 		SetTextFont(4)
-		SetTextCentre(1)
-		EndTextCommandDisplayText(_x, _y)
+		SetTextDropShadow()
+		SetTextCentre(true)
+		SetTextProportional(1)
+		SetTextScale(0.35,0.35)
+		SetTextColour(255,255,255,200)
 
-		local width = (string.len(text) + 4) / 160 * weight
-		DrawRect(_x, _y + 0.0125, width, 0.03, 15, 15, 15, 175)
+		SetTextEntry("STRING")
+		AddTextComponentString(Text)
+		EndTextCommandDisplayText(x, y)
+
+		local Width = string.len(Text) / 160 * Weight
+		DrawRect(x, y + 0.0125, Width, 0.03, 15, 15, 15, 175)
 	end
 end
-
------------------------------------------------------------------------------------------------------------------------------------------
--- ONRESOURCESTOP
------------------------------------------------------------------------------------------------------------------------------------------
-AddEventHandler("onResourceStop", function(resource)
-	TriggerServerEvent("vRP:Print", "pausou o resource " .. resource)
-end)
-
-RegisterNUICallback("Theme", function(Data, Callback)
-	Callback(GetTheme())
-end)

@@ -2,8 +2,9 @@ local Tools = {}
 local IDGenerator = {}
 
 function Tools.newIDGenerator()
-	local r = setmetatable({}, { __index = IDGenerator })
+	local r = setmetatable({},{ __index = IDGenerator })
 	r:construct()
+
 	return r
 end
 
@@ -22,6 +23,7 @@ function IDGenerator:gen()
 	else
 		local r = self.max
 		self.max = self.max+1
+
 		return r
 	end
 end
